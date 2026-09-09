@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>뮌헨 & 바이에른 4일 여행 가이드 (모바일 최적화)</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Core CSS (100% 인라인 내장) -->
+  <style>
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url(images/layers.png);
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(images/layers-2x.png);
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(images/marker-icon.png);
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+  </style>
+
+  <!-- 애플리케이션 반응형 스타일 -->
+  <style>
+    :root {
+      --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      
+      --color-day1: #2563eb;
+      --color-day2: #059669;
+      --color-day3: #7c3aed;
+      --color-day4: #d97706;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: var(--font-main);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 상단 헤더 */
+    header {
+      flex-shrink: 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+      white-space: nowrap;
+    }
+
+    .header-title-group h1 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-title-group p {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+
+    /* 일자별 필터 탭 (가로 스와이프 지원) */
+    .day-tabs {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .day-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 7px 11px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: var(--shadow-sm);
+      font-weight: 800;
+    }
+
+    .tab-btn .tab-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .action-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: var(--text-primary);
+    }
+
+    .action-btn.primary {
+      background: #10b981;
+      color: white;
+      border-color: #059669;
+      font-weight: 800;
+      box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
+    }
+
+    /* 모바일 뷰 전환 세그먼트 (모바일 전용) */
+    .mobile-view-switcher {
+      display: none;
+      background: #e2e8f0;
+      padding: 3px;
+      border-radius: 9px;
+      width: 100%;
+    }
+    .mobile-switch-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 8px 12px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .mobile-switch-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* 메인 레이아웃 */
+    .main-layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 65px);
+    }
+
+    /* 좌측 사이드바 */
+    .sidebar {
+      width: 480px;
+      min-width: 420px;
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .sidebar-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: #fafafa;
+    }
+
+    .sidebar-title {
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .transit-badge {
+      font-size: 11.5px;
+      padding: 6px 10px;
+      border-radius: 7px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 600;
+      margin-top: 6px;
+      display: block;
+      line-height: 1.4;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* 숙소 배너 카드 스타일 */
+    .hotel-banner-card {
+      background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+      border: 1.5px solid #fecdd3;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .hotel-banner-card:hover {
+      border-color: #f43f5e;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .hotel-banner-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .hotel-badge {
+      background: #e11d48;
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+    .hotel-map-link {
+      font-size: 11px;
+      color: #be123c;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .hotel-map-link:hover {
+      text-decoration: underline;
+    }
+    .hotel-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #881337;
+      line-height: 1.3;
+    }
+    .hotel-name-de {
+      font-size: 11.5px;
+      color: #9f1239;
+      font-style: italic;
+      margin-bottom: 3px;
+    }
+    .hotel-desc {
+      font-size: 11.5px;
+      color: #4c0519;
+      line-height: 1.4;
+    }
+    .hotel-action-hint {
+      font-size: 10.5px;
+      color: #e11d48;
+      font-weight: 700;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timeline-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px 40px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .period-section {
+      margin-bottom: 20px;
+    }
+
+    .period-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .period-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .spot-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spot-card:hover {
+      border-color: #94a3b8;
+      box-shadow: var(--shadow-md);
+    }
+
+    .spot-card.selected {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .spot-num-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .time-badge {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #334155;
+      background: #f1f5f9;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .category-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .spot-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .spot-name-de {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .spot-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    .spot-tip {
+      margin-top: 5px;
+      background: #fffbeb;
+      border-left: 3px solid #f59e0b;
+      padding: 5px 8px;
+      border-radius: 0 6px 6px 0;
+      font-size: 11px;
+      color: #92400e;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .spot-tip.highlight {
+      background: #fef2f2;
+      border-left-color: #ef4444;
+      color: #991b1b;
+      font-weight: 600;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .mini-action-link {
+      font-size: 11px;
+      color: #0369a1;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+      transition: all 0.15s;
+    }
+
+    .mini-action-link:hover {
+      background: #e0f2fe;
+    }
+
+    /* 우측 맵 */
+    .map-container {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      background: #e2e8f0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 1;
+    }
+
+    .map-overlay-controls {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .map-ctrl-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .map-legend {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 500;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow-lg);
+      font-size: 11px;
+      max-width: 280px;
+    }
+
+    .legend-title {
+      font-weight: 800;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      color: var(--text-secondary);
+      font-size: 10.5px;
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .custom-div-icon {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    .marker-pin {
+      width: 32px;
+      height: 38px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .marker-pin:hover {
+      transform: scale(1.15) translateY(-3px);
+    }
+
+    .hotel-pin {
+      width: 36px;
+      height: 44px;
+    }
+
+    .marker-svg {
+      filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      padding: 2px;
+    }
+
+    .leaflet-popup-content {
+      margin: 10px 12px;
+      font-family: var(--font-main);
+      min-width: 220px;
+    }
+
+    .popup-badge {
+      font-size: 10px;
+      font-weight: 800;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 3px;
+    }
+
+    .popup-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .popup-time {
+      font-size: 11.5px;
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .popup-desc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .popup-link {
+      display: inline-block;
+      font-size: 11px;
+      color: #0284c7;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-window {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 840px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .modal-close {
+      border: none;
+      background: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+    }
+
+    .original-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: left;
+    }
+
+    .original-table th {
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .original-table td {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    /* ★★★ 모바일 화면 최적화 미디어 쿼리 (< 900px) ★★★ */
+    @media (max-width: 900px) {
+      header {
+        padding: 8px 12px;
+        gap: 6px;
+      }
+      .header-left {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .header-title-group h1 {
+        font-size: 15px;
+      }
+      .header-title-group p {
+        display: none;
+      }
+      .day-tabs {
+        width: 100%;
+      }
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .action-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 7px 4px;
+        font-size: 11px;
+      }
+      .mobile-view-switcher {
+        display: flex;
+      }
+      
+      .main-layout {
+        height: calc(100vh - 175px);
+      }
+
+      body.mobile-mode-list .sidebar {
+        display: flex;
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        border-right: none;
+      }
+      body.mobile-mode-list .map-container {
+        display: none !important;
+      }
+
+      body.mobile-mode-map .sidebar {
+        display: none !important;
+      }
+      body.mobile-mode-map .map-container {
+        display: block !important;
+        width: 100%;
+        height: 100%;
+      }
+
+      .map-legend {
+        max-width: 230px;
+        font-size: 10px;
+        padding: 8px 10px;
+      }
+    }
+  </style>
+</head>
+<body class="mobile-mode-list">
+
+  <!-- 상단 헤더 -->
+  <header>
+    <div class="header-left">
+      <div class="brand-badge">München 4Days</div>
+      <div class="header-title-group">
+        <h1>🇩🇪 뮌헨 & 바이에른 여행 일정</h1>
+        <p>렌트카 알프스 로드트립(마리엔다리·노이슈바인슈타인성·추크슈피체) & 시내 가이드</p>
+      </div>
+    </div>
+
+    <!-- 일자별 필터 탭 (가로 스크롤 가능) -->
+    <div class="day-tabs" id="dayTabs">
+      <button class="tab-btn active" data-day="all">
+        <span class="tab-dot" style="background: #64748b;"></span>
+        전체 4일
+      </button>
+      <button class="tab-btn" data-day="1">
+        <span class="tab-dot" style="background: var(--color-day1);"></span>
+        20일 (시내·BMW)
+      </button>
+      <button class="tab-btn" data-day="2">
+        <span class="tab-dot" style="background: var(--color-day2);"></span>
+        🚗 21일 (렌트카 알프스)
+      </button>
+      <button class="tab-btn" data-day="3">
+        <span class="tab-dot" style="background: var(--color-day3);"></span>
+        22일 (박물관·궁전)
+      </button>
+      <button class="tab-btn" data-day="4">
+        <span class="tab-dot" style="background: var(--color-day4);"></span>
+        23일 (아레나·슈바빙)
+      </button>
+    </div>
+
+    <!-- 액션 버튼 -->
+    <div class="header-actions">
+      <a class="action-btn primary" id="googleRouteHeaderBtn" href="https://www.google.com/maps/dir/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC/%EB%A7%88%EB%A6%AC%EC%97%94+%EB%8B%A4%EB%A6%AC+%EB%8F%85%EC%9D%BC/%EB%85%B8%EC%9D%B4%EC%8A%88%EB%B0%94%EC%9D%B8%EC%8A%88%ED%83%80%EC%9D%B8+%EC%84%B1+%EB%8F%85%EC%9D%BC/%EC%B6%94%ED%81%AC%EC%8A%88%ED%94%BC%EC%B2%B4+%EC%82%B0+%EB%8F%85%EC%9D%BC/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC" target="_blank" title="Google Maps 길찾기">
+        🚗 2일차 Google 경로
+      </a>
+      <button class="action-btn" id="btnOriginalPdf" title="일정표 확인">
+        📋 일정표
+      </button>
+      <button class="action-btn" onclick="window.print()" title="인쇄">
+        🖨️ 인쇄
+      </button>
+    </div>
+
+    <!-- 모바일 뷰 전환 세그먼트 버튼 (모바일 전용) -->
+    <div class="mobile-view-switcher">
+      <button class="mobile-switch-btn active" data-view="list">📋 일정 목록 보기</button>
+      <button class="mobile-switch-btn" data-view="map">🗺️ 지도 전체 보기</button>
+    </div>
+  </header>
+
+  <!-- 메인 뷰: 좌측 타임라인 + 우측 지도 -->
+  <main class="main-layout">
+    
+    <!-- 좌측 타임라인 패널 -->
+    <aside class="sidebar">
+      <div class="sidebar-header" id="sidebarHeader">
+        <div class="sidebar-title">
+          <span id="dayTitleText">전체 4일 일정 개요</span>
+          <span id="spotCountBadge" style="font-size:11.5px; color:var(--text-muted); font-weight:500;">총 26개 스팟</span>
+        </div>
+        <div class="transit-badge" id="transitTipText">
+          💡 각 날짜 탭을 클릭하거나 좌측 카드를 누르면 지도가 해당 장소로 자동 이동합니다.
+        </div>
+      </div>
+
+      <div class="timeline-container" id="timelineList">
+        <!-- 🏨 고정 우리 숙소 배너 카드 -->
+        <div class="hotel-banner-card" id="hotelBannerCard" title="클릭 시 지도가 숙소 위치로 이동합니다">
+          <div class="hotel-banner-top">
+            <span class="hotel-badge">🏨 우리 숙소 (Basecamp)</span>
+            <a class="hotel-map-link" href="https://maps.app.goo.gl/LNwTawdtw64NZc248" target="_blank">Google 지도 ↗</a>
+          </div>
+          <div class="hotel-name">노보텔 뮌헨 시티 아르눌프파크</div>
+          <div class="hotel-name-de">Novotel München City Arnulfpark</div>
+          <div class="hotel-desc">Arnulfstraße 57 • S-Bahn 및 트램(16/17번) 인접 • 중앙역·시내·궁전 이동 편리</div>
+          <div class="hotel-action-hint">👆 터치 시 지도가 숙소로 이동합니다</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 우측 인터랙티브 지도 패널 -->
+    <section class="map-container">
+      <div id="map"></div>
+
+      <!-- 지도 위 플로팅 컨트롤 -->
+      <div class="map-overlay-controls">
+        <button class="map-ctrl-btn" id="btnFitBounds" title="현재 일정 전체 한눈에 보기">
+          🔍 경로 맞춤
+        </button>
+        <button class="map-ctrl-btn" id="btnToggleTile" title="지도 스타일 전환">
+          🗺️ 스타일 변경
+        </button>
+      </div>
+
+      <!-- 지도 우측 하단 범례 -->
+      <div class="map-legend">
+        <div class="legend-title">📍 경로 & 숙소</div>
+        <div class="legend-item" style="margin-bottom: 5px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">
+          <span style="font-size: 13px;">🏨</span>
+          <span><strong>우리 숙소</strong> : 노보텔 아르눌프파크</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: var(--color-day1);"></div>
+          <span><strong>20일</strong> : BMW, 마리엔광장, 디너</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: var(--color-day2);"></div>
+          <span><strong>21일</strong> : 🚗 렌트카 (마리엔다리-성-추크슈피체)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: var(--color-day3);"></div>
+          <span><strong>22일</strong> : 독일박물관, 피나코테크, 궁전</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: var(--color-day4);"></div>
+          <span><strong>23일</strong> : 알리안츠아레나, 영국정원, 슈바빙</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 일정표 모달 -->
+  <div class="modal-backdrop" id="originalModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>📋 뮌헨 & 바이에른 4일 일정표</h3>
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="original-table">
+          <thead>
+            <tr>
+              <th style="width: 14%;">일자</th>
+              <th style="width: 28%;">오전</th>
+              <th style="width: 34%;">오후</th>
+              <th style="width: 24%;">저녁</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #fff1f2;">
+              <td><strong>숙소<br><span style="color:#e11d48; font-weight:800;">[Base]</span></strong></td>
+              <td colspan="3">
+                🏨 <strong>노보텔 뮌헨 시티 아르눌프파크</strong> (Novotel München City Arnulfpark)<br>
+                <span style="font-size: 11.5px; color: #475569;">주소: Arnulfstraße 57, 80636 München • 트램 16/17번 및 Donnersbergerbrücke S-Bahn 역 바로 앞</span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>20일</strong></td>
+              <td>
+                • BMW Welt (9시~10시)<br>
+                • BMW 뮤지엄 (10시~11시)<br>
+                • 올림피아 파크<br>
+                • 학생 부부 기숙사
+              </td>
+              <td>
+                • 호프브로이하우스 뮌헨 (점심)<br>
+                • 마리엔 광장<br>
+                • 빅투알리엔 마켓<br>
+                • 뮌헨 프라우엔키르헤<br>
+                • 막스마라<br>
+                • <strong>신시청 인형극 (17시)</strong>
+              </td>
+              <td>
+                • Schwarzreiter Tagesbar & Restaurant
+              </td>
+            </tr>
+            <tr style="background: #f0fdf4;">
+              <td><strong>21일<br><span style="color:#059669; font-weight:700;">[렌트카]</span></strong></td>
+              <td>
+                • <strong>뮌헨 출발</strong> (렌트카 드라이브)<br>
+                • <strong>마리엔 다리</strong> (Marienbrücke)
+              </td>
+              <td>
+                • <strong>노이슈바인슈타인 성</strong> 내부 관람<br>
+                • 호엔슈방가우/알프제 점심<br>
+                • <strong>추크슈피체 산 (2,962m)</strong> 케이블카
+              </td>
+              <td>
+                • 아이브제 호수 산책 후<br>
+                • <strong>뮌헨 복귀 드라이브</strong> (A95 고속도로)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>22일</strong></td>
+              <td>
+                • 국립 독일 박물관
+              </td>
+              <td>
+                • <strong>TU MENSA (점심, 2시 30분까지)</strong><br>
+                • 알테 피나코테크<br>
+                • 님펜부르크 궁전
+              </td>
+              <td style="color: #94a3b8;">(자유 일정 / 석양 및 비어가든)</td>
+            </tr>
+            <tr>
+              <td><strong>23일</strong></td>
+              <td>
+                • 알리안츠 아레나 투어
+              </td>
+              <td>
+                • 오데온광장 + 뮌헨 레지덴츠<br>
+                • 영국정원<br>
+                • 슈바빙(Schwabing) 지구
+              </td>
+              <td style="color: #94a3b8;">(자유 일정 / 슈바빙 다이닝 & 펍)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+  <!-- 자바스크립트 -->
+  <script>
+
+const HOTEL_DATA = {
+  "name": "노보텔 뮌헨 시티 아르눌프파크 (우리 숙소)",
+  "nameDe": "Novotel München City Arnulfpark",
+  "lat": 48.1454917,
+  "lng": 11.5389985,
+  "address": "Arnulfstraße 57, 80636 München",
+  "googleMapsUrl": "https://maps.app.goo.gl/LNwTawdtw64NZc248",
+  "desc": "이번 뮌헨 여행의 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 정류장이 바로 앞이라 중앙역, 마리엔 광장, 님펜부르크 궁전 이동이 매우 편리합니다.",
+  "tip": "호텔 바로 앞 트램 17번을 타면 중앙역 및 님펜부르크 궁전까지 환승 없이 직통으로 이동할 수 있습니다."
+};
+
+const ITINERARY_DATA = [
+  {
+    "day": 1,
+    "dayLabel": "20일 (1일차)",
+    "title": "20일: BMW 테크 & 유서 깊은 구시가지와 파인다이닝",
+    "summary": "BMW 미래 기술 전시관과 올림픽 공원에서 시작해 활기찬 마리엔 광장, 17시 신시청 인형극, 빅투알리엔 마켓, 명품 쇼핑 및 고급 석식",
+    "color": "#2563eb",
+    "transitTip": "대중교통: 뮌헨 시내 M구역 1일권(Tageskarte M존) 구매 권장 (U-Bahn, 트램, 버스 무제한)",
+    "googleRouteUrl": "https://www.google.com/maps/dir/BMW+Welt/BMW+Museum/Olympiapark/Hofbr%C3%A4uhaus+M%C3%BCnchen/Marienplatz/Viktualienmarkt/Neues+Rathaus/Schwarzreiter+Tagesbar+%26+Restaurant",
+    "spots": [
+      {
+        "id": "d1-1",
+        "day": 1,
+        "num": 1,
+        "period": "오전",
+        "time": "09:00 - 10:00",
+        "name": "BMW 벨트 (BMW Welt)",
+        "nameDe": "BMW Welt München",
+        "lat": 48.177,
+        "lng": 11.556,
+        "category": "전시 / 복합문화공간",
+        "desc": "소용돌이 형태의 미래지향적 건물에 BMW, MINI, 롤스로이스의 최신 라인업이 전시된 복합 쇼룸입니다. 무료입장이며 시승 및 포토존이 다채롭습니다.",
+        "tip": "아침 개장 시간(09시)에 맞춰 방문하면 붐비지 않고 여유롭게 사진을 남길 수 있습니다."
+      },
+      {
+        "id": "d1-2",
+        "day": 1,
+        "num": 2,
+        "period": "오전",
+        "time": "10:00 - 11:00",
+        "name": "BMW 뮤지엄 (BMW Museum)",
+        "nameDe": "BMW Museum",
+        "lat": 48.1764,
+        "lng": 11.5591,
+        "category": "박물관",
+        "desc": "원형 사발 형태의 상징적 건물로, 100년이 넘는 BMW의 모터사이클, 클래식 레이싱 카, 엔진 혁신의 역사를 나선형 슬로프를 따라 감상합니다.",
+        "tip": "BMW Welt에서 연결된 육교(구름다리)를 통해 편리하게 건너갈 수 있습니다."
+      },
+      {
+        "id": "d1-3",
+        "day": 1,
+        "num": 3,
+        "period": "오전",
+        "time": "11:00 - 12:00",
+        "name": "올림피아 파크 (Olympiapark)",
+        "nameDe": "Olympiapark München",
+        "lat": 48.1731,
+        "lng": 11.5466,
+        "category": "공원 / 랜드마크",
+        "desc": "1972년 올림픽을 위해 세워진 혁신적인 텐트 구조의 캐노피 지붕 경기장과 푸른 호수, 올림픽 언덕이 어우러진 대형 힐링 공원입니다.",
+        "tip": "올림픽 힐(Olympiaberg)에 오르면 뮌헨 시내 파노라마 전경과 올림픽 타워가 한눈에 들어옵니다."
+      },
+      {
+        "id": "d1-4",
+        "day": 1,
+        "num": 4,
+        "period": "오전",
+        "time": "12:00 - 12:40",
+        "name": "학생 부부 기숙사 (Olydorf 방갈로촌)",
+        "nameDe": "Studentenstadt Olympisches Dorf",
+        "lat": 48.1795,
+        "lng": 11.5535,
+        "category": "기숙사 / 캠퍼스 건축",
+        "desc": "선수촌을 리모델링해 학생들이 거주하는 학생마을입니다. 각 방갈로마다 거주 학생들이 자유롭게 그린 개성 넘치는 독창적 외벽 벽화가 명물입니다.",
+        "tip": "올림피아첸트룸(Olympiazentrum)역과 바로 인접해 있어 구경 후 지하철(U3)을 타고 마리엔 광장으로 이동하기 최적입니다."
+      },
+      {
+        "id": "d1-5",
+        "day": 1,
+        "num": 5,
+        "period": "오후",
+        "time": "13:00 - 14:30",
+        "name": "호프브로이하우스 뮌헨 (점심)",
+        "nameDe": "Hofbräuhaus am Platzl",
+        "lat": 48.1376,
+        "lng": 11.58,
+        "category": "바이에른 전통 맥주홀",
+        "desc": "1589년 바이에른 공작이 설립한 400여 년 역사의 전설적인 맥주홀입니다. 흥겨운 바이에른 전통 관악 연주와 함께 1리터 마스 맥주, 슈바인학센을 맛봅니다.",
+        "tip": "좌석은 예약 없이 빈자리에 자유롭게 합석하는 방식입니다. 당황하지 말고 빈 테이블을 찾아 착석하세요."
+      },
+      {
+        "id": "d1-6",
+        "day": 1,
+        "num": 6,
+        "period": "오후",
+        "time": "14:40 - 15:30",
+        "name": "마리엔 광장 & 프라우엔키르헤",
+        "nameDe": "Marienplatz & Frauenkirche",
+        "lat": 48.1386,
+        "lng": 11.5732,
+        "category": "역사 광장 & 대성당",
+        "desc": "뮌헨의 심장인 마리엔 광장과 두 개의 양파 돔 탑이 우뚝 솟은 성모 대성당(프라우엔키르헤)입니다. 성당 입구 바닥의 신비한 악마의 발자국 전설이 유명합니다.",
+        "tip": "성당 입구 바닥의 발자국 위치에 서면 기둥에 가려 성당 내 모든 창문이 보이지 않는 착시 구조를 감상할 수 있습니다."
+      },
+      {
+        "id": "d1-7",
+        "day": 1,
+        "num": 7,
+        "period": "오후",
+        "time": "15:30 - 16:20",
+        "name": "빅투알리엔 마켓 (Viktualienmarkt)",
+        "nameDe": "Viktualienmarkt",
+        "lat": 48.1351,
+        "lng": 11.576,
+        "category": "전통 야외 시장",
+        "desc": "200년이 넘는 전통을 간직한 뮌헨 최대의 야외 식료품 시장입니다. 신선한 과일, 치즈, 바이에른 소시지, 향신료와 함께 도심 속 비어가든이 활기를 띱니다.",
+        "tip": "비어가든 셀프바에서 현지 맥주 한 잔과 시장에서 구입한 소시지나 치즈를 가볍게 곁들이기 좋습니다."
+      },
+      {
+        "id": "d1-8",
+        "day": 1,
+        "num": 8,
+        "period": "오후",
+        "time": "16:30 - 16:55",
+        "name": "막스마라 (Max Mara 부티크)",
+        "nameDe": "Max Mara München",
+        "lat": 48.1396,
+        "lng": 11.5815,
+        "category": "명품 쇼핑",
+        "desc": "뮌헨 최고급 명품 거리인 막시밀리안 슈트라세에 자리잡은 막스마라 플래그십 매장입니다. 최고급 코트와 패션을 둘러봅니다.",
+        "tip": "막시밀리안 거리는 명품 부티크 건축물들이 아름다워 가벼운 쇼윈도 산책 코스로도 훌륭합니다."
+      },
+      {
+        "id": "d1-9",
+        "day": 1,
+        "num": 9,
+        "period": "오후",
+        "time": "17:00 - 17:20",
+        "name": "신시청 인형극 관람 (17시)",
+        "nameDe": "Neues Rathaus Glockenspiel",
+        "lat": 48.1375,
+        "lng": 11.5754,
+        "category": "시계탑 인형극 공연",
+        "desc": "네오고딕 양식의 신시청사 시계탑에서 펼쳐지는 정교한 기계식 인형극입니다. 16세기 빌헬름 5세의 혼례 마상 시합과 축하 댄스가 43개 종소리와 함께 울려 퍼집니다.",
+        "tip": "PDF 지정 핵심 일정! 17:00 정각에 시작하므로 16:55까지는 마리엔 광장 중앙 분수대로 복귀해 자리를 선점하세요.",
+        "highlight": true
+      },
+      {
+        "id": "d1-10",
+        "day": 1,
+        "num": 10,
+        "period": "저녁",
+        "time": "18:30 - 20:30",
+        "name": "Schwarzreiter Tagesbar & Restaurant",
+        "nameDe": "Schwarzreiter Restaurant & Tagesbar",
+        "lat": 48.1392,
+        "lng": 11.5818,
+        "category": "미쉐린 바이에른 파인다이닝",
+        "desc": "유서 깊은 5성급 켐핀스키 호텔 내의 품격 있는 레스토랑입니다. 바이에른 국왕 루트비히 2세가 사랑한 연어과 물고기(슈바르츠라이터) 요리를 재해석한 코스를 맛봅니다.",
+        "tip": "스마트 캐주얼 드레스 코드가 권장되며, 여유로운 디너를 위해 사전 테이블 예약을 추천합니다."
+      }
+    ]
+  },
+  {
+    "day": 2,
+    "dayLabel": "21일 (2일차)",
+    "title": "21일: 렌트카 바이에른 알프스 로드트립 (마리엔다리 → 노이슈바인슈타인성 → 추크슈피체산)",
+    "summary": "렌트카로 즐기는 알프스 환상 드라이브! 마리엔 다리 조망, 노이슈바인슈타인 성 투어 후 독일 최고봉 추크슈피체(2,962m) 정복",
+    "color": "#059669",
+    "transitTip": "렌트카 팁: 뮌헨 → 슈방가우(P4 주차장) → 오스트리아 경유 국도(B187) → 추크슈피체 아이브제 케이블카 → A95 고속도로 뮌헨 복귀 (총 280km 힐링 루프 드라이브)",
+    "googleRouteUrl": "https://www.google.com/maps/dir/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC/%EB%A7%88%EB%A6%AC%EC%97%94+%EB%8B%A4%EB%A6%AC+%EB%8F%85%EC%9D%BC/%EB%85%B8%EC%9D%B4%EC%8A%88%EB%B0%94%EC%9D%B8%EC%8A%88%ED%83%80%EC%9D%B8+%EC%84%B1+%EB%8F%85%EC%9D%BC/%EC%B6%94%ED%81%AC%EC%8A%88%ED%94%BC%EC%B2%B4+%EC%82%B0+%EB%8F%85%EC%9D%BC/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC",
+    "spots": [
+      {
+        "id": "d2-1",
+        "day": 2,
+        "num": 1,
+        "period": "오전",
+        "time": "07:30 - 09:30",
+        "name": "뮌헨 출발 → 슈방가우 드라이브",
+        "nameDe": "München → Schwangau Drive",
+        "lat": 48.1374,
+        "lng": 11.5755,
+        "category": "렌트카 출발 (아우토반)",
+        "desc": "뮌헨에서 렌트카를 타고 출발하여 바이에른 알프스를 향해 달립니다 (A96 고속도로 및 B17 로맨틱 가도, 약 115km, 1시간 40분 소요).",
+        "tip": "아침 일찍 출발해야 노이슈바인슈타인 성 주차장(P4) 만차 및 마리엔 다리 대기 줄을 피할 수 있습니다."
+      },
+      {
+        "id": "d2-2",
+        "day": 2,
+        "num": 2,
+        "period": "오전",
+        "time": "09:45 - 11:00",
+        "name": "마리엔 다리 (Marienbrücke)",
+        "nameDe": "Marienbrücke Neuschwanstein",
+        "lat": 47.5552,
+        "lng": 10.7496,
+        "category": "전망대 / 인생샷 포토스팟",
+        "desc": "푈라트 협곡 90m 높이에 걸린 다리로, 노이슈바인슈타인 성의 그림 같은 전체 실루엣을 가장 완벽하게 조망할 수 있는 최고의 뷰포인트입니다.",
+        "tip": "요청 코스 반영! 성 내부 입장 전에 마리엔 다리를 먼저 방문하면 아침의 맑은 순광으로 성 전경 사진을 건질 수 있습니다.",
+        "highlight": true
+      },
+      {
+        "id": "d2-3",
+        "day": 2,
+        "num": 3,
+        "period": "오전~오후",
+        "time": "11:15 - 13:00",
+        "name": "노이슈바인슈타인 성 (Schloss Neuschwanstein)",
+        "nameDe": "Schloss Neuschwanstein",
+        "lat": 47.5576,
+        "lng": 10.7498,
+        "category": "유네스코급 랜드마크 고성",
+        "desc": "디즈니 성의 영감이 된 백조의 성입니다. 마리엔 다리에서 도보로 성 안뜰로 이동하여 왕좌의 홀, 음유시인의 방 등 화려한 국왕의 공간을 관람합니다.",
+        "tip": "내부 투어는 사전 예약 시간(Time-slot)에 정시 입장해야 하므로 15분 전까지 안뜰 대기실에 도착해 번호판을 확인하세요.",
+        "highlight": true
+      },
+      {
+        "id": "d2-4",
+        "day": 2,
+        "num": 4,
+        "period": "오후",
+        "time": "13:00 - 14:00",
+        "name": "호엔슈방가우 마을 & 알프제 (점심)",
+        "nameDe": "Hohenschwangau & Alpsee",
+        "lat": 47.5539,
+        "lng": 10.738,
+        "category": "산책 & 런치",
+        "desc": "성에서 내려와 에메랄드빛 알프 호숫가를 바라보며 바이에른 슈니첼, 소시지와 시원한 무알콜 맥주/음료로 점심 식사를 마칩니다.",
+        "tip": "주차 정산 후 추크슈피체를 향해 출발하기 전 든든하게 휴식을 취하세요."
+      },
+      {
+        "id": "d2-5",
+        "day": 2,
+        "num": 5,
+        "period": "오후",
+        "time": "14:15 - 15:30",
+        "name": "알프스 파노라마 로드 드라이브",
+        "nameDe": "Schwangau → Eibsee (Zugspitze)",
+        "lat": 47.4565,
+        "lng": 10.9922,
+        "category": "알프스 산악 드라이브",
+        "desc": "슈방가우에서 출발하여 오스트리아 로이테(Reutte)와 에어발트(Ehrwald) 국도를 통과해 아이브제 호수(추크슈피체 케이블카 승강장)로 향하는 절경 드라이브 코스입니다 (약 60km, 1시간 10분).",
+        "tip": "렌트카 팁: 고속도로가 아닌 일반 국도(Landstraße B179/B187)로 이동하면 오스트리아 통행 스티커(Vignette)를 사지 않아도 됩니다."
+      },
+      {
+        "id": "d2-6",
+        "day": 2,
+        "num": 6,
+        "period": "오후",
+        "time": "15:30 - 18:00",
+        "name": "추크슈피체 산 & 아이브제 케이블카 (2,962m)",
+        "nameDe": "Zugspitze (2962m) & Seilbahn Zugspitze",
+        "lat": 47.4211,
+        "lng": 10.9853,
+        "category": "독일 최고봉 알프스 정상",
+        "desc": "독일 최고봉 해발 2,962m! 아이브제 호수에서 최첨단 파노라마 케이블카를 타고 10분 만에 정상으로 수직 상승합니다. 4개국 알프스 고봉들이 파노라마로 펼쳐지며 독일과 오스트리아 국경을 걸어서 넘나듭니다.",
+        "tip": "핵심 추가 일정! 정상은 여름에도 기온이 낮고 바람이 부니 겉옷(바람막이/경량패딩)을 준비하세요. 하산 후 에메랄드빛 아이브제 호수 산책도 추천!",
+        "highlight": true
+      },
+      {
+        "id": "d2-7",
+        "day": 2,
+        "num": 7,
+        "period": "저녁",
+        "time": "18:15 - 19:45",
+        "name": "아이브제 → 뮌헨 복귀 드라이브",
+        "nameDe": "Eibsee → München A95 Autobahn",
+        "lat": 48.1402,
+        "lng": 11.5583,
+        "category": "아우토반 귀환 드라이브",
+        "desc": "가르미슈-파르텐키르헨을 지나 시원하게 뻗은 A95 아우토반을 타고 슈타른베르크 호수를 거쳐 뮌헨 시내로 복귀합니다 (약 100km, 1시간 20분).",
+        "tip": "저녁 무렵 알프스 능선 너머로 지는 석양을 바라보며 낭만적인 드라이브를 마무리합니다."
+      }
+    ]
+  },
+  {
+    "day": 3,
+    "dayLabel": "22일 (3일차)",
+    "title": "22일: 과학기술의 정수와 클래식 명화, 왕가의 궁전",
+    "summary": "세계 최대 과학 박물관과 뮌헨 공대 학생식당(TU Mensa) 체험, 피나코테크 거장들의 예술과 님펜부르크 궁전의 석양",
+    "color": "#7c3aed",
+    "transitTip": "대중교통: 뮌헨 시내 대중교통 1일권(M존) 이용 (트램 16/17번 및 U-Bahn 동선 연결 용이)",
+    "googleRouteUrl": "https://www.google.com/maps/dir/Deutsches+Museum/TUM+Mensa+Arcisstra%C3%9Fe/Alte+Pinakothek/Schloss+Nymphenburg",
+    "spots": [
+      {
+        "id": "d3-1",
+        "day": 3,
+        "num": 1,
+        "period": "오전",
+        "time": "09:30 - 12:30",
+        "name": "국립 독일 박물관 (Deutsches Museum)",
+        "nameDe": "Deutsches Museum",
+        "lat": 48.1301,
+        "lng": 11.5838,
+        "category": "세계 최대 과학기술 박물관",
+        "desc": "이자르 강 위의 박물관 섬에 자리잡은 과학·공학의 성지입니다. 최초의 자동차, 증기기관, 잠수함, 로켓, 항공기 및 체험형 물리 실험실을 방대하게 둘러봅니다.",
+        "tip": "전체 관람에 며칠이 걸릴 정도로 거대하므로, 항공/우주관과 에너지 기술관 등 관심 전시실을 먼저 집중 관람하세요."
+      },
+      {
+        "id": "d3-2",
+        "day": 3,
+        "num": 2,
+        "period": "오후",
+        "time": "13:00 - 14:15",
+        "name": "TU MENSA (뮌헨공대 학생식당, 점심)",
+        "nameDe": "TUM Mensa Arcisstraße",
+        "lat": 48.1492,
+        "lng": 11.5679,
+        "category": "대학 캠퍼스 런치",
+        "desc": "유럽 최고의 공과대학인 TUM 중앙 캠퍼스의 학생식당입니다. 저렴한 가격에 든든하고 신선한 로컬 바이에른 요리와 샐러드 바를 체험합니다.",
+        "tip": "중요 알림: PDF에 명시된 대로 점심 배식이 오후 2시 30분(14:30)에 정시 종료되므로 13:30 전까지 반드시 입장해야 합니다!",
+        "highlight": true
+      },
+      {
+        "id": "d3-3",
+        "day": 3,
+        "num": 3,
+        "period": "오후",
+        "time": "14:30 - 16:15",
+        "name": "알테 피나코테크 (Alte Pinakothek)",
+        "nameDe": "Alte Pinakothek",
+        "lat": 48.1483,
+        "lng": 11.57,
+        "category": "고전 미술관 (14~18세기)",
+        "desc": "TU 멘사에서 도보 5분 거리! 알브레히트 뒤러의 전설적인 모피 코트를 입은 자화상, 레오나르도 다빈치의 카네이션의 성모, 라파엘로, 렘브란트, 루벤스의 대작들이 가득합니다.",
+        "tip": "루벤스 전용 대형 전시실의 웅장한 천장과 명작들은 놓치지 말아야 할 대표적인 백미입니다."
+      },
+      {
+        "id": "d3-4",
+        "day": 3,
+        "num": 4,
+        "period": "오후~저녁",
+        "time": "16:45 - 18:30",
+        "name": "님펜부르크 궁전 (Schloss Nymphenburg)",
+        "nameDe": "Schloss Nymphenburg",
+        "lat": 48.1582,
+        "lng": 11.5036,
+        "category": "바이에른 왕가 여름 별궁",
+        "desc": "비텔스바흐 왕가의 바로크·로코코 양식 여름 별궁입니다. 화려한 대연회장과 루트비히 1세의 미인 36인 갤러리, 백조들이 노니는 대운하 정원이 펼쳐집니다.",
+        "tip": "궁전 뒤편의 넓은 정원은 무료 개방이며, 늦은 오후 호수에 비치는 노을과 궁전 실루엣이 매우 로맨틱합니다 (트램 17번 환승)."
+      }
+    ]
+  },
+  {
+    "day": 4,
+    "dayLabel": "23일 (4일차)",
+    "title": "23일: 축구의 심장 알리안츠 아레나와 도심 정원 & 슈바빙",
+    "summary": "바이에른 뮌헨 홈구장 투어부터 역사적인 오데온 광장과 레지덴츠 궁전, 서퍼들이 파도를 타는 영국정원, 예술적인 슈바빙 거리까지",
+    "color": "#d97706",
+    "transitTip": "대중교통: 알리안츠 아레나는 U6 종점 방향(Fröttmaning역)이므로 U-Bahn 지하철 이용에 최적화",
+    "googleRouteUrl": "https://www.google.com/maps/dir/Allianz+Arena/Odeonsplatz/Residenz+M%C3%BCnchen/Eisbachwelle/M%C3%BCnchner+Freiheit",
+    "spots": [
+      {
+        "id": "d4-1",
+        "day": 4,
+        "num": 1,
+        "period": "오전",
+        "time": "10:00 - 12:00",
+        "name": "알리안츠 아레나 투어 (Allianz Arena)",
+        "nameDe": "Allianz Arena Tour & Museum",
+        "lat": 48.2188,
+        "lng": 11.6247,
+        "category": "축구 경기장 스타디움 투어",
+        "desc": "FC 바이에른 뮌헨의 홈구장으로, 외벽이 빛나는 에어쿠션으로 유명합니다. 선수 락커룸, 선수 입장 터널, 피치 사이드 벤치, 기자회견실을 직접 걷는 공식 투어를 진행합니다.",
+        "tip": "U6 지하철 Fröttmaning역 하차 후 도보 10~15분 소요됩니다. 아레나 투어는 인기가 높으므로 사전 온라인 예약이 필수입니다."
+      },
+      {
+        "id": "d4-2",
+        "day": 4,
+        "num": 2,
+        "period": "오후",
+        "time": "12:40 - 13:45",
+        "name": "오데온 광장 (Odeonsplatz)",
+        "nameDe": "Odeonsplatz & Feldherrnhalle",
+        "lat": 48.1428,
+        "lng": 11.5776,
+        "category": "역사 광장",
+        "desc": "피렌체의 로자 데이 란치를 본뜬 웅장한 군인 기념관 펠트헤른할레와 노란 바로크 외관의 테아티너 교회가 둘러싼 이탈리아풍 광장입니다.",
+        "tip": "광장 주변의 오랜 전통 카페 야외 테라스에서 광장을 바라보며 여유롭게 커피와 점심을 즐겨보세요."
+      },
+      {
+        "id": "d4-3",
+        "day": 4,
+        "num": 3,
+        "period": "오후",
+        "time": "14:00 - 15:30",
+        "name": "뮌헨 레지덴츠 (Munich Residenz)",
+        "nameDe": "Residenz München",
+        "lat": 48.1412,
+        "lng": 11.5786,
+        "category": "바이에른 왕궁 복합체",
+        "desc": "수백 년 동안 바이에른 공작과 국왕들이 거처했던 독일 최대 규모의 도심 궁전입니다. 르네상스 조각상들이 끝없이 늘어선 안티콰리움 홀의 웅장함이 압권입니다.",
+        "tip": "오데온 광장 바로 동쪽에 접해 있어 이동 시간이 걸리지 않습니다. 궁전 박물관과 보물관을 함께 둘러보세요."
+      },
+      {
+        "id": "d4-4",
+        "day": 4,
+        "num": 4,
+        "period": "오후",
+        "time": "15:45 - 17:00",
+        "name": "영국정원 (Englischer Garten & Eisbachwelle)",
+        "nameDe": "Englischer Garten & Eisbachwelle",
+        "lat": 48.1433,
+        "lng": 11.5878,
+        "category": "도심 공원 & 도심 서핑 스팟",
+        "desc": "레지덴츠 궁전 정원에서 이어지는 유럽 최대의 도심 공원입니다. 입구의 아이스바흐 강에서는 도심 한가운데서 거센 급류 파도를 타는 서퍼들을 바로 눈앞에서 관람할 수 있습니다.",
+        "tip": "서퍼들을 구경한 뒤 공원 안쪽의 잔디밭을 산책하거나 호숫가 비어가든에서 휴식을 취하기 좋습니다."
+      },
+      {
+        "id": "d4-5",
+        "day": 4,
+        "num": 5,
+        "period": "오후~저녁",
+        "time": "17:15 - 19:30",
+        "name": "슈바빙 지구 (Schwabing)",
+        "nameDe": "Schwabing Viertel",
+        "lat": 48.1614,
+        "lng": 11.5862,
+        "category": "예술가 지구 / 카페 & 디너",
+        "desc": "칸딘스키, 파울 클레 등이 예술 활동을 펼쳤던 뮌헨의 대표적인 보헤미안 & 예술 지구입니다. 뮌히너 프라이하이트를 중심으로 트렌디한 편집숍, 카페, 펍이 가득합니다.",
+        "tip": "여행의 마지막 밤을 슈바빙의 활기찬 야외 테라스 레스토랑에서 맛있는 식사와 와인/맥주로 마무리하세요."
+      }
+    ]
+  }
+];
+
+const ROADTRIP_ROUTE_COORDS = [
+  [48.1374, 11.5755],
+  [48.1300, 11.4500],
+  [48.0600, 11.0000],
+  [48.0500, 10.8700],
+  [47.8000, 10.8700],
+  [47.5750, 10.7400],
+  [47.5552, 10.7496],
+  [47.5576, 10.7498],
+  [47.5539, 10.7380],
+  [47.5300, 10.7100],
+  [47.4890, 10.7180],
+  [47.4000, 10.9160],
+  [47.4565, 10.9922],
+  [47.4211, 10.9853],
+  [47.4565, 10.9922],
+  [47.4920, 11.0950],
+  [47.7100, 11.2000],
+  [47.9900, 11.3400],
+  [48.1374, 11.5755]
+];
+
+let currentDayFilter = 'all';
+let currentMobileView = 'list';
+let map = null;
+let markersLayerGroup = null;
+let polylinesLayerGroup = null;
+let hotelMarker = null;
+let tileLayer = null;
+let currentTileMode = 'voyager';
+const spotMarkerMap = new Map();
+
+const TILE_PROVIDERS = {
+  voyager: {
+    url: 'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    options: {
+      attribution: '&copy; CARTO & OpenStreetMap',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }
+  },
+  esri_street: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+    options: {
+      attribution: '&copy; Esri World Street Map',
+      maxZoom: 19
+    }
+  },
+  esri_satellite: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    options: {
+      attribution: '&copy; Esri World Imagery',
+      maxZoom: 18
+    }
+  }
+};
+
+function initMap() {
+  try {
+    map = L.map('map', {
+      center: [48.1455, 11.5390],
+      zoom: 12,
+      zoomControl: true
+    });
+
+    tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
+
+    polylinesLayerGroup = L.layerGroup().addTo(map);
+    markersLayerGroup = L.layerGroup().addTo(map);
+
+    createHotelMarker();
+    renderView();
+
+    setTimeout(fixMapSize, 100);
+    setTimeout(fixMapSize, 300);
+    setTimeout(fixMapSize, 800);
+    window.addEventListener('resize', fixMapSize);
+  } catch (err) {
+    console.error('Map init error:', err);
+  }
+}
+
+function fixMapSize() {
+  if (map) {
+    map.invalidateSize();
+  }
+}
+
+function createHotelPin() {
+  const svg = `
+    <svg class="marker-svg" viewBox="0 0 36 44" width="36" height="44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 0C8.06 0 0 8.06 0 18c0 12 18 26 18 26s18-14 18-26c0-9.94-8.06-18-18-18z" fill="#e11d48"/>
+      <circle cx="18" cy="17" r="12" fill="#ffffff" opacity="0.95"/>
+      <text x="18" y="22" font-size="14" text-anchor="middle">🏨</text>
+    </svg>
+  `;
+  return L.divIcon({
+    className: 'custom-div-icon',
+    html: `<div class="marker-pin hotel-pin">` + svg + `</div>`,
+    iconSize: [36, 44],
+    iconAnchor: [18, 42],
+    popupAnchor: [0, -40]
+  });
+}
+
+function createHotelMarker() {
+  if (!map) return;
+  const pinIcon = createHotelPin();
+  hotelMarker = L.marker([HOTEL_DATA.lat, HOTEL_DATA.lng], {
+    icon: pinIcon,
+    zIndexOffset: 1000
+  }).addTo(map);
+
+  const popupContent = `
+    <div class="popup-badge" style="background:#e11d48">🏨 우리 숙소 (Basecamp)</div>
+    <div class="popup-title">` + HOTEL_DATA.name + `</div>
+    <div style="font-size:11.5px; color:#475569; font-style:italic; margin-bottom:4px;">` + HOTEL_DATA.nameDe + `</div>
+    <div style="font-size:11.5px; color:#0f172a; margin-bottom:6px;">📍 ` + HOTEL_DATA.address + `</div>
+    <div class="popup-desc">` + HOTEL_DATA.desc + `</div>
+    <div style="background:#fff1f2; border-left:3px solid #e11d48; padding:5px 8px; border-radius:4px; font-size:11px; color:#9f1239; margin-bottom:8px;">💡 ` + HOTEL_DATA.tip + `</div>
+    <a class="popup-link" href="` + HOTEL_DATA.googleMapsUrl + `" target="_blank" style="color:#e11d48; font-weight:800;">🗺️ Google 지도 열기 →</a>
+  `;
+  hotelMarker.bindPopup(popupContent);
+}
+
+function setMobileView(view) {
+  currentMobileView = view;
+  document.body.classList.remove('mobile-mode-list', 'mobile-mode-map');
+  document.body.classList.add('mobile-mode-' + view);
+
+  document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
+    if (btn.getAttribute('data-view') === view) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  if (view === 'map') {
+    setTimeout(fixMapSize, 100);
+    setTimeout(fixMapSize, 300);
+  }
+}
+
+function focusOnHotel() {
+  if (window.innerWidth <= 900) {
+    setMobileView('map');
+  }
+  if (map && hotelMarker) {
+    map.flyTo([HOTEL_DATA.lat, HOTEL_DATA.lng], 16, { duration: 0.8 });
+    hotelMarker.openPopup();
+  }
+}
+
+function createCustomPin(number, color) {
+  const svg = `
+    <svg class="marker-svg" viewBox="0 0 32 40" width="32" height="40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 10.5 16 24 16 24s16-13.5 16-24c0-8.837-7.163-16-16-16z" fill="` + color + `"/>
+      <circle cx="16" cy="15" r="10" fill="#ffffff" opacity="0.95"/>
+      <text x="16" y="19" fill="` + color + `" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">` + number + `</text>
+    </svg>
+  `;
+  return L.divIcon({
+    className: 'custom-div-icon',
+    html: `<div class="marker-pin">` + svg + `</div>`,
+    iconSize: [32, 40],
+    iconAnchor: [16, 38],
+    popupAnchor: [0, -36]
+  });
+}
+
+function renderView() {
+  if (markersLayerGroup) markersLayerGroup.clearLayers();
+  if (polylinesLayerGroup) polylinesLayerGroup.clearLayers();
+  spotMarkerMap.clear();
+
+  const timelineContainer = document.getElementById('timelineList');
+  if (!timelineContainer) return;
+
+  const existingHotelCard = document.getElementById('hotelBannerCard');
+  timelineContainer.innerHTML = '';
+  if (existingHotelCard) {
+    timelineContainer.appendChild(existingHotelCard);
+  }
+
+  const latLngsToFit = [
+    [HOTEL_DATA.lat, HOTEL_DATA.lng]
+  ];
+
+  const targetDays = currentDayFilter === 'all' 
+    ? ITINERARY_DATA 
+    : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
+
+  updateHeaderSummary(targetDays);
+
+  targetDays.forEach(dayData => {
+    const daySection = document.createElement('div');
+    daySection.style.marginBottom = '28px';
+
+    if (currentDayFilter === 'all') {
+      const dayHeader = document.createElement('div');
+      dayHeader.style.display = 'flex';
+      dayHeader.style.alignItems = 'center';
+      dayHeader.style.justifyContent = 'space-between';
+      dayHeader.style.padding = '8px 0';
+      dayHeader.style.marginBottom = '12px';
+      dayHeader.style.borderBottom = `2px solid ` + dayData.color;
+      dayHeader.innerHTML = `
+        <span style="font-weight: 800; font-size: 15px; color: ` + dayData.color + `;">` + dayData.dayLabel + `</span>
+        <span style="font-size: 11.5px; color: var(--text-secondary);">` + dayData.spots.length + `개 장소</span>
+      `;
+      daySection.appendChild(dayHeader);
+    }
+
+    const dayCoords = [];
+
+    if (dayData.day === 2) {
+      ROADTRIP_ROUTE_COORDS.forEach(c => dayCoords.push(c));
+    } else {
+      dayData.spots.forEach(spot => dayCoords.push([spot.lat, spot.lng]));
+    }
+
+    if (polylinesLayerGroup && dayCoords.length > 1) {
+      L.polyline(dayCoords, {
+        color: dayData.color,
+        weight: dayData.day === 2 ? 5 : 4,
+        opacity: 0.85,
+        dashArray: dayData.day === 2 ? '8, 6' : undefined,
+        lineJoin: 'round'
+      }).addTo(polylinesLayerGroup);
+    }
+
+    let currentPeriod = '';
+    let currentPeriodContainer = null;
+
+    dayData.spots.forEach((spot) => {
+      latLngsToFit.push([spot.lat, spot.lng]);
+
+      if (markersLayerGroup) {
+        const pinIcon = createCustomPin(spot.num, dayData.color);
+        const marker = L.marker([spot.lat, spot.lng], { icon: pinIcon })
+          .addTo(markersLayerGroup);
+
+        const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || ''));
+        const popupContent = `
+          <div class="popup-badge" style="background:` + dayData.color + `">` + dayData.dayLabel + ` #` + spot.num + `</div>
+          <div class="popup-title">` + spot.name + `</div>
+          <div class="popup-time">🕒 ` + spot.time + `</div>
+          <div class="popup-desc">` + spot.desc + `</div>
+          ` + (spot.tip ? `<div style="background:#fffbeb; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ` + spot.tip + `</div>` : '') + `
+          <a class="popup-link" href="` + googleLink + `" target="_blank">🗺️ Google 지도에서 보기 →</a>
+        `;
+        marker.bindPopup(popupContent);
+        spotMarkerMap.set(spot.id, marker);
+
+        marker.on('click', () => {
+          highlightCard(spot.id);
+        });
+      }
+
+      if (spot.period !== currentPeriod) {
+        currentPeriod = spot.period;
+        currentPeriodContainer = document.createElement('div');
+        currentPeriodContainer.className = 'period-section';
+        currentPeriodContainer.innerHTML = `<div class="period-title">` + currentPeriod + ` 일정</div>`;
+        daySection.appendChild(currentPeriodContainer);
+      }
+
+      const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || ''));
+      const card = document.createElement('div');
+      card.className = 'spot-card';
+      card.id = `card-` + spot.id;
+      card.innerHTML = `
+        <div class="card-top">
+          <div class="badge-wrap">
+            <span class="spot-num-badge" style="background: ` + dayData.color + `">` + spot.num + `</span>
+            <span class="time-badge">` + spot.time + `</span>
+          </div>
+          <span class="category-badge">` + spot.category + `</span>
+        </div>
+        <div class="spot-name">` + spot.name + `</div>
+        <div class="spot-name-de">` + (spot.nameDe || '') + `</div>
+        <div class="spot-desc">` + spot.desc + `</div>
+        ` + (spot.tip ? `
+          <div class="spot-tip ` + (spot.highlight ? 'highlight' : '') + `">
+            <span>` + (spot.highlight ? '🚗' : '💡') + `</span>
+            <span>` + spot.tip + `</span>
+          </div>
+        ` : '') + `
+        <div class="card-actions">
+          <button class="mini-action-link" style="background:#eff6ff; border:1px solid #bfdbfe; color:#2563eb; cursor:pointer;" onclick="focusOnSpot('` + spot.id + `', ` + spot.lat + `, ` + spot.lng + `)">
+            📍 지도에서 보기
+          </button>
+          <a class="mini-action-link" href="` + googleLink + `" target="_blank">
+            🗺️ Google ↗
+          </a>
+        </div>
+      `;
+
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName && (e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button')) return;
+        focusOnSpot(spot.id, spot.lat, spot.lng);
+      });
+
+      if (currentPeriodContainer) {
+        currentPeriodContainer.appendChild(card);
+      }
+    });
+
+    timelineContainer.appendChild(daySection);
+  });
+
+  if (map && latLngsToFit.length > 0) {
+    map.fitBounds(latLngsToFit, { padding: [40, 40], maxZoom: 15 });
+  }
+}
+
+function highlightCard(spotId) {
+  document.querySelectorAll('.spot-card').forEach(c => c.classList.remove('selected'));
+  const targetCard = document.getElementById(`card-` + spotId);
+  if (targetCard) {
+    targetCard.classList.add('selected');
+    targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function focusOnSpot(spotId, lat, lng) {
+  highlightCard(spotId);
+  if (window.innerWidth <= 900) {
+    setMobileView('map');
+  }
+  if (map) {
+    map.flyTo([lat, lng], 15, { duration: 0.8 });
+    const marker = spotMarkerMap.get(spotId);
+    if (marker) {
+      marker.openPopup();
+    }
+  }
+}
+
+function updateHeaderSummary(targetDays) {
+  const titleEl = document.getElementById('dayTitleText');
+  const countBadge = document.getElementById('spotCountBadge');
+  const transitTipEl = document.getElementById('transitTipText');
+  const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
+
+  if (currentDayFilter === 'all') {
+    if (titleEl) titleEl.textContent = '전체 4일 일정 개요 (20일 ~ 23일)';
+    const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
+    if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
+    if (transitTipEl) transitTipEl.innerHTML = `💡 날짜 탭을 누르면 렌트카 코스 및 일자별 세부 동선을 확인할 수 있습니다.`;
+    if (googleHeaderBtn) {
+      googleHeaderBtn.href = ITINERARY_DATA[1].googleRouteUrl;
+      googleHeaderBtn.textContent = '🚗 2일차 렌트카 전체 경로 (Google Maps)';
+    }
+  } else {
+    const d = targetDays[0];
+    if (titleEl) titleEl.textContent = d.title;
+    if (countBadge) countBadge.textContent = d.spots.length + `개 방문지`;
+    if (transitTipEl) transitTipEl.innerHTML = d.transitTip;
+    if (googleHeaderBtn) {
+      googleHeaderBtn.href = d.googleRouteUrl || 'https://www.google.com/maps';
+      googleHeaderBtn.textContent = `🗺️ ` + d.dayLabel + ` Google Maps 경로 열기`;
+    }
+  }
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDayFilter = btn.getAttribute('data-day');
+    renderView();
+    setTimeout(fixMapSize, 150);
+  });
+});
+
+document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetView = btn.getAttribute('data-view');
+    setMobileView(targetView);
+  });
+});
+
+const fitBtn = document.getElementById('btnFitBounds');
+if (fitBtn) {
+  fitBtn.addEventListener('click', () => {
+    const targetDays = currentDayFilter === 'all' 
+      ? ITINERARY_DATA 
+      : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
+    
+    const coords = [[HOTEL_DATA.lat, HOTEL_DATA.lng]];
+    targetDays.forEach(d => d.spots.forEach(s => coords.push([s.lat, s.lng])));
+    if (map && coords.length > 0) {
+      map.fitBounds(coords, { padding: [40, 40] });
+    }
+  });
+}
+
+const toggleTileBtn = document.getElementById('btnToggleTile');
+if (toggleTileBtn) {
+  toggleTileBtn.addEventListener('click', () => {
+    if (!map) return;
+    map.removeLayer(tileLayer);
+    if (currentTileMode === 'voyager') {
+      currentTileMode = 'esri_street';
+      tileLayer = L.tileLayer(TILE_PROVIDERS.esri_street.url, TILE_PROVIDERS.esri_street.options).addTo(map);
+    } else if (currentTileMode === 'esri_street') {
+      currentTileMode = 'esri_satellite';
+      tileLayer = L.tileLayer(TILE_PROVIDERS.esri_satellite.url, TILE_PROVIDERS.esri_satellite.options).addTo(map);
+    } else {
+      currentTileMode = 'voyager';
+      tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
+    }
+  });
+}
+
+const modal = document.getElementById('originalModal');
+const pdfBtn = document.getElementById('btnOriginalPdf');
+const closeBtn = document.getElementById('modalCloseBtn');
+if (pdfBtn && modal) {
+  pdfBtn.addEventListener('click', () => { modal.classList.add('open'); });
+}
+if (closeBtn && modal) {
+  closeBtn.addEventListener('click', () => { modal.classList.remove('open'); });
+}
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('open');
+  });
+}
+
+const hotelBanner = document.getElementById('hotelBannerCard');
+if (hotelBanner) {
+  hotelBanner.addEventListener('click', (e) => {
+    if (e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
+    focusOnHotel();
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 900) {
+    setMobileView('list');
+  }
+  initMap();
+});
+
+  </script>
+</body>
+</html>
