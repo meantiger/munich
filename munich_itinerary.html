@@ -7,7 +7,7 @@
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Leaflet Core CSS (100% 인라인 내장) -->
@@ -725,28 +725,33 @@ svg.leaflet-image-layer.leaflet-interactive path {
       flex-shrink: 0;
       background: #ffffff;
       border-bottom: 1px solid var(--border-color);
-      padding: 10px 18px;
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      z-index: 1000;
-      box-shadow: var(--shadow-sm);
+      gap: 8px;
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .brand-badge {
       background: linear-gradient(135deg, #1e3a8a, #2563eb);
       color: white;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 12px;
+      padding: 5px 9px;
+      border-radius: 7px;
+      font-size: 11.5px;
       font-weight: 800;
       letter-spacing: 0.5px;
       box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
@@ -754,7 +759,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .header-title-group h1 {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       color: #0f172a;
       display: flex;
@@ -763,79 +768,28 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .header-title-group p {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-secondary);
       margin-top: 1px;
-    }
-
-    /* 일자별 필터 탭 (가로 스와이프 지원) */
-    .day-tabs {
-      display: flex;
-      background: #f1f5f9;
-      padding: 4px;
-      border-radius: 10px;
-      gap: 4px;
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .day-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tab-btn {
-      border: none;
-      background: transparent;
-      padding: 7px 11px;
-      border-radius: 7px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-    }
-
-    .tab-btn:hover {
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--text-primary);
-    }
-
-    .tab-btn.active {
-      background: #ffffff;
-      color: #0f172a;
-      box-shadow: var(--shadow-sm);
-      font-weight: 800;
-    }
-
-    .tab-btn .tab-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      display: inline-block;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .action-btn {
       background: white;
       border: 1px solid var(--border-color);
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 11.5px;
+      padding: 5px 9px;
+      border-radius: 7px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       color: var(--text-secondary);
       transition: all 0.15s ease;
       text-decoration: none;
@@ -853,7 +807,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       color: white;
       border-color: #059669;
       font-weight: 800;
-      box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
     }
 
     /* 모바일 뷰 전환 세그먼트 (모바일 전용) */
@@ -868,9 +822,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
       flex: 1;
       border: none;
       background: transparent;
-      padding: 8px 12px;
+      padding: 7px 10px;
       border-radius: 7px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-secondary);
       cursor: pointer;
@@ -886,6 +840,58 @@ svg.leaflet-image-layer.leaflet-interactive path {
       box-shadow: var(--shadow-sm);
     }
 
+    /* 일자별 필터 탭 (가로 스와이프 지원) */
+    .day-tabs {
+      display: flex;
+      background: #f1f5f9;
+      padding: 3px;
+      border-radius: 9px;
+      gap: 3px;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .day-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 10px;
+      border-radius: 7px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: var(--shadow-sm);
+      font-weight: 800;
+    }
+
+    .tab-btn .tab-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
     /* 메인 레이아웃 */
     .main-layout {
       flex: 1;
@@ -893,7 +899,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       overflow: hidden;
       position: relative;
       width: 100%;
-      height: calc(100vh - 65px);
+      height: calc(100vh - 110px);
     }
 
     /* 좌측 사이드바 */
@@ -910,13 +916,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .sidebar-header {
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-bottom: 1px solid var(--border-color);
       background: #fafafa;
     }
 
     .sidebar-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -924,9 +930,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .transit-badge {
-      font-size: 11.5px;
-      padding: 6px 10px;
-      border-radius: 7px;
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 6px;
       background: #eff6ff;
       color: #1d4ed8;
       font-weight: 600;
@@ -941,8 +947,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
       background: linear-gradient(135deg, #fff1f2, #ffe4e6);
       border: 1.5px solid #fecdd3;
       border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: var(--shadow-sm);
@@ -956,15 +962,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .hotel-badge {
       background: #e11d48;
       color: white;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
       letter-spacing: 0.5px;
     }
     .hotel-map-link {
@@ -973,31 +979,28 @@ svg.leaflet-image-layer.leaflet-interactive path {
       text-decoration: none;
       font-weight: 800;
     }
-    .hotel-map-link:hover {
-      text-decoration: underline;
-    }
     .hotel-name {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 800;
       color: #881337;
       line-height: 1.3;
     }
     .hotel-name-de {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #9f1239;
       font-style: italic;
       margin-bottom: 3px;
     }
     .hotel-desc {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #4c0519;
       line-height: 1.4;
     }
     .hotel-action-hint {
-      font-size: 10.5px;
+      font-size: 10px;
       color: #e11d48;
       font-weight: 700;
-      margin-top: 5px;
+      margin-top: 4px;
       display: flex;
       align-items: center;
       gap: 4px;
@@ -1006,17 +1009,17 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .timeline-container {
       flex: 1;
       overflow-y: auto;
-      padding: 14px 16px 40px;
+      padding: 12px 14px 40px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
     }
 
     .period-section {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .period-title {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -1024,7 +1027,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .period-title::after {
@@ -1038,9 +1041,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
       position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 10px;
+      border-radius: 11px;
+      padding: 11px 13px;
+      margin-bottom: 9px;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
@@ -1072,11 +1075,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .spot-num-badge {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       color: white;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -1085,16 +1088,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .time-badge {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       color: #334155;
       background: #f1f5f9;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
     }
 
     .category-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-muted);
       font-weight: 600;
     }
@@ -1113,7 +1116,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .spot-desc {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-secondary);
       line-height: 1.45;
       margin-top: 2px;
@@ -1123,9 +1126,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
       margin-top: 5px;
       background: #fffbeb;
       border-left: 3px solid #f59e0b;
-      padding: 5px 8px;
-      border-radius: 0 6px 6px 0;
-      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 0 5px 5px 0;
+      font-size: 10.5px;
       color: #92400e;
       line-height: 1.4;
       display: flex;
@@ -1144,7 +1147,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       display: flex;
       justify-content: flex-end;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 5px;
     }
 
     .mini-action-link {
@@ -1152,21 +1155,17 @@ svg.leaflet-image-layer.leaflet-interactive path {
       color: #0369a1;
       background: #f0f9ff;
       border: 1px solid #bae6fd;
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 4px 7px;
+      border-radius: 5px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       font-weight: 700;
       transition: all 0.15s;
     }
 
-    .mini-action-link:hover {
-      background: #e0f2fe;
-    }
-
-    /* 우측 맵 */
+    /* 우측 맵 컨테이너 */
     .map-container {
       flex: 1;
       height: 100%;
@@ -1185,13 +1184,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
       z-index: 1;
     }
 
+    /* 지도 상단 컨트롤 */
     .map-overlay-controls {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 10px;
+      right: 50px;
       z-index: 500;
       display: flex;
-      flex-direction: column;
       gap: 6px;
     }
 
@@ -1199,53 +1198,244 @@ svg.leaflet-image-layer.leaflet-interactive path {
       background: white;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 7px 10px;
-      font-size: 11.5px;
+      padding: 6px 9px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--text-primary);
       box-shadow: var(--shadow-md);
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
+    /* ★★★ 접기/최소화 가능한 범례(Legend) ★★★ */
     .map-legend {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
+      top: 10px;
+      left: 10px;
       z-index: 500;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: var(--shadow-lg);
+      border-radius: 9px;
+      padding: 8px 10px;
+      box-shadow: var(--shadow-md);
       font-size: 11px;
-      max-width: 280px;
+      max-width: 260px;
+      transition: all 0.2s ease;
+    }
+
+    .legend-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
     }
 
     .legend-title {
       font-weight: 800;
-      margin-bottom: 6px;
-      font-size: 12px;
+      font-size: 11px;
       color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+    }
+
+    .legend-toggle-btn {
+      font-size: 10px;
+      color: #64748b;
+      background: #f1f5f9;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-weight: 600;
+    }
+
+    .legend-body {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .map-legend.collapsed .legend-body {
+      display: none;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
+      gap: 5px;
       color: var(--text-secondary);
-      font-size: 10.5px;
+      font-size: 10px;
     }
 
     .legend-color {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
       flex-shrink: 0;
+    }
+
+    /* ★★★ 지도 보기 모드 하단 스팟 캐러셀 (Mobile-First) ★★★ */
+    .bottom-carousel-container {
+      position: absolute;
+      bottom: 12px;
+      left: 10px;
+      right: 10px;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bottom-carousel-container.collapsed {
+      transform: translateY(calc(100% - 28px));
+    }
+
+    .carousel-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .carousel-day-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffffff;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(6px);
+      padding: 3px 8px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .carousel-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .carousel-toggle-btn {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(6px);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 3px 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .carousel-nav-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #0f172a;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 2px;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-card {
+      flex: 0 0 250px;
+      scroll-snap-align: center;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 9px 12px;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: all 0.2s;
+    }
+
+    .carousel-card.active {
+      border-color: #2563eb;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .carousel-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .carousel-badge {
+      font-size: 10px;
+      font-weight: 800;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .carousel-google-link {
+      font-size: 10.5px;
+      color: #0369a1;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .carousel-card-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .carousel-card-sub {
+      font-size: 10.5px;
+      color: var(--text-secondary);
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .carousel-card-desc {
+      font-size: 10.5px;
+      color: #475569;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .custom-div-icon {
@@ -1283,7 +1473,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .leaflet-popup-content {
       margin: 10px 12px;
       font-family: var(--font-main);
-      min-width: 220px;
+      min-width: 210px;
     }
 
     .popup-badge {
@@ -1297,29 +1487,29 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .popup-title {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 800;
       color: #0f172a;
       margin-bottom: 2px;
     }
 
     .popup-time {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #2563eb;
       font-weight: 700;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .popup-desc {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-secondary);
       line-height: 1.4;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .popup-link {
       display: inline-block;
-      font-size: 11px;
+      font-size: 10.5px;
       color: #0284c7;
       font-weight: 800;
       text-decoration: none;
@@ -1360,7 +1550,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .modal-header {
-      padding: 14px 20px;
+      padding: 12px 18px;
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -1368,7 +1558,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .modal-header h3 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
     }
 
@@ -1381,67 +1571,50 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
 
     .modal-body {
-      padding: 16px 20px;
+      padding: 14px 18px;
       overflow-y: auto;
     }
 
     .original-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 12.5px;
+      font-size: 12px;
       text-align: left;
     }
 
     .original-table th {
       background: #f1f5f9;
-      padding: 8px 12px;
+      padding: 7px 10px;
       border: 1px solid #cbd5e1;
       font-weight: 700;
       color: #1e293b;
     }
 
     .original-table td {
-      padding: 10px 12px;
+      padding: 8px 10px;
       border: 1px solid #cbd5e1;
       vertical-align: top;
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
-    /* ★★★ 모바일 화면 최적화 미디어 쿼리 (< 900px) ★★★ */
+    /* ★★★ 모바일 화면 분기 (< 900px) ★★★ */
     @media (max-width: 900px) {
       header {
-        padding: 8px 12px;
-        gap: 6px;
-      }
-      .header-left {
-        width: 100%;
-        justify-content: space-between;
+        padding: 6px 10px;
+        gap: 5px;
       }
       .header-title-group h1 {
-        font-size: 15px;
+        font-size: 14.5px;
       }
       .header-title-group p {
         display: none;
-      }
-      .day-tabs {
-        width: 100%;
-      }
-      .header-actions {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .action-btn {
-        flex: 1;
-        justify-content: center;
-        padding: 7px 4px;
-        font-size: 11px;
       }
       .mobile-view-switcher {
         display: flex;
       }
       
       .main-layout {
-        height: calc(100vh - 175px);
+        height: calc(100vh - 128px);
       }
 
       body.mobile-mode-list .sidebar {
@@ -1463,11 +1636,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
         width: 100%;
         height: 100%;
       }
+    }
 
-      .map-legend {
-        max-width: 230px;
-        font-size: 10px;
-        padding: 8px 10px;
+    /* 데스크톱에서는 하단 캐러셀 숨김 (좌측 사이드바가 있으므로) */
+    @media (min-width: 901px) {
+      .bottom-carousel-container {
+        display: none;
       }
     }
   </style>
@@ -1476,15 +1650,33 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   <!-- 상단 헤더 -->
   <header>
-    <div class="header-left">
-      <div class="brand-badge">München 4Days</div>
-      <div class="header-title-group">
-        <h1>🇩🇪 뮌헨 & 바이에른 여행 일정</h1>
-        <p>렌트카 알프스 로드트립(마리엔다리·노이슈바인슈타인성·추크슈피체) & 시내 가이드</p>
+    <div class="header-top-row">
+      <div class="header-left">
+        <div class="brand-badge">München</div>
+        <div class="header-title-group">
+          <h1>🇩🇪 뮌헨 여행 일정</h1>
+          <p>4일간의 핵심 경로 및 알프스 렌트카 가이드</p>
+        </div>
+      </div>
+
+      <!-- 액션 버튼 -->
+      <div class="header-actions">
+        <a class="action-btn primary" id="googleRouteHeaderBtn" href="https://www.google.com/maps/dir/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC/%EB%A7%88%EB%A6%AC%EC%97%94+%EB%8B%A4%EB%A6%AC+%EB%8F%85%EC%9D%BC/%EB%85%B8%EC%9D%B4%EC%8A%88%EB%B0%94%EC%9D%B8%EC%8A%88%ED%83%80%EC%9D%B8+%EC%84%B1+%EB%8F%85%EC%9D%BC/%EC%B6%94%ED%81%AC%EC%8A%88%ED%94%BC%EC%B2%B4+%EC%82%B0+%EB%8F%85%EC%9D%BC/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC" target="_blank" title="Google Maps 길찾기">
+          🚗 2일차 Google 경로
+        </a>
+        <button class="action-btn" id="btnOriginalPdf" title="일정표 확인">
+          📋 일정표
+        </button>
       </div>
     </div>
 
-    <!-- 일자별 필터 탭 (가로 스크롤 가능) -->
+    <!-- 모바일 뷰 전환 세그먼트 버튼 (모바일 전용) -->
+    <div class="mobile-view-switcher">
+      <button class="mobile-switch-btn active" data-view="list">📋 일정 목록</button>
+      <button class="mobile-switch-btn" data-view="map">🗺️ 지도 전체 보기</button>
+    </div>
+
+    <!-- 일자별 필터 탭 (가로 스크롤) -->
     <div class="day-tabs" id="dayTabs">
       <button class="tab-btn active" data-day="all">
         <span class="tab-dot" style="background: #64748b;"></span>
@@ -1492,39 +1684,20 @@ svg.leaflet-image-layer.leaflet-interactive path {
       </button>
       <button class="tab-btn" data-day="1">
         <span class="tab-dot" style="background: var(--color-day1);"></span>
-        20일 (시내·BMW)
+        20일 (시내)
       </button>
       <button class="tab-btn" data-day="2">
         <span class="tab-dot" style="background: var(--color-day2);"></span>
-        🚗 21일 (렌트카 알프스)
+        🚗 21일 (렌트카)
       </button>
       <button class="tab-btn" data-day="3">
         <span class="tab-dot" style="background: var(--color-day3);"></span>
-        22일 (박물관·궁전)
+        22일 (과학·궁전)
       </button>
       <button class="tab-btn" data-day="4">
         <span class="tab-dot" style="background: var(--color-day4);"></span>
-        23일 (아레나·슈바빙)
+        23일 (아레나)
       </button>
-    </div>
-
-    <!-- 액션 버튼 -->
-    <div class="header-actions">
-      <a class="action-btn primary" id="googleRouteHeaderBtn" href="https://www.google.com/maps/dir/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC/%EB%A7%88%EB%A6%AC%EC%97%94+%EB%8B%A4%EB%A6%AC+%EB%8F%85%EC%9D%BC/%EB%85%B8%EC%9D%B4%EC%8A%88%EB%B0%94%EC%9D%B8%EC%8A%88%ED%83%80%EC%9D%B8+%EC%84%B1+%EB%8F%85%EC%9D%BC/%EC%B6%94%ED%81%AC%EC%8A%88%ED%94%BC%EC%B2%B4+%EC%82%B0+%EB%8F%85%EC%9D%BC/%EB%AE%8C%ED%97%A8+%EB%8F%85%EC%9D%BC" target="_blank" title="Google Maps 길찾기">
-        🚗 2일차 Google 경로
-      </a>
-      <button class="action-btn" id="btnOriginalPdf" title="일정표 확인">
-        📋 일정표
-      </button>
-      <button class="action-btn" onclick="window.print()" title="인쇄">
-        🖨️ 인쇄
-      </button>
-    </div>
-
-    <!-- 모바일 뷰 전환 세그먼트 버튼 (모바일 전용) -->
-    <div class="mobile-view-switcher">
-      <button class="mobile-switch-btn active" data-view="list">📋 일정 목록 보기</button>
-      <button class="mobile-switch-btn" data-view="map">🗺️ 지도 전체 보기</button>
     </div>
   </header>
 
@@ -1536,7 +1709,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div class="sidebar-header" id="sidebarHeader">
         <div class="sidebar-title">
           <span id="dayTitleText">전체 4일 일정 개요</span>
-          <span id="spotCountBadge" style="font-size:11.5px; color:var(--text-muted); font-weight:500;">총 26개 스팟</span>
+          <span id="spotCountBadge" style="font-size:11px; color:var(--text-muted); font-weight:500;">총 26개 스팟</span>
         </div>
         <div class="transit-badge" id="transitTipText">
           💡 각 날짜 탭을 클릭하거나 좌측 카드를 누르면 지도가 해당 장소로 자동 이동합니다.
@@ -1562,40 +1735,61 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <section class="map-container">
       <div id="map"></div>
 
-      <!-- 지도 위 플로팅 컨트롤 -->
+      <!-- 지도 상단 우측 컨트롤 -->
       <div class="map-overlay-controls">
         <button class="map-ctrl-btn" id="btnFitBounds" title="현재 일정 전체 한눈에 보기">
-          🔍 경로 맞춤
+          🔍 맞춤
         </button>
         <button class="map-ctrl-btn" id="btnToggleTile" title="지도 스타일 전환">
-          🗺️ 스타일 변경
+          🗺️ 스타일
         </button>
       </div>
 
-      <!-- 지도 우측 하단 범례 -->
-      <div class="map-legend">
-        <div class="legend-title">📍 경로 & 숙소</div>
-        <div class="legend-item" style="margin-bottom: 5px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">
-          <span style="font-size: 13px;">🏨</span>
-          <span><strong>우리 숙소</strong> : 노보텔 아르눌프파크</span>
+      <!-- ★★★ 최소화 가능한 접이식 범례 (모바일 시야 방해 제로) ★★★ -->
+      <div class="map-legend" id="mapLegend">
+        <div class="legend-header" id="legendHeader" title="클릭하여 범례 열기/닫기">
+          <div class="legend-title">📍 경로 & 숙소</div>
+          <span class="legend-toggle-btn">접기/열기</span>
         </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background: var(--color-day1);"></div>
-          <span><strong>20일</strong> : BMW, 마리엔광장, 디너</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background: var(--color-day2);"></div>
-          <span><strong>21일</strong> : 🚗 렌트카 (마리엔다리-성-추크슈피체)</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background: var(--color-day3);"></div>
-          <span><strong>22일</strong> : 독일박물관, 피나코테크, 궁전</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background: var(--color-day4);"></div>
-          <span><strong>23일</strong> : 알리안츠아레나, 영국정원, 슈바빙</span>
+        <div class="legend-body">
+          <div class="legend-item" style="margin-bottom: 3px; padding-bottom: 3px; border-bottom: 1px dashed #e2e8f0;">
+            <span style="font-size: 11.5px;">🏨</span>
+            <span><strong>우리 숙소</strong>: 노보텔 아르눌프파크</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-day1);"></div>
+            <span><strong>20일</strong> : BMW, 구시가지, 디너</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-day2);"></div>
+            <span><strong>21일</strong> : 🚗 렌트카 (마리엔다리-성-추크슈피체)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-day3);"></div>
+            <span><strong>22일</strong> : 독일박물관, 피나코테크, 궁전</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-day4);"></div>
+            <span><strong>23일</strong> : 알리안츠아레나, 영국정원, 슈바빙</span>
+          </div>
         </div>
       </div>
+
+      <!-- ★★★ 모바일 지도 하단 스팟 캐러셀 바텀 슬라이더 ★★★ -->
+      <div class="bottom-carousel-container" id="bottomCarousel">
+        <div class="carousel-top-bar">
+          <span class="carousel-day-title" id="carouselDayTitle">코스 스팟 둘러보기</span>
+          <div class="carousel-actions">
+            <button class="carousel-toggle-btn" id="carouselToggleBtn">▼ 접기</button>
+            <button class="carousel-nav-btn" id="carouselPrevBtn" title="이전">‹</button>
+            <button class="carousel-nav-btn" id="carouselNextBtn" title="다음">›</button>
+          </div>
+        </div>
+        <div class="carousel-track" id="carouselTrack">
+          <!-- JS 동적 생성 -->
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -1622,7 +1816,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
               <td><strong>숙소<br><span style="color:#e11d48; font-weight:800;">[Base]</span></strong></td>
               <td colspan="3">
                 🏨 <strong>노보텔 뮌헨 시티 아르눌프파크</strong> (Novotel München City Arnulfpark)<br>
-                <span style="font-size: 11.5px; color: #475569;">주소: Arnulfstraße 57, 80636 München • 트램 16/17번 및 Donnersbergerbrücke S-Bahn 역 바로 앞</span>
+                <span style="font-size: 11px; color: #475569;">주소: Arnulfstraße 57, 80636 München • 트램 16/17번 및 Donnersbergerbrücke S-Bahn 역 바로 앞</span>
               </td>
             </tr>
             <tr>
@@ -1704,8 +1898,8 @@ const HOTEL_DATA = {
   "lng": 11.5389985,
   "address": "Arnulfstraße 57, 80636 München",
   "googleMapsUrl": "https://maps.app.goo.gl/LNwTawdtw64NZc248",
-  "desc": "이번 뮌헨 여행의 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 정류장이 바로 앞이라 중앙역, 마리엔 광장, 님펜부르크 궁전 이동이 매우 편리합니다.",
-  "tip": "호텔 바로 앞 트램 17번을 타면 중앙역 및 님펜부르크 궁전까지 환승 없이 직통으로 이동할 수 있습니다."
+  "desc": "이번 뮌헨 여행의 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 정류장 도보 2분! 중앙역, 마리엔 광장, 님펜부르크 궁전 이동 최적.",
+  "tip": "호텔 바로 앞 트램 17번을 타면 중앙역 및 님펜부르크 궁전까지 환승 없이 직통 이동!"
 };
 
 const ITINERARY_DATA = [
@@ -2155,6 +2349,7 @@ let hotelMarker = null;
 let tileLayer = null;
 let currentTileMode = 'voyager';
 const spotMarkerMap = new Map();
+let currentActiveSpotId = null;
 
 const TILE_PROVIDERS = {
   voyager: {
@@ -2186,8 +2381,11 @@ function initMap() {
     map = L.map('map', {
       center: [48.1455, 11.5390],
       zoom: 12,
-      zoomControl: true
+      zoomControl: false // 모바일 화면 확보를 위해 커스텀 컨트롤 사용
     });
+
+    // 줌 컨트롤 우측 상단 배치
+    L.control.zoom({ position: 'topright' }).addTo(map);
 
     tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
 
@@ -2240,13 +2438,17 @@ function createHotelMarker() {
   const popupContent = `
     <div class="popup-badge" style="background:#e11d48">🏨 우리 숙소 (Basecamp)</div>
     <div class="popup-title">` + HOTEL_DATA.name + `</div>
-    <div style="font-size:11.5px; color:#475569; font-style:italic; margin-bottom:4px;">` + HOTEL_DATA.nameDe + `</div>
-    <div style="font-size:11.5px; color:#0f172a; margin-bottom:6px;">📍 ` + HOTEL_DATA.address + `</div>
+    <div style="font-size:11px; color:#475569; font-style:italic; margin-bottom:3px;">` + HOTEL_DATA.nameDe + `</div>
+    <div style="font-size:11px; color:#0f172a; margin-bottom:5px;">📍 ` + HOTEL_DATA.address + `</div>
     <div class="popup-desc">` + HOTEL_DATA.desc + `</div>
-    <div style="background:#fff1f2; border-left:3px solid #e11d48; padding:5px 8px; border-radius:4px; font-size:11px; color:#9f1239; margin-bottom:8px;">💡 ` + HOTEL_DATA.tip + `</div>
+    <div style="background:#fff1f2; border-left:3px solid #e11d48; padding:4px 8px; border-radius:4px; font-size:10.5px; color:#9f1239; margin-bottom:6px;">💡 ` + HOTEL_DATA.tip + `</div>
     <a class="popup-link" href="` + HOTEL_DATA.googleMapsUrl + `" target="_blank" style="color:#e11d48; font-weight:800;">🗺️ Google 지도 열기 →</a>
   `;
   hotelMarker.bindPopup(popupContent);
+
+  hotelMarker.on('click', () => {
+    highlightCarouselCard('hotel');
+  });
 }
 
 function setMobileView(view) {
@@ -2272,6 +2474,7 @@ function focusOnHotel() {
   if (window.innerWidth <= 900) {
     setMobileView('map');
   }
+  highlightCarouselCard('hotel');
   if (map && hotelMarker) {
     map.flyTo([HOTEL_DATA.lat, HOTEL_DATA.lng], 16, { duration: 0.8 });
     hotelMarker.openPopup();
@@ -2309,6 +2512,33 @@ function renderView() {
     timelineContainer.appendChild(existingHotelCard);
   }
 
+  // 하단 캐러셀 트랙 준비
+  const carouselTrack = document.getElementById('carouselTrack');
+  if (carouselTrack) {
+    carouselTrack.innerHTML = '';
+  }
+
+  // 캐러셀 첫 번째 카드: 숙소 카드
+  if (carouselTrack) {
+    const hotelCard = document.createElement('div');
+    hotelCard.className = 'carousel-card';
+    hotelCard.id = 'carousel-card-hotel';
+    hotelCard.innerHTML = `
+      <div class="carousel-card-top">
+        <span class="carousel-badge" style="background:#e11d48">🏨 우리 숙소</span>
+        <a class="carousel-google-link" href="` + HOTEL_DATA.googleMapsUrl + `" target="_blank">Google ↗</a>
+      </div>
+      <div class="carousel-card-title">` + HOTEL_DATA.name + `</div>
+      <div class="carousel-card-sub">` + HOTEL_DATA.nameDe + `</div>
+      <div class="carousel-card-desc">트램 16/17번 및 S-Bahn 도보 2분! 중앙역·궁전 이동 편리</div>
+    `;
+    hotelCard.addEventListener('click', (e) => {
+      if (e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
+      focusOnHotel();
+    });
+    carouselTrack.appendChild(hotelCard);
+  }
+
   const latLngsToFit = [
     [HOTEL_DATA.lat, HOTEL_DATA.lng]
   ];
@@ -2321,7 +2551,7 @@ function renderView() {
 
   targetDays.forEach(dayData => {
     const daySection = document.createElement('div');
-    daySection.style.marginBottom = '28px';
+    daySection.style.marginBottom = '24px';
 
     if (currentDayFilter === 'all') {
       const dayHeader = document.createElement('div');
@@ -2332,8 +2562,8 @@ function renderView() {
       dayHeader.style.marginBottom = '12px';
       dayHeader.style.borderBottom = `2px solid ` + dayData.color;
       dayHeader.innerHTML = `
-        <span style="font-weight: 800; font-size: 15px; color: ` + dayData.color + `;">` + dayData.dayLabel + `</span>
-        <span style="font-size: 11.5px; color: var(--text-secondary);">` + dayData.spots.length + `개 장소</span>
+        <span style="font-weight: 800; font-size: 14.5px; color: ` + dayData.color + `;">` + dayData.dayLabel + `</span>
+        <span style="font-size: 11px; color: var(--text-secondary);">` + dayData.spots.length + `개 장소</span>
       `;
       daySection.appendChild(dayHeader);
     }
@@ -2373,7 +2603,7 @@ function renderView() {
           <div class="popup-title">` + spot.name + `</div>
           <div class="popup-time">🕒 ` + spot.time + `</div>
           <div class="popup-desc">` + spot.desc + `</div>
-          ` + (spot.tip ? `<div style="background:#fffbeb; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ` + spot.tip + `</div>` : '') + `
+          ` + (spot.tip ? `<div style="background:#fffbeb; padding:4px 8px; border-radius:4px; font-size:10.5px; color:#92400e; margin-bottom:6px;">💡 ` + spot.tip + `</div>` : '') + `
           <a class="popup-link" href="` + googleLink + `" target="_blank">🗺️ Google 지도에서 보기 →</a>
         `;
         marker.bindPopup(popupContent);
@@ -2381,6 +2611,7 @@ function renderView() {
 
         marker.on('click', () => {
           highlightCard(spot.id);
+          highlightCarouselCard(spot.id);
         });
       }
 
@@ -2393,6 +2624,8 @@ function renderView() {
       }
 
       const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || ''));
+      
+      // 1. 좌측 사이드바 카드
       const card = document.createElement('div');
       card.className = 'spot-card';
       card.id = `card-` + spot.id;
@@ -2431,13 +2664,34 @@ function renderView() {
       if (currentPeriodContainer) {
         currentPeriodContainer.appendChild(card);
       }
+
+      // 2. 지도 하단 스와이프 캐러셀 카드
+      if (carouselTrack) {
+        const cCard = document.createElement('div');
+        cCard.className = 'carousel-card';
+        cCard.id = `carousel-card-` + spot.id;
+        cCard.innerHTML = `
+          <div class="carousel-card-top">
+            <span class="carousel-badge" style="background:` + dayData.color + `">#` + spot.num + ` ` + spot.time + `</span>
+            <a class="carousel-google-link" href="` + googleLink + `" target="_blank">Google ↗</a>
+          </div>
+          <div class="carousel-card-title">` + spot.name + `</div>
+          <div class="carousel-card-sub">` + (spot.nameDe || '') + `</div>
+          <div class="carousel-card-desc">` + spot.desc.substring(0, 60) + `...</div>
+        `;
+        cCard.addEventListener('click', (e) => {
+          if (e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
+          focusOnSpot(spot.id, spot.lat, spot.lng);
+        });
+        carouselTrack.appendChild(cCard);
+      }
     });
 
     timelineContainer.appendChild(daySection);
   });
 
   if (map && latLngsToFit.length > 0) {
-    map.fitBounds(latLngsToFit, { padding: [40, 40], maxZoom: 15 });
+    map.fitBounds(latLngsToFit, { padding: [30, 30], maxZoom: 15 });
   }
 }
 
@@ -2450,11 +2704,24 @@ function highlightCard(spotId) {
   }
 }
 
+function highlightCarouselCard(spotId) {
+  currentActiveSpotId = spotId;
+  document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('active'));
+  const targetCard = document.getElementById(`carousel-card-` + spotId);
+  if (targetCard) {
+    targetCard.classList.add('active');
+    targetCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+}
+
 function focusOnSpot(spotId, lat, lng) {
   highlightCard(spotId);
-  if (window.innerWidth <= 900) {
+  highlightCarouselCard(spotId);
+
+  if (window.innerWidth <= 900 && currentMobileView !== 'map') {
     setMobileView('map');
   }
+
   if (map) {
     map.flyTo([lat, lng], 15, { duration: 0.8 });
     const marker = spotMarkerMap.get(spotId);
@@ -2469,28 +2736,32 @@ function updateHeaderSummary(targetDays) {
   const countBadge = document.getElementById('spotCountBadge');
   const transitTipEl = document.getElementById('transitTipText');
   const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
+  const carouselDayTitle = document.getElementById('carouselDayTitle');
 
   if (currentDayFilter === 'all') {
     if (titleEl) titleEl.textContent = '전체 4일 일정 개요 (20일 ~ 23일)';
     const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
     if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
     if (transitTipEl) transitTipEl.innerHTML = `💡 날짜 탭을 누르면 렌트카 코스 및 일자별 세부 동선을 확인할 수 있습니다.`;
+    if (carouselDayTitle) carouselDayTitle.textContent = '전체 코스 스팟 둘러보기';
     if (googleHeaderBtn) {
       googleHeaderBtn.href = ITINERARY_DATA[1].googleRouteUrl;
-      googleHeaderBtn.textContent = '🚗 2일차 렌트카 전체 경로 (Google Maps)';
+      googleHeaderBtn.textContent = '🚗 2일차 렌트카 경로';
     }
   } else {
     const d = targetDays[0];
     if (titleEl) titleEl.textContent = d.title;
     if (countBadge) countBadge.textContent = d.spots.length + `개 방문지`;
     if (transitTipEl) transitTipEl.innerHTML = d.transitTip;
+    if (carouselDayTitle) carouselDayTitle.textContent = d.dayLabel + ` 코스 스팟 (` + d.spots.length + `곳)`;
     if (googleHeaderBtn) {
       googleHeaderBtn.href = d.googleRouteUrl || 'https://www.google.com/maps';
-      googleHeaderBtn.textContent = `🗺️ ` + d.dayLabel + ` Google Maps 경로 열기`;
+      googleHeaderBtn.textContent = `🗺️ ` + d.dayLabel + ` Google 경로`;
     }
   }
 }
 
+// 날짜 필터 탭
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -2501,6 +2772,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
+// 모바일 뷰 스위처
 document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const targetView = btn.getAttribute('data-view');
@@ -2508,6 +2780,7 @@ document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
   });
 });
 
+// 지도 맞춤 버튼
 const fitBtn = document.getElementById('btnFitBounds');
 if (fitBtn) {
   fitBtn.addEventListener('click', () => {
@@ -2518,11 +2791,12 @@ if (fitBtn) {
     const coords = [[HOTEL_DATA.lat, HOTEL_DATA.lng]];
     targetDays.forEach(d => d.spots.forEach(s => coords.push([s.lat, s.lng])));
     if (map && coords.length > 0) {
-      map.fitBounds(coords, { padding: [40, 40] });
+      map.fitBounds(coords, { padding: [30, 30] });
     }
   });
 }
 
+// 지도 타일 전환
 const toggleTileBtn = document.getElementById('btnToggleTile');
 if (toggleTileBtn) {
   toggleTileBtn.addEventListener('click', () => {
@@ -2541,6 +2815,44 @@ if (toggleTileBtn) {
   });
 }
 
+// 범례 최소화 토글
+const legendBox = document.getElementById('mapLegend');
+const legendHeader = document.getElementById('legendHeader');
+if (legendHeader && legendBox) {
+  legendHeader.addEventListener('click', () => {
+    legendBox.classList.toggle('collapsed');
+  });
+}
+
+// 하단 캐러셀 접기/펼치기 토글
+const carouselBox = document.getElementById('bottomCarousel');
+const carouselToggleBtn = document.getElementById('carouselToggleBtn');
+if (carouselToggleBtn && carouselBox) {
+  carouselToggleBtn.addEventListener('click', () => {
+    carouselBox.classList.toggle('collapsed');
+    const isCollapsed = carouselBox.classList.contains('collapsed');
+    carouselToggleBtn.innerHTML = isCollapsed 
+      ? '▲ 코스 카드 보기' 
+      : '▼ 접기';
+  });
+}
+
+// 하단 캐러셀 좌우 이동 버튼
+const carouselPrevBtn = document.getElementById('carouselPrevBtn');
+const carouselNextBtn = document.getElementById('carouselNextBtn');
+const carouselTrackEl = document.getElementById('carouselTrack');
+if (carouselPrevBtn && carouselTrackEl) {
+  carouselPrevBtn.addEventListener('click', () => {
+    carouselTrackEl.scrollBy({ left: -260, behavior: 'smooth' });
+  });
+}
+if (carouselNextBtn && carouselTrackEl) {
+  carouselNextBtn.addEventListener('click', () => {
+    carouselTrackEl.scrollBy({ left: 260, behavior: 'smooth' });
+  });
+}
+
+// 모달 창
 const modal = document.getElementById('originalModal');
 const pdfBtn = document.getElementById('btnOriginalPdf');
 const closeBtn = document.getElementById('modalCloseBtn');
@@ -2567,6 +2879,8 @@ if (hotelBanner) {
 window.addEventListener('DOMContentLoaded', () => {
   if (window.innerWidth <= 900) {
     setMobileView('list');
+    // 모바일에서는 범례를 기본적으로 접어둠
+    if (legendBox) legendBox.classList.add('collapsed');
   }
   initMap();
 });
