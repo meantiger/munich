@@ -1897,7 +1897,7 @@ const HOTEL_DATA = {
   "lng": 11.5389985,
   "address": "Arnulfstraße 57, 80636 München",
   "googleMapsUrl": "https://maps.app.goo.gl/LNwTawdtw64NZc248",
-  "desc": "이번 뮌헨 여행의 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 도보 2분. 중앙역 SIXT 렌터카, 마리엔 광장, 님펜부르크 궁전 이동 최적.",
+  "desc": "이번 뮌헨 여행의 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 정류장 도보 2분. 중앙역 SIXT 렌터카, 시내 중심, 님펜부르크 궁전 이동 최적.",
   "tip": "호텔 바로 앞 트램 17번을 타면 중앙역(SIXT) 및 님펜부르크 궁전까지 환승 없이 5~15분 직통 이동!"
 };
 
@@ -2462,7 +2462,6 @@ let hotelMarker = null;
 let tileLayer = null;
 let currentTileMode = 'voyager';
 const spotMarkerMap = new Map();
-let currentActiveSpotId = null;
 
 const TILE_PROVIDERS = {
   voyager: {
@@ -2474,14 +2473,14 @@ const TILE_PROVIDERS = {
     }
   },
   esri_street: {
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{x}',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
     options: {
       attribution: '&copy; Esri World Street Map',
       maxZoom: 19
     }
   },
   esri_satellite: {
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{x}',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     options: {
       attribution: '&copy; Esri World Imagery',
       maxZoom: 18
@@ -2494,10 +2493,9 @@ function initMap() {
     map = L.map('map', {
       center: [48.1455, 11.5390],
       zoom: 12,
-      zoomControl: false
+      zoomControl: true
     });
 
-    L.control.zoom({ position: 'topright' }).addTo(map);
     tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
 
     polylinesLayerGroup = L.layerGroup().addTo(map);
@@ -2521,262 +2519,264 @@ function fixMapSize() {
   }
 }
 
-function createHotelMarker() {
-  const hotelIcon = L.divIcon({
-    className: 'custom-div-icon',
-    html: `
-      <div class="marker-pin hotel-pin" title="${HOTEL_DATA.name}">
-        <svg class="marker-svg" viewBox="0 0 36 44" width="36" height="44">
-          <path d="M18 0 C8 0 0 8 0 18 C0 31.5 18 44 18 44 C18 44 36 31.5 36 18 C36 8 28 0 18 0 Z" fill="#b45309" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="18" cy="18" r="14" fill="#d97706"/>
-          <text x="18" y="23" font-size="14" text-anchor="middle" fill="#ffffff">🏨</text>
-        </svg>
-      </div>
-    `,
-    iconSize: [36, 44],
-    iconAnchor: [18, 44],
-    popupAnchor: [0, -40]
-  });
-
-  const popupHtml = `
-    <div>
-      <div class="popup-badge" style="background:#b45309;">우리 숙소 (Basecamp)</div>
-      <div class="popup-title">${HOTEL_DATA.name}</div>
-      <div class="popup-time" style="color:#78350f;">${HOTEL_DATA.nameDe}</div>
-      <div class="popup-desc">${HOTEL_DATA.desc}</div>
-      <div style="background:#fef3c7; border:1px solid #fde68a; border-radius:6px; padding:6px; font-size:11px; margin-bottom:8px; color:#92400e;">
-        <strong>💡 교통 팁:</strong> ${HOTEL_DATA.tip}
-      </div>
-      <a class="popup-link" href="${HOTEL_DATA.googleMapsUrl}" target="_blank" rel="noopener">Google 지도에서 열기 &rarr;</a>
-    </div>
+function createHotelPin() {
+  const svg = `
+    <svg class="marker-svg" viewBox="0 0 36 44" width="36" height="44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 0C8.06 0 0 8.06 0 18c0 12 18 26 18 26s18-14 18-26c0-9.94-8.06-18-18-18z" fill="#b45309" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="18" cy="17" r="12" fill="#f59e0b" opacity="0.95"/>
+      <text x="18" y="22" font-size="14" text-anchor="middle">🏨</text>
+    </svg>
   `;
-
-  hotelMarker = L.marker([HOTEL_DATA.lat, HOTEL_DATA.lng], {
-    icon: hotelIcon,
-    zIndexOffset: 1000
-  }).bindPopup(popupHtml);
-
-  hotelMarker.addTo(map);
-}
-
-function createCustomPin(num, color, isHighlight) {
-  const width = isHighlight ? 36 : 30;
-  const height = isHighlight ? 44 : 38;
-  const strokeColor = isHighlight ? '#fbbf24' : '#ffffff';
-  const strokeWidth = isHighlight ? 2.5 : 1.5;
-
   return L.divIcon({
     className: 'custom-div-icon',
-    html: `
-      <div class="marker-pin ${isHighlight ? 'hotel-pin' : ''}">
-        <svg class="marker-svg" viewBox="0 0 36 44" width="${width}" height="${height}">
-          <path d="M18 0 C8 0 0 8 0 18 C0 31.5 18 44 18 44 C18 44 36 31.5 36 18 C36 8 28 0 18 0 Z" fill="${color}" stroke="${strokeColor}" stroke-width="${strokeWidth}"/>
-          <circle cx="18" cy="18" r="11" fill="#ffffff"/>
-          <text x="18" y="22.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="900" text-anchor="middle" fill="${color}">${num}</text>
-        </svg>
-      </div>
-    `,
-    iconSize: [width, height],
-    iconAnchor: [width / 2, height],
-    popupAnchor: [0, -height + 4]
+    html: `<div class="marker-pin hotel-pin">` + svg + `</div>`,
+    iconSize: [36, 44],
+    iconAnchor: [18, 42],
+    popupAnchor: [0, -40]
   });
+}
+
+function createHotelMarker() {
+  if (!map) return;
+  const pinIcon = createHotelPin();
+  hotelMarker = L.marker([HOTEL_DATA.lat, HOTEL_DATA.lng], {
+    icon: pinIcon,
+    zIndexOffset: 1000
+  }).addTo(map);
+
+  const popupContent = `
+    <div class="popup-badge" style="background:#b45309">🏨 우리 숙소 (Basecamp)</div>
+    <div class="popup-title">` + HOTEL_DATA.name + `</div>
+    <div style="font-size:11.5px; color:#475569; font-style:italic; margin-bottom:4px;">` + HOTEL_DATA.nameDe + `</div>
+    <div style="font-size:11.5px; color:#0f172a; margin-bottom:6px;">📍 ` + HOTEL_DATA.address + `</div>
+    <div class="popup-desc">` + HOTEL_DATA.desc + `</div>
+    <div style="background:#fef3c7; border-left:3px solid #b45309; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ` + HOTEL_DATA.tip + `</div>
+    <a class="popup-link" href="` + HOTEL_DATA.googleMapsUrl + `" target="_blank" style="color:#b45309; font-weight:800;">🗺️ Google 지도 열기 →</a>
+  `;
+  hotelMarker.bindPopup(popupContent);
+}
+
+function createCustomPin(number, color, isHighlight) {
+  const strokeColor = isHighlight ? '#fbbf24' : '#ffffff';
+  const strokeWidth = isHighlight ? '2.5' : '1.5';
+  const svg = `
+    <svg class="marker-svg" viewBox="0 0 32 40" width="32" height="40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 10.5 16 24 16 24s16-13.5 16-24c0-8.837-7.163-16-16-16z" fill="` + color + `" stroke="` + strokeColor + `" stroke-width="` + strokeWidth + `"/>
+      <circle cx="16" cy="15" r="10" fill="#ffffff" opacity="0.95"/>
+      <text x="16" y="19" fill="` + color + `" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="900" text-anchor="middle">` + number + `</text>
+    </svg>
+  `;
+  return L.divIcon({
+    className: 'custom-div-icon',
+    html: `<div class="marker-pin">` + svg + `</div>`,
+    iconSize: [32, 40],
+    iconAnchor: [16, 38],
+    popupAnchor: [0, -36]
+  });
+}
+
+function setMobileView(view) {
+  currentMobileView = view;
+  document.body.classList.remove('mobile-mode-list', 'mobile-mode-map');
+  document.body.classList.add('mobile-mode-' + view);
+
+  document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
+    if (btn.getAttribute('data-view') === view) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  if (view === 'map') {
+    setTimeout(fixMapSize, 100);
+    setTimeout(fixMapSize, 300);
+  }
+}
+
+function focusOnHotel() {
+  if (window.innerWidth <= 900) {
+    setMobileView('map');
+  }
+  if (map && hotelMarker) {
+    map.flyTo([HOTEL_DATA.lat, HOTEL_DATA.lng], 15, { duration: 0.8 });
+    hotelMarker.openPopup();
+  }
+  highlightCarouselCard('carousel-hotel');
 }
 
 function renderView() {
-  renderSidebar();
-  renderMapLayers();
-  renderBottomCarousel();
-  updateLegend();
-}
-
-function renderSidebar() {
-  const container = document.getElementById('itineraryList');
-  if (!container) return;
-
-  const daysToShow = currentDayFilter === 'all'
-    ? ITINERARY_DATA
-    : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
-
-  let html = '';
-
-  daysToShow.forEach(dayInfo => {
-    html += `
-      <section class="day-section" id="day-sec-${dayInfo.day}">
-        <div class="day-header" style="border-left-color: ${dayInfo.color};">
-          <div class="day-header-meta">
-            <span class="day-tag" style="background: ${dayInfo.color};">${dayInfo.dayLabel}</span>
-            <span class="day-route-count">장소 ${dayInfo.spots.length}곳</span>
-          </div>
-          <h2 class="day-title">${dayInfo.title}</h2>
-          <p class="day-summary">${dayInfo.summary}</p>
-          <div class="day-transit-tip">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-            ${dayInfo.transitTip}
-          </div>
-          <div style="margin-top: 8px;">
-            <a href="${dayInfo.googleRouteUrl}" target="_blank" rel="noopener" class="google-nav-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-              ${dayInfo.dayLabel} 전체 구글 경로 길찾기
-            </a>
-          </div>
-        </div>
-        <div class="spots-list">
-    `;
-
-    dayInfo.spots.forEach(spot => {
-      const gUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'))}`;
-      html += `
-        <div class="spot-card ${spot.highlight ? 'highlight-spot' : ''}" id="card-${spot.id}" onclick="onSpotCardClick('${spot.id}')">
-          <div class="spot-card-header">
-            <div class="spot-num-badge" style="background: ${dayInfo.color};">${spot.num}</div>
-            <div class="spot-title-wrap">
-              <div class="spot-time-category">
-                <span class="spot-period-tag">${spot.period}</span>
-                <span class="spot-time">${spot.time}</span>
-                <span class="spot-category-tag">${spot.category}</span>
-              </div>
-              <h3 class="spot-name">${spot.name}</h3>
-              ${spot.nameDe ? `<div class="spot-name-de">${spot.nameDe}</div>` : ''}
-            </div>
-          </div>
-          <p class="spot-desc">${spot.desc}</p>
-          <div class="spot-tip">
-            <strong>TIP:</strong> ${spot.tip}
-          </div>
-          <div class="spot-links">
-            <a class="spot-map-link" href="${gUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Google 지도 열기
-            </a>
-          </div>
-        </div>
-      `;
-    });
-
-    html += `
-        </div>
-      </section>
-    `;
-  });
-
-  container.innerHTML = html;
-}
-
-function renderMapLayers() {
-  if (!map || !markersLayerGroup || !polylinesLayerGroup) return;
-
-  markersLayerGroup.clearLayers();
-  polylinesLayerGroup.clearLayers();
+  if (markersLayerGroup) markersLayerGroup.clearLayers();
+  if (polylinesLayerGroup) polylinesLayerGroup.clearLayers();
   spotMarkerMap.clear();
 
-  const daysToShow = currentDayFilter === 'all'
+  const timelineContainer = document.getElementById('timelineList');
+  if (!timelineContainer) return;
+
+  const existingHotelCard = document.getElementById('hotelBannerCard');
+  timelineContainer.innerHTML = '';
+  if (existingHotelCard) {
+    timelineContainer.appendChild(existingHotelCard);
+  }
+
+  const latLngsToFit = [
+    [HOTEL_DATA.lat, HOTEL_DATA.lng]
+  ];
+
+  const targetDays = currentDayFilter === 'all'
     ? ITINERARY_DATA
     : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
 
-  const allLatLngs = [];
+  updateHeaderSummary(targetDays);
+  renderBottomCarousel(targetDays);
 
-  if (hotelMarker) {
-    allLatLngs.push([HOTEL_DATA.lat, HOTEL_DATA.lng]);
-  }
+  targetDays.forEach(dayData => {
+    const daySection = document.createElement('div');
+    daySection.style.marginBottom = '28px';
 
-  daysToShow.forEach(dayInfo => {
+    if (currentDayFilter === 'all') {
+      const dayHeader = document.createElement('div');
+      dayHeader.style.display = 'flex';
+      dayHeader.style.alignItems = 'center';
+      dayHeader.style.justifyContent = 'space-between';
+      dayHeader.style.padding = '8px 0';
+      dayHeader.style.marginBottom = '12px';
+      dayHeader.style.borderBottom = `2px solid ` + dayData.color;
+      dayHeader.innerHTML = `
+        <span style="font-weight: 800; font-size: 15px; color: ` + dayData.color + `;">` + dayData.dayLabel + `</span>
+        <span style="font-size: 11.5px; color: var(--text-secondary);">` + dayData.spots.length + `개 장소</span>
+      `;
+      daySection.appendChild(dayHeader);
+    }
+
     const dayCoords = [];
 
-    dayInfo.spots.forEach(spot => {
-      const latLng = [spot.lat, spot.lng];
-      dayCoords.push(latLng);
-      allLatLngs.push(latLng);
+    if (dayData.day === 2) {
+      ROADTRIP_ROUTE_COORDS.forEach(c => dayCoords.push(c));
+    } else {
+      dayData.spots.forEach(spot => dayCoords.push([spot.lat, spot.lng]));
+    }
 
-      const icon = createCustomPin(spot.num, dayInfo.color, spot.highlight);
-      const marker = L.marker(latLng, {
-        icon: icon,
-        zIndexOffset: spot.highlight ? 500 : 100
-      });
+    if (polylinesLayerGroup && dayCoords.length > 1) {
+      L.polyline(dayCoords, {
+        color: dayData.color,
+        weight: dayData.day === 2 ? 5 : 4,
+        opacity: 0.85,
+        dashArray: dayData.day === 2 ? '8, 6' : undefined,
+        lineJoin: 'round'
+      }).addTo(polylinesLayerGroup);
+    }
 
-      const gUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'))}`;
-      const popupHtml = `
-        <div>
-          <div class="popup-badge" style="background:${dayInfo.color};">${dayInfo.dayLabel} · 코스 #${spot.num}</div>
-          <div class="popup-title">${spot.name}</div>
-          <div class="popup-time">${spot.period} ${spot.time} (${spot.category})</div>
-          <div class="popup-desc">${spot.desc}</div>
-          <div style="background:#f8fafc; border-left:3px solid ${dayInfo.color}; padding:6px 8px; font-size:11px; margin-bottom:8px; border-radius:0 4px 4px 0;">
-            <strong>TIP:</strong> ${spot.tip}
+    let currentPeriod = '';
+    let currentPeriodContainer = null;
+
+    dayData.spots.forEach((spot) => {
+      latLngsToFit.push([spot.lat, spot.lng]);
+
+      if (markersLayerGroup) {
+        const pinIcon = createCustomPin(spot.num, dayData.color, spot.highlight);
+        const marker = L.marker([spot.lat, spot.lng], {
+          icon: pinIcon,
+          zIndexOffset: spot.highlight ? 500 : 100
+        }).addTo(markersLayerGroup);
+
+        const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'));
+        const popupContent = `
+          <div class="popup-badge" style="background:` + dayData.color + `">` + dayData.dayLabel + ` #` + spot.num + `</div>
+          <div class="popup-title">` + spot.name + `</div>
+          <div class="popup-time">🕒 ` + spot.period + ` ` + spot.time + `</div>
+          <div class="popup-desc">` + spot.desc + `</div>
+          ` + (spot.tip ? `<div style="background:#fffbeb; border-left:3px solid ` + dayData.color + `; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ` + spot.tip + `</div>` : '') + `
+          <a class="popup-link" href="` + googleLink + `" target="_blank" style="color:` + dayData.color + `; font-weight:800;">🗺️ Google 지도에서 보기 →</a>
+        `;
+        marker.bindPopup(popupContent);
+        spotMarkerMap.set(spot.id, marker);
+
+        marker.on('click', () => {
+          highlightCard(spot.id);
+          highlightCarouselCard(`carousel-` + spot.id);
+        });
+      }
+
+      if (spot.period !== currentPeriod) {
+        currentPeriod = spot.period;
+        currentPeriodContainer = document.createElement('div');
+        currentPeriodContainer.className = 'period-section';
+        currentPeriodContainer.innerHTML = `<div class="period-title">` + currentPeriod + ` 일정</div>`;
+        daySection.appendChild(currentPeriodContainer);
+      }
+
+      const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'));
+      const card = document.createElement('div');
+      card.className = 'spot-card';
+      card.id = `card-` + spot.id;
+      card.innerHTML = `
+        <div class="card-top">
+          <div class="badge-wrap">
+            <span class="spot-num-badge" style="background: ` + dayData.color + `">` + spot.num + `</span>
+            <span class="time-badge">` + spot.time + `</span>
           </div>
-          <a class="popup-link" href="${gUrl}" target="_blank" rel="noopener">Google 지도에서 보기 &rarr;</a>
+          <span class="category-badge">` + spot.category + `</span>
+        </div>
+        <div class="spot-name">` + spot.name + `</div>
+        <div class="spot-name-de">` + (spot.nameDe || '') + `</div>
+        <div class="spot-desc">` + spot.desc + `</div>
+        ` + (spot.tip ? `
+          <div class="spot-tip ` + (spot.highlight ? 'highlight' : '') + `">
+            <span>` + (spot.highlight ? '🚗' : '💡') + `</span>
+            <span>` + spot.tip + `</span>
+          </div>
+        ` : '') + `
+        <div class="card-actions">
+          <button class="mini-action-link" style="background:#eff6ff; border:1px solid #bfdbfe; color:#2563eb; cursor:pointer;" onclick="focusOnSpot('` + spot.id + `', ` + spot.lat + `, ` + spot.lng + `)">
+            📍 지도에서 보기
+          </button>
+          <a class="mini-action-link" href="` + googleLink + `" target="_blank">
+            🗺️ Google ↗
+          </a>
         </div>
       `;
 
-      marker.bindPopup(popupHtml);
-      marker.on('click', () => {
-        highlightActiveSpot(spot.id, false);
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName && (e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button')) return;
+        focusOnSpot(spot.id, spot.lat, spot.lng);
       });
 
-      marker.addTo(markersLayerGroup);
-      spotMarkerMap.set(spot.id, { marker, spot, dayInfo });
+      if (currentPeriodContainer) {
+        currentPeriodContainer.appendChild(card);
+      }
     });
 
-    // 경로선 그리기
-    if (dayInfo.day === 2) {
-      const roadPolyline = L.polyline(ROADTRIP_ROUTE_COORDS, {
-        color: dayInfo.color,
-        weight: 4.5,
-        opacity: 0.85,
-        dashArray: '8, 6',
-        lineCap: 'round',
-        lineJoin: 'round'
-      }).addTo(polylinesLayerGroup);
-    } else if (dayCoords.length > 1) {
-      const line = L.polyline(dayCoords, {
-        color: dayInfo.color,
-        weight: 3.5,
-        opacity: 0.75,
-        dashArray: '5, 5',
-        lineCap: 'round',
-        lineJoin: 'round'
-      }).addTo(polylinesLayerGroup);
-    }
+    timelineContainer.appendChild(daySection);
   });
 
-  if (allLatLngs.length > 0) {
-    try {
-      const bounds = L.latLngBounds(allLatLngs);
-      map.fitBounds(bounds, {
-        padding: [30, 30],
-        maxZoom: 14
-      });
-    } catch (e) {
-      console.error(e);
-    }
+  if (map && latLngsToFit.length > 0) {
+    map.fitBounds(latLngsToFit, { padding: [40, 40], maxZoom: 15 });
   }
 }
 
-function renderBottomCarousel() {
+function renderBottomCarousel(targetDays) {
   const carouselTrack = document.getElementById('carouselTrack');
   const dayTitleElem = document.getElementById('carouselDayTitle');
   if (!carouselTrack) return;
 
-  const daysToShow = currentDayFilter === 'all'
-    ? ITINERARY_DATA
-    : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
-
   if (dayTitleElem) {
     if (currentDayFilter === 'all') {
-      dayTitleElem.textContent = '전체 4일 일정 스팟 둘러보기';
+      dayTitleElem.textContent = '전체 4일 코스 스팟 둘러보기';
     } else {
-      const cur = ITINERARY_DATA.find(d => d.day === parseInt(currentDayFilter));
+      const cur = targetDays[0];
       dayTitleElem.textContent = `${cur.dayLabel} 스팟 (${cur.spots.length}곳)`;
     }
   }
 
   let cardsHtml = '';
 
-  // 첫 번째 카드는 우리 숙소
+  // 첫 번째 카드는 항상 우리 숙소
   cardsHtml += `
-    <div class="carousel-card" id="carousel-hotel" onclick="focusHotel(true)">
+    <div class="carousel-card" id="carousel-hotel" onclick="focusOnHotel()">
       <div class="carousel-card-top">
         <span class="carousel-badge" style="background:#b45309;">🏨 베이스캠프</span>
-        <a class="carousel-google-link" href="${HOTEL_DATA.googleMapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation();">길찾기 &rarr;</a>
+        <a class="carousel-google-link" href="${HOTEL_DATA.googleMapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation();">길찾기 ↗</a>
       </div>
       <div class="carousel-card-title">${HOTEL_DATA.name}</div>
       <div class="carousel-card-sub">중앙역 트램 5분 · 님펜부르크 직통</div>
@@ -2784,14 +2784,14 @@ function renderBottomCarousel() {
     </div>
   `;
 
-  daysToShow.forEach(dayInfo => {
+  targetDays.forEach(dayInfo => {
     dayInfo.spots.forEach(spot => {
       const gUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'))}`;
       cardsHtml += `
-        <div class="carousel-card" id="carousel-${spot.id}" onclick="onSpotCardClick('${spot.id}', true)">
+        <div class="carousel-card" id="carousel-${spot.id}" onclick="focusOnSpot('${spot.id}', ${spot.lat}, ${spot.lng})">
           <div class="carousel-card-top">
             <span class="carousel-badge" style="background:${dayInfo.color};">${dayInfo.dayLabel} #${spot.num}</span>
-            <a class="carousel-google-link" href="${gUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation();">Google 지도 &rarr;</a>
+            <a class="carousel-google-link" href="${gUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation();">Google ↗</a>
           </div>
           <div class="carousel-card-title">${spot.name}</div>
           <div class="carousel-card-sub">${spot.period} ${spot.time} · ${spot.category}</div>
@@ -2804,199 +2804,194 @@ function renderBottomCarousel() {
   carouselTrack.innerHTML = cardsHtml;
 }
 
-function scrollCarousel(dir) {
-  const track = document.getElementById('carouselTrack');
-  if (track) {
-    track.scrollBy({ left: dir * 260, behavior: 'smooth' });
+function highlightCard(spotId) {
+  document.querySelectorAll('.spot-card').forEach(c => c.classList.remove('selected'));
+  const targetCard = document.getElementById(`card-` + spotId);
+  if (targetCard) {
+    targetCard.classList.add('selected');
+    targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
 
-function toggleCarousel() {
-  const container = document.getElementById('bottomCarousel');
-  const btn = document.getElementById('carouselToggleBtn');
-  if (!container) return;
-  const isCollapsed = container.classList.toggle('collapsed');
-  if (btn) {
-    btn.innerHTML = isCollapsed
-      ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg> 스팟 목록 보기`
-      : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg> 접기`;
+function highlightCarouselCard(carouselId) {
+  document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('active'));
+  const target = document.getElementById(carouselId);
+  if (target) {
+    target.classList.add('active');
+    target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   }
 }
 
-function toggleLegend() {
-  const legend = document.getElementById('mapLegend');
-  const btn = document.getElementById('legendToggleBtn');
-  if (!legend) return;
-  const isCollapsed = legend.classList.toggle('collapsed');
-  if (btn) {
-    btn.textContent = isCollapsed ? '펼치기 ▼' : '접기 ▲';
-  }
-}
+function focusOnSpot(spotId, lat, lng) {
+  highlightCard(spotId);
+  highlightCarouselCard(`carousel-` + spotId);
 
-function updateLegend() {
-  const body = document.getElementById('legendBody');
-  if (!body) return;
-
-  let html = `
-    <div class="legend-item" style="cursor:pointer;" onclick="focusHotel(true)">
-      <span class="legend-color" style="background:#b45309;"></span>
-      <span><strong>🏨 우리 숙소 (노보텔)</strong></span>
-    </div>
-  `;
-
-  ITINERARY_DATA.forEach(d => {
-    const activeStyle = (currentDayFilter === 'all' || currentDayFilter == d.day) ? 'font-weight:700; color:#0f172a;' : 'opacity:0.6;';
-    html += `
-      <div class="legend-item" style="cursor:pointer; ${activeStyle}" onclick="setDayFilter('${d.day}')">
-        <span class="legend-color" style="background:${d.color};"></span>
-        <span>${d.dayLabel} (${d.spots.length}곳)</span>
-      </div>
-    `;
-  });
-
-  body.innerHTML = html;
-}
-
-function setDayFilter(day) {
-  currentDayFilter = day;
-
-  document.querySelectorAll('.day-tab').forEach(tab => {
-    if (tab.dataset.day === String(day)) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
-  });
-
-  renderView();
-
-  if (window.innerWidth <= 768 && currentMobileView === 'list') {
+  if (window.innerWidth <= 900) {
     setMobileView('map');
   }
+  if (map) {
+    map.flyTo([lat, lng], 15, { duration: 0.8 });
+    const marker = spotMarkerMap.get(spotId);
+    if (marker) {
+      marker.openPopup();
+    }
+  }
 }
 
-function setMobileView(mode) {
-  currentMobileView = mode;
+function updateHeaderSummary(targetDays) {
+  const titleEl = document.getElementById('dayTitleText');
+  const countBadge = document.getElementById('spotCountBadge');
+  const transitTipEl = document.getElementById('transitTipText');
+  const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
 
-  const btnList = document.getElementById('btnViewList');
-  const btnMap = document.getElementById('btnViewMap');
-  const sidebar = document.getElementById('sidebar');
-  const mapContainer = document.getElementById('mapContainer');
-
-  if (mode === 'list') {
-    if (btnList) btnList.classList.add('active');
-    if (btnMap) btnMap.classList.remove('active');
-    if (sidebar) sidebar.classList.remove('hidden-on-mobile');
-    if (mapContainer) mapContainer.classList.remove('active-on-mobile');
+  if (currentDayFilter === 'all') {
+    if (titleEl) titleEl.textContent = '전체 4일 일정 개요 (20일 ~ 23일)';
+    const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
+    if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
+    if (transitTipEl) transitTipEl.innerHTML = `💡 날짜 탭을 누르면 렌트카 코스 및 일자별 세부 동선을 확인할 수 있습니다.`;
+    if (googleHeaderBtn) {
+      googleHeaderBtn.href = ITINERARY_DATA[1].googleRouteUrl;
+      googleHeaderBtn.textContent = '🚗 2일차 렌트카 전체 경로 (Google Maps)';
+    }
   } else {
-    if (btnList) btnList.classList.remove('active');
-    if (btnMap) btnMap.classList.add('active');
-    if (sidebar) sidebar.classList.add('hidden-on-mobile');
-    if (mapContainer) mapContainer.classList.add('active-on-mobile');
+    const d = targetDays[0];
+    if (titleEl) titleEl.textContent = d.title;
+    if (countBadge) countBadge.textContent = d.spots.length + `개 방문지`;
+    if (transitTipEl) transitTipEl.innerHTML = d.transitTip;
+    if (googleHeaderBtn) {
+      googleHeaderBtn.href = d.googleRouteUrl || 'https://www.google.com/maps';
+      googleHeaderBtn.textContent = `🗺️ ` + d.dayLabel + ` Google Maps 경로 열기`;
+    }
+  }
+}
+
+// ==========================================
+// ★★★ 모든 이벤트 리스너 완벽 연결 ★★★
+// ==========================================
+
+// 1. 일자별 탭 버튼 클릭
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDayFilter = btn.getAttribute('data-day');
+    renderView();
     setTimeout(fixMapSize, 150);
-  }
-}
-
-function onSpotCardClick(spotId, isFromCarousel = false) {
-  highlightActiveSpot(spotId, true);
-
-  if (window.innerWidth <= 768 && !isFromCarousel) {
-    setMobileView('map');
-  }
-}
-
-function highlightActiveSpot(spotId, panTo = true) {
-  currentActiveSpotId = spotId;
-
-  document.querySelectorAll('.spot-card').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('active'));
-
-  const card = document.getElementById(`card-${spotId}`);
-  if (card) {
-    card.classList.add('active');
-    if (window.innerWidth > 768) {
-      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-
-  const cCard = document.getElementById(`carousel-${spotId}`);
-  if (cCard) {
-    cCard.classList.add('active');
-    cCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-
-  const target = spotMarkerMap.get(spotId);
-  if (target && map) {
-    if (panTo) {
-      map.flyTo([target.spot.lat, target.spot.lng], 15, {
-        duration: 0.8
-      });
-    }
-    target.marker.openPopup();
-  }
-}
-
-function focusHotel(openPopup = true) {
-  if (!map || !hotelMarker) return;
-
-  document.querySelectorAll('.spot-card').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('active'));
-
-  const cCard = document.getElementById('carousel-hotel');
-  if (cCard) {
-    cCard.classList.add('active');
-    cCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-
-  map.flyTo([HOTEL_DATA.lat, HOTEL_DATA.lng], 15, {
-    duration: 0.8
   });
+});
 
-  if (openPopup) {
-    hotelMarker.openPopup();
-  }
+// 2. 모바일 세그먼트 스위치 버튼 (일정 목록 / 지도 전체 보기)
+document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetView = btn.getAttribute('data-view');
+    setMobileView(targetView);
+  });
+});
 
-  if (window.innerWidth <= 768 && currentMobileView === 'list') {
-    setMobileView('map');
-  }
-}
-
-function toggleMapLayer() {
-  if (!map || !tileLayer) return;
-
-  if (currentTileMode === 'voyager') {
-    currentTileMode = 'esri_street';
-  } else if (currentTileMode === 'esri_street') {
-    currentTileMode = 'esri_satellite';
-  } else {
-    currentTileMode = 'voyager';
-  }
-
-  map.removeLayer(tileLayer);
-  const prov = TILE_PROVIDERS[currentTileMode];
-  tileLayer = L.tileLayer(prov.url, prov.options).addTo(map);
-
-  const btn = document.getElementById('tileToggleBtn');
-  if (btn) {
-    btn.innerHTML = currentTileMode === 'voyager'
-      ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> 지도: 상세도`
-      : (currentTileMode === 'esri_street'
-          ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> 지도: 표준`
-          : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> 지도: 위성`);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  initMap();
-
-  if (window.innerWidth <= 768) {
-    const legend = document.getElementById('mapLegend');
-    if (legend) {
-      legend.classList.add('collapsed');
-      const btn = document.getElementById('legendToggleBtn');
-      if (btn) btn.textContent = '펼치기 ▼';
+// 3. 지도 맞춤 버튼
+const fitBtn = document.getElementById('btnFitBounds');
+if (fitBtn) {
+  fitBtn.addEventListener('click', () => {
+    const targetDays = currentDayFilter === 'all' 
+      ? ITINERARY_DATA 
+      : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
+    
+    const coords = [[HOTEL_DATA.lat, HOTEL_DATA.lng]];
+    targetDays.forEach(d => d.spots.forEach(s => coords.push([s.lat, s.lng])));
+    if (map && coords.length > 0) {
+      map.fitBounds(coords, { padding: [40, 40] });
     }
+  });
+}
+
+// 4. 지도 스타일 전환 버튼
+const toggleTileBtn = document.getElementById('btnToggleTile');
+if (toggleTileBtn) {
+  toggleTileBtn.addEventListener('click', () => {
+    if (!map) return;
+    map.removeLayer(tileLayer);
+    if (currentTileMode === 'voyager') {
+      currentTileMode = 'esri_street';
+      tileLayer = L.tileLayer(TILE_PROVIDERS.esri_street.url, TILE_PROVIDERS.esri_street.options).addTo(map);
+    } else if (currentTileMode === 'esri_street') {
+      currentTileMode = 'esri_satellite';
+      tileLayer = L.tileLayer(TILE_PROVIDERS.esri_satellite.url, TILE_PROVIDERS.esri_satellite.options).addTo(map);
+    } else {
+      currentTileMode = 'voyager';
+      tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
+    }
+  });
+}
+
+// 5. 일정표 모달 팝업
+const modal = document.getElementById('originalModal');
+const pdfBtn = document.getElementById('btnOriginalPdf');
+const closeBtn = document.getElementById('modalCloseBtn');
+if (pdfBtn && modal) {
+  pdfBtn.addEventListener('click', () => { modal.classList.add('open'); });
+}
+if (closeBtn && modal) {
+  closeBtn.addEventListener('click', () => { modal.classList.remove('open'); });
+}
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('open');
+  });
+}
+
+// 6. 숙소 배너 카드 클릭
+const hotelBanner = document.getElementById('hotelBannerCard');
+if (hotelBanner) {
+  hotelBanner.addEventListener('click', (e) => {
+    if (e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
+    focusOnHotel();
+  });
+}
+
+// 7. 지도 범례 접기/펼치기
+const legendHeader = document.getElementById('legendHeader');
+if (legendHeader) {
+  legendHeader.addEventListener('click', () => {
+    const mapLegend = document.getElementById('mapLegend');
+    if (mapLegend) mapLegend.classList.toggle('collapsed');
+  });
+}
+
+// 8. 하단 캐러셀 제어 버튼 (접기/열기, 이전, 다음)
+const carouselToggleBtn = document.getElementById('carouselToggleBtn');
+if (carouselToggleBtn) {
+  carouselToggleBtn.addEventListener('click', () => {
+    const container = document.getElementById('bottomCarousel');
+    if (!container) return;
+    const isCollapsed = container.classList.toggle('collapsed');
+    carouselToggleBtn.textContent = isCollapsed ? '▲ 스팟 보기' : '▼ 접기';
+  });
+}
+
+const carouselPrevBtn = document.getElementById('carouselPrevBtn');
+if (carouselPrevBtn) {
+  carouselPrevBtn.addEventListener('click', () => {
+    const track = document.getElementById('carouselTrack');
+    if (track) track.scrollBy({ left: -260, behavior: 'smooth' });
+  });
+}
+
+const carouselNextBtn = document.getElementById('carouselNextBtn');
+if (carouselNextBtn) {
+  carouselNextBtn.addEventListener('click', () => {
+    const track = document.getElementById('carouselTrack');
+    if (track) track.scrollBy({ left: 260, behavior: 'smooth' });
+  });
+}
+
+// 9. 페이지 로드 초기화
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 900) {
+    setMobileView('list');
+    const mapLegend = document.getElementById('mapLegend');
+    if (mapLegend) mapLegend.classList.add('collapsed');
   }
+  initMap();
 });
 </script>
 </body>
