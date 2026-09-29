@@ -1,33 +1,136 @@
 import json
 import os
 
-# 1. 호텔 데이터
-hotel_data = {
-    "name": "노보텔 뮌헨 시티 아르눌프파크 (우리 숙소)",
+# 1. 3개 호텔 데이터
+hotels_data = [
+  {
+    "id": "hotel-novotel",
+    "name": "노보텔 뮌헨 시티 아르눌프파크 (메인 베이스캠프)",
     "nameDe": "Novotel München City Arnulfpark",
     "lat": 48.1454917,
     "lng": 11.5389985,
+    "tag": "🏨 20일~24일 메인 숙소 (4박)",
     "address": "Arnulfstraße 57, 80636 München",
     "googleMapsUrl": "https://maps.app.goo.gl/LNwTawdtw64NZc248",
-    "desc": "이번 뮌헨 여행의 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 정류장 도보 2분. 중앙역 SIXT 렌터카, 시내 중심, 님펜부르크 궁전 이동 최적.",
-    "tip": "호텔 바로 앞 트램 17번을 타면 중앙역(SIXT) 및 님펜부르크 궁전까지 환승 없이 5~15분 직통 이동!"
-}
+    "desc": "이번 뮌헨 여행의 메인 베이스캠프! Donnersbergerbrücke S-Bahn역 및 트램(16, 17번) 도보 2분. 중앙역 SIXT 렌터카 5분, 님펜부르크 궁전 12분 직통.",
+    "tip": "20일 아침 체크인 전 리셉션에 캐리어 짐 보관(Luggage Drop) 후 가볍게 시내 투어 출발!",
+    "iconEmoji": "🏨",
+    "color": "#b45309"
+  },
+  {
+    "id": "hotel-ibis",
+    "name": "이비스 스타일스 뮌헨 에어포트",
+    "nameDe": "ibis Styles Munich Airport",
+    "lat": 48.3540,
+    "lng": 11.7591,
+    "tag": "✈️ 19일(입국) & 25일(귀국 전) 2박",
+    "address": "Freisinger Str. 80, 85356 Freising",
+    "googleMapsUrl": "https://maps.app.goo.gl/q1EQZ3kPKLurGyM6A",
+    "desc": "뮌헨 국제공항 인근 신축 호텔. 19일 늦은 밤(22:25) 도착 후 편안한 첫날 휴식 및 25일 오스트리아 여행 후 다음 날 귀국을 위한 최적의 공항 호텔!",
+    "tip": "공항 터미널에서 버스 635번 또는 택시로 10~15분 거리. 20일 아침 S-Bahn으로 시내 직통 이동.",
+    "iconEmoji": "✈️",
+    "color": "#0284c7"
+  },
+  {
+    "id": "hotel-salzburg",
+    "name": "오스트리아 트렌드 호텔 유로파 잘츠부르크",
+    "nameDe": "Austria Trend Hotel Europa Salzburg",
+    "lat": 47.8122,
+    "lng": 13.0437,
+    "tag": "🇦🇹 24일 잘츠부르크 숙박 (1박 / 중앙역 1분)",
+    "address": "Rainerstraße 31, 5020 Salzburg, Austria",
+    "googleMapsUrl": "https://maps.app.goo.gl/HT9MLHTdumCr8rZh8",
+    "desc": "잘츠부르크 중앙역(Salzburg Hbf) 정문 바로 맞은편 초역세권(도보 1분)! 독일 기차 도착 후 역에서 나오자마자 짐 보관 후 바로 시내 투어 출발 가능.",
+    "tip": "기차역과 시내 버스 정류장이 바로 코앞이라 미라벨 정원, 구시가지, 다음 날 할슈타트 이동 최적!",
+    "iconEmoji": "🇦🇹",
+    "color": "#e11d48"
+  }
+]
 
-# 2. 사용자 확정 최적화 일정 데이터
+# 2. 전체 7일 일정 데이터 (19일 ~ 25일)
 itinerary_data = [
+  {
+    "day": 0,
+    "dayLabel": "✈️ 19일 (입국)",
+    "title": "19일: ✈️ 인천 출발 ➔ 암스테르담 환승 ➔ 뮌헨 도착 & 에어포트 호텔 1박",
+    "summary": "오전 11:55 인천공항 출발, 18:55 암스테르담(AMS) 환승 후 22:25 뮌헨 국제공항(MUC) 도착! 늦은 밤 피로를 최소화하기 위해 공항 인근 이비스 스타일스 호텔에 체크인하여 첫날 편안하게 휴식",
+    "color": "#0284c7",
+    "transitTip": "항공편: 대한항공/환승편 DQYMPE (인천 11:55 ➔ 암스테르담 18:55 ➔ 뮌헨 22:25). 공항 ➔ 호텔 버스 635번 또는 택시 10~15분",
+    "googleRouteUrl": "https://maps.app.goo.gl/q1EQZ3kPKLurGyM6A",
+    "spots": [
+      {
+        "id": "d0-1",
+        "day": 0,
+        "num": 1,
+        "period": "오전~오후",
+        "time": "11:55 - 18:55",
+        "name": "인천국제공항(ICN) 출국 ➔ 암스테르담(AMS) 비행",
+        "nameDe": "Incheon (ICN) nach Amsterdam (AMS) - DQYMPE",
+        "lat": 48.3537,
+        "lng": 11.7860,
+        "category": "국제선 항공편 (대한항공 DQYMPE)",
+        "desc": "인천공항 제2여객터미널에서 11:55 출발하여 유럽으로 향합니다! 장거리 비행 후 18:55 네덜란드 암스테르담 스키폴 공항에 도착해 뮌헨행 환승을 진행합니다.",
+        "tip": "기내에서 수분 섭취를 충분히 하고 시차 적응을 위해 현지 밤 시간에 맞춰 수면을 취하세요."
+      },
+      {
+        "id": "d0-2",
+        "day": 0,
+        "num": 2,
+        "period": "저녁~밤",
+        "time": "18:55 - 22:25",
+        "name": "암스테르담 환승 ➔ 뮌헨 국제공항(MUC) 도착",
+        "nameDe": "Amsterdam Transfer ➔ Munich Airport Ankunft (22:25)",
+        "lat": 48.3537,
+        "lng": 11.7860,
+        "category": "환승 및 뮌헨 공항 착륙",
+        "desc": "스키폴 공항에서 환승 후 22:25 뮌헨 국제공항 터미널 착륙! 입국 심사 및 위탁 수하물을 찾고 첫날 숙소로 이동합니다.",
+        "tip": "터미널 출구로 나와 버스 정류장(635번 버스) 또는 택시/우버 승차장으로 이동하세요."
+      },
+      {
+        "id": "d0-3",
+        "day": 0,
+        "num": 3,
+        "period": "밤",
+        "time": "23:00 - 23:30",
+        "name": "이비스 스타일스 뮌헨 에어포트 (첫날 숙박)",
+        "nameDe": "ibis Styles Munich Airport (Check-in)",
+        "lat": 48.3540,
+        "lng": 11.7591,
+        "category": "첫날 공항 호텔 (새로 오픈)",
+        "desc": "늦은 밤 도착 후 편안하게 쉴 수 있는 공항 인근 최신 호텔입니다! 체크인 후 따뜻한 샤워와 함께 내일부터 본격적으로 시작될 뮌헨 일정을 위해 꿀잠 충전.",
+        "tip": "내일 아침 일찍 뮌헨 시내 노보텔로 이동해 짐을 맡길 예정이므로 가볍게 취침 준비를 합니다.",
+        "highlight": True
+      }
+    ]
+  },
   {
     "day": 1,
     "dayLabel": "20일 (1일차)",
-    "title": "20일: BMW 테크 & 올림피아 피크닉, 구시가지 쇼핑 & 감성 산책",
-    "summary": "BMW 미래 기술 관람 후 대학가 베이커리/카페에서 빵과 커피를 사서 올림피아 언덕 피크닉! 오후엔 구시가지 성당, 활기찬 야외 시장, 달마이어 본점, 17시 인형극, 막스마라 & 퓐프 회페 쇼핑 및 내일 로드트립 간식 구비",
+    "title": "20일: 노보텔 짐보관 ➔ BMW 테크 & 올림피아 피크닉 ➔ 구시가지 쇼핑 & 디너",
+    "summary": "아침 일찍 이비스 체크아웃 후 시내 노보텔에 짐 맡기기! BMW 첨단 쇼룸 관람 후 대학가 베이커리 빵과 커피로 올림피아 언덕 브런치 피크닉, 오후엔 구시가지 성당, 빅투알리엔 야외 시장, 달마이어 본점, 17시 인형극, 막스마라 & 퓐프 회페 쇼핑, 브레너그릴/슈파텐하우스 디너 및 내일 로드트립 간식 구비",
     "color": "#2563eb",
     "transitTip": "대중교통: 뮌헨 시내 M구역 1일권 (U-Bahn, 트램, 버스 무제한) 이용 권장",
     "googleRouteUrl": "https://www.google.com/maps/dir/BMW+Welt/BMW+Museum/Studentenstadt+Olympisches+Dorf/Olympiapark/Marienplatz/Viktualienmarkt/Alois+Dallmayr/Neues+Rathaus/Max+Mara/F%C3%BCnf+H%C3%B6fe",
     "spots": [
       {
-        "id": "d1-1",
+        "id": "d1-0",
         "day": 1,
         "num": 1,
+        "period": "아침",
+        "time": "08:00 - 08:50",
+        "name": "이비스 체크아웃 ➔ 노보텔 뮌헨 시티 아르눌프파크 이동 & 짐 보관",
+        "nameDe": "ibis Check-out ➔ Novotel Arnulfpark Luggage Drop",
+        "lat": 48.1455,
+        "lng": 11.5390,
+        "category": "숙소 이동 & 캐리어 짐 보관",
+        "desc": "이비스 호텔에서 이른 아침 체크아웃 후 S-Bahn(S1 또는 S8)을 타고 뮌헨 시내 Donnersbergerbrücke역으로 이동! 우리 메인 숙소인 노보텔 아르눌프파크 리셉션에 캐리어 짐을 맡깁니다(Luggage Drop). 가벼운 몸으로 09:00 BMW 벨트 시작!",
+        "tip": "호텔 리셉션에 'Luggage storage please'라고 말하고 짐 보관 태그를 챙긴 뒤 가볍게 출발하세요.",
+        "highlight": True
+      },
+      {
+        "id": "d1-1",
+        "day": 1,
+        "num": 2,
         "period": "오전",
         "time": "09:00 - 10:00",
         "name": "BMW 벨트 (BMW Welt)",
@@ -41,7 +144,7 @@ itinerary_data = [
       {
         "id": "d1-2",
         "day": 1,
-        "num": 2,
+        "num": 3,
         "period": "오전",
         "time": "10:00 - 11:00",
         "name": "BMW 뮤지엄 (BMW Museum)",
@@ -55,7 +158,7 @@ itinerary_data = [
       {
         "id": "d1-3",
         "day": 1,
-        "num": 3,
+        "num": 4,
         "period": "오전~점심",
         "time": "11:00 - 12:00",
         "name": "올리도르프(Olydorf) 대학가 베이커리 & 카페",
@@ -69,7 +172,7 @@ itinerary_data = [
       {
         "id": "d1-4",
         "day": 1,
-        "num": 4,
+        "num": 5,
         "period": "점심~오후",
         "time": "12:00 - 13:30",
         "name": "올림피아 파크 언덕 피크닉 & 호숫가 산책",
@@ -83,7 +186,7 @@ itinerary_data = [
       {
         "id": "d1-5",
         "day": 1,
-        "num": 5,
+        "num": 6,
         "period": "오후",
         "time": "14:00 - 14:50",
         "name": "마리엔 광장 & 프라우엔키르헤",
@@ -97,7 +200,7 @@ itinerary_data = [
       {
         "id": "d1-6",
         "day": 1,
-        "num": 6,
+        "num": 7,
         "period": "오후",
         "time": "14:50 - 15:40",
         "name": "빅투알리엔 마켓 (Viktualienmarkt)",
@@ -111,7 +214,7 @@ itinerary_data = [
       {
         "id": "d1-7",
         "day": 1,
-        "num": 7,
+        "num": 8,
         "period": "오후",
         "time": "15:45 - 16:35",
         "name": "달마이어 본점 (Dallmayr Delikatessenhaus)",
@@ -125,7 +228,7 @@ itinerary_data = [
       {
         "id": "d1-8",
         "day": 1,
-        "num": 8,
+        "num": 9,
         "period": "오후",
         "time": "16:50 - 17:20",
         "name": "신시청 인형극 관람 (Glockenspiel - 17시 정각)",
@@ -140,7 +243,7 @@ itinerary_data = [
       {
         "id": "d1-9",
         "day": 1,
-        "num": 9,
+        "num": 10,
         "period": "오후~저녁",
         "time": "17:30 - 18:20",
         "name": "막스마라 (Max Mara 부티크)",
@@ -154,7 +257,7 @@ itinerary_data = [
       {
         "id": "d1-10",
         "day": 1,
-        "num": 10,
+        "num": 11,
         "period": "저녁",
         "time": "18:20 - 19:15",
         "name": "퓐프 회페 (Fünf Höfe)",
@@ -168,7 +271,7 @@ itinerary_data = [
       {
         "id": "d1-11",
         "day": 1,
-        "num": 11,
+        "num": 12,
         "period": "저녁",
         "time": "19:15 - 20:45",
         "name": "구시가지 저녁 식사 (브레너그릴/슈파텐하우스) & 내일 로드트립 간식 구비 (Rewe City)",
@@ -177,7 +280,8 @@ itinerary_data = [
         "lng": 11.5745,
         "category": "미식 디너 & 마트 장보기",
         "desc": "퓐프 회페 주변 최고 맛집에서 근사한 첫날 저녁 식사! [핫플 그릴: 브레너 그릴(Brenner Grill)], [정통 바이에른: 슈파텐하우스(Spatenhaus an der Oper)], [캐주얼: Vapiano/Aran]. 식사 후 바로 옆 'Rewe City' 마트에 들러 내일 새벽 렌트카에서 먹을 생수, 과일, 음료, 빵을 미리 챙깁니다!",
-        "tip": "식사 후 마리엔광장역에서 S-Bahn을 타면 숙소 앞 Donnersbergerbrücke역까지 6분 만에 편안하게 복귀할 수 있습니다."
+        "tip": "식사 후 마리엔광장역에서 S-Bahn을 타면 숙소 앞 Donnersbergerbrücke역까지 6분 만에 편안하게 복귀할 수 있습니다.",
+        "highlight": True
       }
     ]
   },
@@ -200,53 +304,54 @@ itinerary_data = [
         "nameDe": "SIXT Car Rental Munich Central Station",
         "lat": 48.1402,
         "lng": 11.5583,
-        "category": "렌터카 픽업 / 출발",
-        "desc": "SIXT 뮌헨 중앙역점(Bahnhofplatz 1)에서 예약 차량을 06:00 정각에 픽업합니다! 노보텔 숙소에서 트램 17번으로 5분 거리라 이동이 매우 편리합니다.",
-        "tip": "국제운전면허증, 국내면허증, 여권, 본인 명의 신용카드를 미리 챙기세요. 차량 외관 사진을 꼼꼼히 촬영해 둡니다.",
+        "category": "렌터카 픽업",
+        "desc": "숙소(노보텔) 바로 앞 트램 17번을 타면 중앙역 앞까지 5분 만에 도착! 06:00 정각에 예약된 차량을 인수하고 외관 사진/연료를 체크한 뒤 로맨틱 가도를 향해 상쾌한 새벽 출발을 합니다.",
+        "tip": "이른 아침 출발해야 뮌헨 시내 출근길 교통체증을 완벽하게 피할 수 있습니다.",
         "highlight": True
       },
       {
         "id": "d2-2",
         "day": 2,
         "num": 2,
-        "period": "오전",
+        "period": "아침~오전",
         "time": "08:45 - 10:15",
         "name": "마리엔 다리 (Marienbrücke - 1순위 방문)",
         "nameDe": "Marienbrücke Neuschwanstein",
-        "lat": 47.5552,
+        "lat": 48.5552,
         "lng": 10.7496,
-        "category": "전망 명소 / 협곡 다리",
-        "desc": "페Polling 협곡 위 90m 상공에 걸린 아찔한 철교입니다. 디즈니 성의 모티브가 된 노이슈바인슈타인 성의 압도적인 전경을 가장 완벽한 각도에서 담을 수 있는 최고의 포토존입니다.",
-        "tip": "★ 1순위 방문! 성 투어 전 먼저 올라가 단체 관광객이 몰리기 전 환상적인 인생 사진을 남기세요.",
+        "category": "전망 명소",
+        "desc": "노이슈바인슈타인 성을 가장 웅장한 각도에서 바라볼 수 있는 아찔한 협곡 위 인도교입니다. 셔틀버스를 타고 올라가 성 내부 투어 전 인생 사진을 남깁니다.",
+        "tip": "★ 성 내부 투어 시간보다 반드시 1시간 이상 먼저 다리에 도착해 여유롭게 사진을 찍으세요.",
         "highlight": True
       },
       {
         "id": "d2-3",
         "day": 2,
         "num": 3,
-        "period": "오전",
+        "period": "오전~낮",
         "time": "10:30 - 12:15",
         "name": "노이슈바인슈타인 성 내부 투어",
         "nameDe": "Schloss Neuschwanstein",
-        "lat": 47.5576,
+        "lat": 48.5576,
         "lng": 10.7498,
-        "category": "궁전 투어 (사전예약)",
-        "desc": "바이에른 국왕 루드비히 2세가 바그너의 오페라에 영감을 받아 지은 중세 환상 속 백조의 성입니다. 왕의 침실, 음유시인의 방, 인공 동굴 등 화려한 내부를 가이드 투어로 관람합니다.",
-        "tip": "사전 예약 티켓의 입장 시간에 늦으면 입장이 절대 불가하므로 최소 15분 전 성 안뜰에 도착해 대기하세요."
+        "category": "성 / 궁전",
+        "desc": "디즈니 성의 모티브가 된 루드비히 2세 국왕의 백조의 성입니다. 왕의 침실, 인공 동굴, 바그너 오페라를 테마로 꾸며진 웅장한 '가수의 홀' 등을 가이드 오디오 투어로 관람합니다.",
+        "tip": "입장 시간 10분 전까지 성 정문 개찰구에 도착해야 하며, 지각 시 티켓이 취소되므로 유의하세요.",
+        "highlight": True
       },
       {
         "id": "d2-4",
         "day": 2,
         "num": 4,
-        "period": "점심",
+        "period": "낮",
         "time": "12:30 - 13:45",
         "name": "호엔슈방가우 마을 & 알프제(Alpsee) 점심",
-        "nameDe": "Alpsee & Hohenschwangau Dorf",
-        "lat": 47.5539,
+        "nameDe": "Hohenschwangau & Alpsee",
+        "lat": 48.5539,
         "lng": 10.7380,
-        "category": "알프스 호수 & 런치",
-        "desc": "알프스 산맥이 병풍처럼 둘러싼 에메랄드빛 알프제 호숫가를 산책하고, 마을 전통 레스토랑 테라스에서 슈니첼과 바이에른 요리로 기분 좋은 점심 식사를 즐깁니다.",
-        "tip": "호숫가 벤치에서 호수와 호엔슈방가우 성을 배경으로 사진 찍기 좋습니다."
+        "category": "호수 산책 / 점심 식사",
+        "desc": "성에서 내려와 에메랄드빛 알프제 호숫가를 가볍게 거닐고, 호엔슈방가우 마을 레스토랑에서 따뜻한 슈니첼이나 바이에른 요리로 든든한 점심 식사를 즐깁니다.",
+        "tip": "호숫가 벤치에서 성과 호수를 바라보며 마시는 시원한 음료가 일품입니다."
       },
       {
         "id": "d2-5",
@@ -255,12 +360,12 @@ itinerary_data = [
         "period": "오후",
         "time": "13:45 - 15:00",
         "name": "알프스 파노라마 국도 드라이브 (오스트리아 국경)",
-        "nameDe": "Alpen-Panoramastraße via Reutte (Österreich)",
+        "nameDe": "Alpen Panorama Route (Reutte - Ehrwald)",
         "lat": 47.4565,
         "lng": 10.9922,
-        "category": "파노라마 드라이브 코스",
-        "desc": "슈방가우에서 오스트리아 로이테(Reutte)와 에어발트(Ehrwald) 국도를 경유하여 추크슈피체 아이브제 호수로 향하는 환상적인 알프스 드라이브 코스입니다 (약 60km).",
-        "tip": "국도(Landstraße B179/B187)를 이용하므로 오스트리아 고속도로 통행권(비네트 Vignette) 구매가 필요 없습니다!"
+        "category": "파노라마 드라이브",
+        "desc": "슈방가우에서 출발하여 오스트리아 로이테(Reutte), 에어발트(Ehrwald) 국도를 경유하는 약 60km의 환상적인 알프스 절경 도로를 달립니다. 고속도로가 아닌 일반 국도이므로 오스트리아 통행 비네트 스티커가 필요 없습니다.",
+        "tip": "창문을 열고 시원한 알프스 바람과 만년설 웅장한 봉우리들을 감상하며 힐링 드라이브를 즐기세요."
       },
       {
         "id": "d2-6",
@@ -269,12 +374,12 @@ itinerary_data = [
         "period": "오후",
         "time": "15:00 - 17:45",
         "name": "추크슈피체 산 (2,962m) & 아이브제",
-        "nameDe": "Zugspitze (2.962m) Seilbahn & Eibsee",
+        "nameDe": "Zugspitze & Eibsee-Seilbahn",
         "lat": 47.4211,
         "lng": 10.9853,
-        "category": "독일 최고봉 전망대",
-        "desc": "해발 2,962m 독일의 지붕! 최첨단 아이브제 케이블카로 단 10분 만에 정상으로 수직 상승합니다. 독일·오스트리아·스위스·이탈리아 4개국 알프스 고봉 400여 개가 파노라마로 펼쳐집니다.",
-        "tip": "정상 테라스에서 독일과 오스트리아 국경선 표시판을 걸어서 넘어가는 이색 체험을 놓치지 마세요.",
+        "category": "알프스 정상 / 케이블카",
+        "desc": "독일의 최고봉(2,962m)! 2017년 개통된 최신 케이블카를 타고 10분 만에 정상으로 수직 상승합니다. 4개국 알프스 산맥이 파노라마로 펼쳐지며, 독일-오스트리아 국경 통로를 걸어서 넘나들 수 있습니다.",
+        "tip": "고산지대이므로 한여름에도 쌀쌀할 수 있으니 바람막이나 가벼운 겉옷을 꼭 챙기세요.",
         "highlight": True
       },
       {
@@ -529,10 +634,162 @@ itinerary_data = [
         "highlight": True
       }
     ]
+  },
+  {
+    "day": 5,
+    "dayLabel": "🚆 24일 (잘츠부르크)",
+    "title": "24일: 🚆 뮌헨 ➔ 오스트리아 잘츠부르크 기차 이동 & 모차르트의 도시 투어",
+    "summary": "노보텔 체크아웃 후 뮌헨 중앙역에서 독일 기차(DB/BRB)를 타고 오스트리아 잘츠부르크로 국경 횡단(약 1시간 30분 소요)! 잘츠부르크 중앙역 바로 정면 오스트리아 트렌드 호텔 유로파에 체크인 및 짐 보관 후 모차르트와 사운드 오브 뮤직의 낭만적인 고도 탐방 (자세한 일정은 추후 업데이트 예정)",
+    "color": "#e11d48",
+    "transitTip": "교통편: 독일 기차 DB 또는 BRB(바이에른 티켓 유효 구간) 뮌헨 Hbf ➔ 잘츠부르크 Hbf (약 1시간 30분 직통)",
+    "googleRouteUrl": "https://maps.app.goo.gl/HT9MLHTdumCr8rZh8",
+    "spots": [
+      {
+        "id": "d5-1",
+        "day": 5,
+        "num": 1,
+        "period": "오전",
+        "time": "09:30 - 10:15",
+        "name": "노보텔 체크아웃 & 뮌헨 중앙역(München Hbf) 이동",
+        "nameDe": "Novotel Check-out ➔ München Hbf",
+        "lat": 48.1402,
+        "lng": 11.5583,
+        "category": "체크아웃 & 기차역 이동",
+        "desc": "노보텔에서 짐을 챙겨 체크아웃 후 트램 17번을 타고 5분 만에 뮌헨 중앙역 도착! 오스트리아행 기차 플랫폼으로 이동합니다.",
+        "tip": "중앙역 전광판에서 잘츠부르크(Salzburg Hbf)행 기차 플랫폼 번호를 확인하세요."
+      },
+      {
+        "id": "d5-2",
+        "day": 5,
+        "num": 2,
+        "period": "오전~낮",
+        "time": "10:30 - 12:05",
+        "name": "독일 기차(DB / BRB) 탑승: 뮌헨 ➔ 잘츠부르크 국경 횡단",
+        "nameDe": "Zugfahrt: München Hbf ➔ Salzburg Hbf",
+        "lat": 47.8561,
+        "lng": 12.1289,
+        "category": "알프스 파노라마 기차 여행",
+        "desc": "알프스 기슭과 킴제(Chiemsee) 호수를 차창 밖으로 바라보며 오스트리아 잘츠부르크 중앙역으로 이동합니다 (약 1시간 35분 소요).",
+        "tip": "기차 진행 방향 오른쪽에 앉으면 킴제 호수와 알프스 산맥 풍경을 감상할 수 있습니다.",
+        "highlight": True
+      },
+      {
+        "id": "d5-3",
+        "day": 5,
+        "num": 3,
+        "period": "낮",
+        "time": "12:15 - 13:00",
+        "name": "오스트리아 트렌드 호텔 유로파 잘츠부르크 (체크인 / 짐보관)",
+        "nameDe": "Austria Trend Hotel Europa Salzburg (Check-in)",
+        "lat": 47.8122,
+        "lng": 13.0437,
+        "category": "잘츠부르크 숙소 (중앙역 도보 1분)",
+        "desc": "잘츠부르크 중앙역(Salzburg Hbf) 정문 바로 맞은편 초역세권 호텔! 역에서 나오자마자 체크인하고 캐리어를 맡긴 뒤 가벼운 차림으로 시내로 나섭니다.",
+        "tip": "구글맵: https://maps.app.goo.gl/HT9MLHTdumCr8rZh8 (역 광장 바로 앞 고층 빌딩)",
+        "highlight": True
+      },
+      {
+        "id": "d5-4",
+        "day": 5,
+        "num": 4,
+        "period": "오후~저녁",
+        "time": "13:00 - 21:00",
+        "name": "오스트리아 잘츠부르크 도시 투어 (세부 일정 추후 반영 예정)",
+        "nameDe": "Salzburg Stadt-Tour (Details folgen)",
+        "lat": 47.7981,
+        "lng": 13.0470,
+        "category": "유네스코 세계문화유산 고도 탐방",
+        "desc": "미라벨 정원, 게트라이데 거리(모차르트 생가), 호엔잘츠부르크 성채, 잘츠부르크 대성당 등 아름다운 모차르트와 사운드 오브 뮤직의 도시를 즐깁니다! (사용자님이 자세한 일정을 주시면 분 단위로 정밀하게 업데이트됩니다)",
+        "tip": "잘츠부르크 카드를 구매하면 대중교통 및 주요 관광지 무료 입장이 가능합니다."
+      }
+    ]
+  },
+  {
+    "day": 6,
+    "dayLabel": "🏞️ 25일 (할슈타트)",
+    "title": "25일: 🏞️ 동화 마을 할슈타트(Hallstatt) 탐방 후 뮌헨 복귀 & 에어포트 호텔 1박",
+    "summary": "잘츠부르크에서 기차+버스를 타고 알프스 호수 속 그림 같은 세계문화유산 할슈타트 당일 투어! 알프스 산과 청정 호수를 만끽한 뒤 뮌헨으로 복귀하여, 다음 날 귀국에 가장 완벽한 공항 옆 이비스 스타일스 뮌헨 에어포트에 투숙",
+    "color": "#0d9488",
+    "transitTip": "교통편: 잘츠부르크 ➔ 바트이슐/아트낭 ➔ 할슈타트 (기차+버스/페리). 할슈타트 ➔ 잘츠부르크 ➔ 뮌헨 Hbf ➔ 공항 S-Bahn",
+    "googleRouteUrl": "https://maps.app.goo.gl/q1EQZ3kPKLurGyM6A",
+    "spots": [
+      {
+        "id": "d6-1",
+        "day": 6,
+        "num": 1,
+        "period": "오전",
+        "time": "08:00 - 08:30",
+        "name": "호텔 유로파 체크아웃 & 할슈타트 출발",
+        "nameDe": "Hotel Europa Check-out ➔ Hallstatt Start",
+        "lat": 47.8122,
+        "lng": 13.0437,
+        "category": "체크아웃 & 출발",
+        "desc": "호텔 체크아웃 후 중앙역 광장에서 할슈타트행 버스 150번 또는 기차 플랫폼으로 이동합니다.",
+        "tip": "일찍 출발해야 할슈타트 관광객이 붐비기 전에 여유롭게 둘러볼 수 있습니다."
+      },
+      {
+        "id": "d6-2",
+        "day": 6,
+        "num": 2,
+        "period": "오전",
+        "time": "08:30 - 10:45",
+        "name": "잘츠부르크 ➔ 할슈타트 (기차 + 버스/페리 이동)",
+        "nameDe": "Salzburg ➔ Hallstatt Panorama-Transfer",
+        "lat": 47.7120,
+        "lng": 13.6230,
+        "category": "잘츠카머구트 호수 파노라마 이동",
+        "desc": "잘츠카머구트 호수 지대를 지나며 버스 150번 및 기차, 페리를 타고 할슈타트로 이동합니다. 페리선 위에서 호수 너머로 바라보는 할슈타트 마을 전경이 절경입니다.",
+        "tip": "페리를 타고 호수를 건너 마을 선착장에 도착하는 순간이 최고의 포토존입니다."
+      },
+      {
+        "id": "d6-3",
+        "day": 6,
+        "num": 3,
+        "period": "낮",
+        "time": "10:45 - 14:30",
+        "name": "할슈타트 (Hallstatt) 세계문화유산 마을 & 전망대 자유 탐방",
+        "nameDe": "Hallstatt Weltkulturerbe & Aussichtspunkt",
+        "lat": 47.5622,
+        "lng": 13.6493,
+        "category": "알프스 호수 마을 / 엽서 속 뷰포인트",
+        "desc": "세계에서 가장 아름다운 호숫가 마을 할슈타트! 클래식 엽서 뷰포인트, 목조 가옥 골목길, 스카이워크 전망대, 호숫가 송어 요리 점심을 즐깁니다.",
+        "tip": "유명한 북쪽 뷰포인트(Aussichtspunkt Hallstatt)에서 기념 인생 사진 촬영 필수!",
+        "highlight": True
+      },
+      {
+        "id": "d6-4",
+        "day": 6,
+        "num": 4,
+        "period": "오후~저녁",
+        "time": "14:30 - 19:30",
+        "name": "할슈타트 ➔ 잘츠부르크 경유 ➔ 뮌헨 복귀 드라이브/기차",
+        "nameDe": "Rückfahrt: Hallstatt ➔ Salzburg ➔ München",
+        "lat": 48.1402,
+        "lng": 11.5583,
+        "category": "뮌헨 복귀 기차 이동",
+        "desc": "할슈타트에서 출발하여 잘츠부르크를 거쳐 뮌헨 중앙역(München Hbf)으로 복귀합니다.",
+        "tip": "뮌헨 중앙역 도착 후 S-Bahn(S1/S8) 또는 공항버스로 공항 호텔로 이동합니다."
+      },
+      {
+        "id": "d6-5",
+        "day": 6,
+        "num": 5,
+        "period": "저녁~밤",
+        "time": "19:30 - 20:30",
+        "name": "이비스 스타일스 뮌헨 에어포트 체크인 (귀국 전 마지막 밤)",
+        "nameDe": "ibis Styles Munich Airport (Wiederaufnahme)",
+        "lat": 48.3540,
+        "lng": 11.7591,
+        "category": "공항 호텔 재투숙 (귀국 동선 최적)",
+        "desc": "19일 첫날 묵었던 공항 인근 이비스 스타일스 호텔에 다시 체크인! 다음 날 아침 비행기 탑승을 위해 짐을 최종 패킹하고, 이번 바이에른 & 오스트리아 대장정의 추억을 정리하며 편안하게 휴식합니다.",
+        "tip": "호텔 바로 앞 공항 연결 버스로 공항 터미널까지 10~15분 만에 여유롭게 이동 가능합니다.",
+        "highlight": True
+      }
+    ]
   }
 ]
 
-# 3. 렌트카 경로 좌표
+# 3. 경로 좌표들
 roadtrip_coords = [
   [48.1402, 11.5583], # SIXT 뮌헨 중앙역
   [48.1300, 11.4500],
@@ -555,24 +812,48 @@ roadtrip_coords = [
   [48.1455, 11.5390]  # 노보텔 복귀
 ]
 
+train_route_salzburg = [
+  [48.1402, 11.5583], # 뮌헨 중앙역 (München Hbf)
+  [48.1350, 11.6000], # 뮌헨 동역 (München Ost)
+  [47.8561, 12.1289], # 로젠하임 (Rosenheim)
+  [47.8600, 12.3500], # 킴제 (Chiemsee)
+  [47.8680, 12.6450], # 트라운슈타인 (Traunstein)
+  [47.8380, 12.9700], # 프라이라싱 (Freilassing 국경)
+  [47.8130, 13.0457]  # 잘츠부르크 중앙역 (Salzburg Hbf)
+]
+
+train_route_hallstatt = [
+  [47.8130, 13.0457], # 잘츠부르크 중앙역
+  [47.7950, 13.3000], # 푸슐제 (Fuschl am See)
+  [47.7380, 13.4400], # 장크트 길겐 (St. Gilgen)
+  [47.7120, 13.6230], # 바트 이슐 (Bad Ischl)
+  [47.5622, 13.6493], # 할슈타트 (Hallstatt)
+  [47.7120, 13.6230],
+  [47.8130, 13.0457],
+  [48.1402, 11.5583], # 뮌헨 중앙역
+  [48.3540, 11.7591]  # 이비스 에어포트
+]
+
 # 4. HTML 파일의 head 부분 가져오기
 base_html = open('/Users/min/orca/workspaces/trip/여행/index.html', encoding='utf-8').read()
 html_head = base_html.split('<script>')[0]
 
 # 5. 모든 클릭 이벤트와 UI 상호작용이 100% 정상 작동하는 완전무결 JS 코드 작성
 robust_js = f"""
-const HOTEL_DATA = {json.dumps(hotel_data, ensure_ascii=False, indent=2)};
+const HOTELS_DATA = {json.dumps(hotels_data, ensure_ascii=False, indent=2)};
 
 const ITINERARY_DATA = {json.dumps(itinerary_data, ensure_ascii=False, indent=2)};
 
 const ROADTRIP_ROUTE_COORDS = {json.dumps(roadtrip_coords, ensure_ascii=False, indent=2)};
+const TRAIN_ROUTE_SALZBURG = {json.dumps(train_route_salzburg, ensure_ascii=False, indent=2)};
+const TRAIN_ROUTE_HALLSTATT = {json.dumps(train_route_hallstatt, ensure_ascii=False, indent=2)};
 
 let currentDayFilter = 'all';
 let currentMobileView = 'list';
 let map = null;
 let markersLayerGroup = null;
 let polylinesLayerGroup = null;
-let hotelMarker = null;
+let hotelMarkersLayerGroup = null;
 let tileLayer = null;
 let currentTileMode = 'osm';
 const spotMarkerMap = new Map();
@@ -634,7 +915,7 @@ function initMap() {{
   try {{
     map = L.map('map', {{
       center: [48.1455, 11.5390],
-      zoom: 12,
+      zoom: 11,
       zoomControl: true
     }});
 
@@ -642,8 +923,9 @@ function initMap() {{
 
     polylinesLayerGroup = L.layerGroup().addTo(map);
     markersLayerGroup = L.layerGroup().addTo(map);
+    hotelMarkersLayerGroup = L.layerGroup().addTo(map);
 
-    createHotelMarker();
+    createAllHotelMarkers();
     renderView();
 
     setTimeout(fixMapSize, 100);
@@ -661,12 +943,12 @@ function fixMapSize() {{
   }}
 }}
 
-function createHotelPin() {{
+function createHotelPin(emoji, color) {{
   const svg = `
     <svg class="marker-svg" viewBox="0 0 36 44" width="36" height="44" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 0C8.06 0 0 8.06 0 18c0 12 18 26 18 26s18-14 18-26c0-9.94-8.06-18-18-18z" fill="#b45309" stroke="#ffffff" stroke-width="1.5"/>
-      <circle cx="18" cy="17" r="12" fill="#f59e0b" opacity="0.95"/>
-      <text x="18" y="22" font-size="14" text-anchor="middle">🏨</text>
+      <path d="M18 0C8.06 0 0 8.06 0 18c0 12 18 26 18 26s18-14 18-26c0-9.94-8.06-18-18-18z" fill="${{color}}" stroke="#ffffff" stroke-width="1.8"/>
+      <circle cx="18" cy="17" r="12" fill="#ffffff" opacity="0.95"/>
+      <text x="18" y="22" font-size="14" text-anchor="middle">${{emoji}}</text>
     </svg>
   `;
   return L.divIcon({{
@@ -678,24 +960,29 @@ function createHotelPin() {{
   }});
 }}
 
-function createHotelMarker() {{
+function createAllHotelMarkers() {{
   if (!map) return;
-  const pinIcon = createHotelPin();
-  hotelMarker = L.marker([HOTEL_DATA.lat, HOTEL_DATA.lng], {{
-    icon: pinIcon,
-    zIndexOffset: 1000
-  }}).addTo(map);
+  hotelMarkersLayerGroup.clearLayers();
 
-  const popupContent = `
-    <div class="popup-badge" style="background:#b45309">🏨 우리 숙소 (Basecamp)</div>
-    <div class="popup-title">` + HOTEL_DATA.name + `</div>
-    <div style="font-size:11.5px; color:#475569; font-style:italic; margin-bottom:4px;">` + HOTEL_DATA.nameDe + `</div>
-    <div style="font-size:11.5px; color:#0f172a; margin-bottom:6px;">📍 ` + HOTEL_DATA.address + `</div>
-    <div class="popup-desc">` + HOTEL_DATA.desc + `</div>
-    <div style="background:#fef3c7; border-left:3px solid #b45309; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ` + HOTEL_DATA.tip + `</div>
-    <a class="popup-link" href="` + HOTEL_DATA.googleMapsUrl + `" target="_blank" style="color:#b45309; font-weight:800;">🗺️ Google 지도 열기 →</a>
-  `;
-  hotelMarker.bindPopup(popupContent);
+  HOTELS_DATA.forEach(hotel => {{
+    const pinIcon = createHotelPin(hotel.iconEmoji, hotel.color);
+    const marker = L.marker([hotel.lat, hotel.lng], {{
+      icon: pinIcon,
+      zIndexOffset: 1000
+    }}).addTo(hotelMarkersLayerGroup);
+
+    const popupContent = `
+      <div class="popup-badge" style="background:${{hotel.color}}">${{hotel.tag}}</div>
+      <div class="popup-title">${{hotel.name}}</div>
+      <div style="font-size:11.5px; color:#475569; font-style:italic; margin-bottom:4px;">${{hotel.nameDe}}</div>
+      <div style="font-size:11.5px; color:#0f172a; margin-bottom:6px;">📍 ${{hotel.address}}</div>
+      <div class="popup-desc">${{hotel.desc}}</div>
+      <div style="background:#fef3c7; border-left:3px solid ${{hotel.color}}; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ${{hotel.tip}}</div>
+      <a class="popup-link" href="${{hotel.googleMapsUrl}}" target="_blank" style="color:${{hotel.color}}; font-weight:800;">🗺️ Google 지도 열기 →</a>
+    `;
+    marker.bindPopup(popupContent);
+    spotMarkerMap.set(hotel.id, marker);
+  }});
 }}
 
 function createCustomPin(number, color, isHighlight) {{
@@ -740,204 +1027,252 @@ function setMobileView(view) {{
   }}
 }}
 
-function focusOnHotel() {{
-  if (window.innerWidth <= 900) {{
-    setMobileView('map');
+function updateHotelBanner(dayFilter) {{
+  const banner = document.getElementById('hotelBannerCard');
+  if (!banner) return;
+  let targetHotel = HOTELS_DATA[0]; // 노보텔 기본
+  if (dayFilter === '0' || dayFilter === '6') {{
+    targetHotel = HOTELS_DATA[1]; // 이비스 에어포트
+  }} else if (dayFilter === '5') {{
+    targetHotel = HOTELS_DATA[2]; // 잘츠부르크 유로파
   }}
-  if (map && hotelMarker) {{
-    map.flyTo([HOTEL_DATA.lat, HOTEL_DATA.lng], 15, {{ duration: 0.8 }});
-    hotelMarker.openPopup();
-  }}
-  highlightCarouselCard('carousel-hotel');
+
+  const badgeEl = banner.querySelector('.hotel-badge');
+  const nameEl = banner.querySelector('.hotel-name');
+  const nameDeEl = banner.querySelector('.hotel-name-de');
+  const descEl = banner.querySelector('.hotel-desc');
+  const linkEl = banner.querySelector('.hotel-map-link');
+
+  if (badgeEl) badgeEl.textContent = targetHotel.tag;
+  if (nameEl) nameEl.textContent = targetHotel.name;
+  if (nameDeEl) nameDeEl.textContent = targetHotel.nameDe;
+  if (descEl) descEl.textContent = targetHotel.desc;
+  if (linkEl) linkEl.href = targetHotel.googleMapsUrl;
+
+  banner.onclick = (e) => {{
+    if (e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
+    focusOnSpot(targetHotel.id, targetHotel.lat, targetHotel.lng);
+  }};
 }}
 
 function renderView() {{
-  if (markersLayerGroup) markersLayerGroup.clearLayers();
-  if (polylinesLayerGroup) polylinesLayerGroup.clearLayers();
-  spotMarkerMap.clear();
+  if (!map) return;
 
-  const timelineContainer = document.getElementById('timelineList');
-  if (!timelineContainer) return;
+  markersLayerGroup.clearLayers();
+  polylinesLayerGroup.clearLayers();
 
-  const existingHotelCard = document.getElementById('hotelBannerCard');
-  timelineContainer.innerHTML = '';
-  if (existingHotelCard) {{
-    timelineContainer.appendChild(existingHotelCard);
-  }}
-
-  const latLngsToFit = [
-    [HOTEL_DATA.lat, HOTEL_DATA.lng]
-  ];
-
-  const targetDays = currentDayFilter === 'all'
-    ? ITINERARY_DATA
+  const targetDays = currentDayFilter === 'all' 
+    ? ITINERARY_DATA 
     : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
 
   updateHeaderSummary(targetDays);
-  renderBottomCarousel(targetDays);
+  updateHotelBanner(currentDayFilter);
 
-  targetDays.forEach(dayData => {{
-    const daySection = document.createElement('div');
-    daySection.style.marginBottom = '28px';
+  // 1. 스팟 마커 추가
+  targetDays.forEach(day => {{
+    day.spots.forEach(spot => {{
+      const pin = createCustomPin(spot.num, day.color, spot.highlight);
+      const marker = L.marker([spot.lat, spot.lng], {{ icon: pin }}).addTo(markersLayerGroup);
 
-    if (currentDayFilter === 'all') {{
-      const dayHeader = document.createElement('div');
-      dayHeader.style.display = 'flex';
-      dayHeader.style.alignItems = 'center';
-      dayHeader.style.justifyContent = 'space-between';
-      dayHeader.style.padding = '8px 0';
-      dayHeader.style.marginBottom = '12px';
-      dayHeader.style.borderBottom = `2px solid ` + dayData.color;
-      dayHeader.innerHTML = `
-        <span style="font-weight: 800; font-size: 15px; color: ` + dayData.color + `;">` + dayData.dayLabel + `</span>
-        <span style="font-size: 11.5px; color: var(--text-secondary);">` + dayData.spots.length + `개 장소</span>
-      `;
-      daySection.appendChild(dayHeader);
-    }}
-
-    const dayCoords = [];
-
-    if (dayData.day === 2) {{
-      ROADTRIP_ROUTE_COORDS.forEach(c => dayCoords.push(c));
-    }} else {{
-      dayData.spots.forEach(spot => dayCoords.push([spot.lat, spot.lng]));
-    }}
-
-    if (polylinesLayerGroup && dayCoords.length > 1) {{
-      L.polyline(dayCoords, {{
-        color: dayData.color,
-        weight: dayData.day === 2 ? 5 : 4,
-        opacity: 0.85,
-        dashArray: dayData.day === 2 ? '8, 6' : undefined,
-        lineJoin: 'round'
-      }}).addTo(polylinesLayerGroup);
-    }}
-
-    let currentPeriod = '';
-    let currentPeriodContainer = null;
-
-    dayData.spots.forEach((spot) => {{
-      latLngsToFit.push([spot.lat, spot.lng]);
-
-      if (markersLayerGroup) {{
-        const pinIcon = createCustomPin(spot.num, dayData.color, spot.highlight);
-        const marker = L.marker([spot.lat, spot.lng], {{
-          icon: pinIcon,
-          zIndexOffset: spot.highlight ? 500 : 100
-        }}).addTo(markersLayerGroup);
-
-        const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'));
-        const popupContent = `
-          <div class="popup-badge" style="background:` + dayData.color + `">` + dayData.dayLabel + ` #` + spot.num + `</div>
-          <div class="popup-title">` + spot.name + `</div>
-          <div class="popup-time">🕒 ` + spot.period + ` ` + spot.time + `</div>
-          <div class="popup-desc">` + spot.desc + `</div>
-          ` + (spot.tip ? `<div style="background:#fffbeb; border-left:3px solid ` + dayData.color + `; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ` + spot.tip + `</div>` : '') + `
-          <a class="popup-link" href="` + googleLink + `" target="_blank" style="color:` + dayData.color + `; font-weight:800;">🗺️ Google 지도에서 보기 →</a>
-        `;
-        marker.bindPopup(popupContent);
-        spotMarkerMap.set(spot.id, marker);
-
-        marker.on('click', () => {{
-          highlightCard(spot.id);
-          highlightCarouselCard(`carousel-` + spot.id);
-        }});
-      }}
-
-      if (spot.period !== currentPeriod) {{
-        currentPeriod = spot.period;
-        currentPeriodContainer = document.createElement('div');
-        currentPeriodContainer.className = 'period-section';
-        currentPeriodContainer.innerHTML = `<div class="period-title">` + currentPeriod + ` 일정</div>`;
-        daySection.appendChild(currentPeriodContainer);
-      }}
-
-      const googleLink = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'));
-      const card = document.createElement('div');
-      card.className = 'spot-card';
-      card.id = `card-` + spot.id;
-      card.innerHTML = `
-        <div class="card-top">
-          <div class="badge-wrap">
-            <span class="spot-num-badge" style="background: ` + dayData.color + `">` + spot.num + `</span>
-            <span class="time-badge">` + spot.time + `</span>
-          </div>
-          <span class="category-badge">` + spot.category + `</span>
-        </div>
-        <div class="spot-name">` + spot.name + `</div>
-        <div class="spot-name-de">` + (spot.nameDe || '') + `</div>
-        <div class="spot-desc">` + spot.desc + `</div>
-        ` + (spot.tip ? `
-          <div class="spot-tip ` + (spot.highlight ? 'highlight' : '') + `">
-            <span>` + (spot.highlight ? '🚗' : '💡') + `</span>
-            <span>` + spot.tip + `</span>
-          </div>
-        ` : '') + `
-        <div class="card-actions">
-          <button class="mini-action-link" style="background:#eff6ff; border:1px solid #bfdbfe; color:#2563eb; cursor:pointer;" onclick="focusOnSpot('` + spot.id + `', ` + spot.lat + `, ` + spot.lng + `)">
-            📍 지도에서 보기
-          </button>
-          <a class="mini-action-link" href="` + googleLink + `" target="_blank">
-            🗺️ Google ↗
-          </a>
-        </div>
+      const popupHtml = `
+        <div class="popup-badge" style="background:${{day.color}}">${{day.dayLabel}} #${{spot.num}}</div>
+        <div class="popup-title">${{spot.name}}</div>
+        <div style="font-size:11.5px; color:#475569; font-style:italic; margin-bottom:4px;">${{spot.nameDe}}</div>
+        <div style="font-size:12px; font-weight:600; color:#0f172a; margin-bottom:4px;">⏰ ${{spot.period}} ${{spot.time}}</div>
+        <div class="popup-desc">${{spot.desc}}</div>
+        <div style="background:#fef3c7; border-left:3px solid #f59e0b; padding:5px 8px; border-radius:4px; font-size:11px; color:#92400e; margin-bottom:8px;">💡 ${{spot.tip}}</div>
+        <a class="popup-link" href="https://www.google.com/maps/search/?api=1&query=${{encodeURIComponent(spot.nameDe + ' ' + spot.name)}}" target="_blank">Google 지도 열기 →</a>
       `;
 
-      card.addEventListener('click', (e) => {{
-        if (e.target.tagName && (e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button')) return;
-        focusOnSpot(spot.id, spot.lat, spot.lng);
+      marker.bindPopup(popupHtml);
+      marker.on('click', () => {{
+        highlightCard(spot.id);
+        highlightCarouselCard(`carousel-` + spot.id);
       }});
 
-      if (currentPeriodContainer) {{
-        currentPeriodContainer.appendChild(card);
-      }}
+      spotMarkerMap.set(spot.id, marker);
     }});
-
-    timelineContainer.appendChild(daySection);
   }});
 
-  if (map && latLngsToFit.length > 0) {{
-    map.fitBounds(latLngsToFit, {{ padding: [40, 40], maxZoom: 15 }});
+  // 2. 경로 폴리라인 그리기
+  if (currentDayFilter === 'all') {{
+    // 렌트카 루프선
+    L.polyline(ROADTRIP_ROUTE_COORDS, {{
+      color: '#f97316',
+      weight: 3.5,
+      opacity: 0.85
+    }}).addTo(polylinesLayerGroup);
+
+    // 24일 잘츠부르크 기차선 (대시 점선)
+    L.polyline(TRAIN_ROUTE_SALZBURG, {{
+      color: '#e11d48',
+      weight: 3,
+      opacity: 0.85,
+      dashArray: '8, 8'
+    }}).addTo(polylinesLayerGroup);
+
+    // 25일 할슈타트 기차선 (대시 점선)
+    L.polyline(TRAIN_ROUTE_HALLSTATT, {{
+      color: '#0d9488',
+      weight: 3,
+      opacity: 0.85,
+      dashArray: '6, 6'
+    }}).addTo(polylinesLayerGroup);
+
+    // 기타 날짜 가벼운 연결선
+    targetDays.forEach(day => {{
+      if (day.day !== 2 && day.day !== 5 && day.day !== 6 && day.day !== 0) {{
+        const coords = day.spots.map(s => [s.lat, s.lng]);
+        if (coords.length > 1) {{
+          L.polyline(coords, {{
+            color: day.color,
+            weight: 2,
+            opacity: 0.45,
+            dashArray: '4, 6'
+          }}).addTo(polylinesLayerGroup);
+        }}
+      }}
+    }});
+  }} else if (currentDayFilter === '2') {{
+    L.polyline(ROADTRIP_ROUTE_COORDS, {{
+      color: '#f97316',
+      weight: 4.5,
+      opacity: 0.95
+    }}).addTo(polylinesLayerGroup);
+  }} else if (currentDayFilter === '5') {{
+    L.polyline(TRAIN_ROUTE_SALZBURG, {{
+      color: '#e11d48',
+      weight: 4.5,
+      opacity: 0.95,
+      dashArray: '8, 8'
+    }}).addTo(polylinesLayerGroup);
+  }} else if (currentDayFilter === '6') {{
+    L.polyline(TRAIN_ROUTE_HALLSTATT, {{
+      color: '#0d9488',
+      weight: 4.5,
+      opacity: 0.95,
+      dashArray: '6, 6'
+    }}).addTo(polylinesLayerGroup);
+  }} else {{
+    targetDays.forEach(day => {{
+      const coords = day.spots.map(s => [s.lat, s.lng]);
+      if (coords.length > 1) {{
+        L.polyline(coords, {{
+          color: day.color,
+          weight: 3.5,
+          opacity: 0.85
+        }}).addTo(polylinesLayerGroup);
+      }}
+    }});
+  }}
+
+  // 3. 지도 바운드 맞춤
+  const allCoords = [];
+  if (currentDayFilter === 'all') {{
+    // 전체일 때 뮌헨과 알프스, 잘츠부르크 포커스
+    allCoords.push([HOTELS_DATA[0].lat, HOTELS_DATA[0].lng]);
+    allCoords.push([47.4211, 10.9853]); // 추크슈피체
+    allCoords.push([48.3540, 11.7591]); // 공항
+    allCoords.push([47.8122, 13.0437]); // 잘츠부르크
+  }} else {{
+    targetDays.forEach(d => d.spots.forEach(s => allCoords.push([s.lat, s.lng])));
+    if (currentDayFilter === '0' || currentDayFilter === '6') {{
+      allCoords.push([HOTELS_DATA[1].lat, HOTELS_DATA[1].lng]);
+    }} else if (currentDayFilter === '5') {{
+      allCoords.push([HOTELS_DATA[2].lat, HOTELS_DATA[2].lng]);
+    }} else {{
+      allCoords.push([HOTELS_DATA[0].lat, HOTELS_DATA[0].lng]);
+    }}
+  }}
+
+  if (allCoords.length > 0) {{
+    map.fitBounds(allCoords, {{ padding: [35, 35] }});
+  }}
+
+  // 4. 좌측 타임라인 카드 렌더링
+  renderSidebarCards(targetDays);
+
+  // 5. 모바일 캐러셀 카드 렌더링
+  renderCarouselCards(targetDays);
+}}
+
+function renderSidebarCards(targetDays) {{
+  const container = document.getElementById('timelineList');
+  if (!container) return;
+
+  let cardsHtml = '';
+  targetDays.forEach(day => {{
+    cardsHtml += `
+      <div class="day-group-header" style="border-left-color: ${{day.color}};">
+        <h3>${{day.title}}</h3>
+        <p>${{day.summary}}</p>
+      </div>
+    `;
+
+    day.spots.forEach(spot => {{
+      cardsHtml += `
+        <article class="spot-card ${{spot.highlight ? 'highlight' : ''}}" id="card-${{spot.id}}" onclick="focusOnSpot('${{spot.id}}', ${{spot.lat}}, ${{spot.lng}})">
+          <div class="spot-card-header">
+            <span class="spot-num-badge" style="background: ${{day.color}};">${{spot.num}}</span>
+            <div class="spot-time-group">
+              <span class="spot-time">${{spot.time}}</span>
+              <span class="spot-period">${{spot.period}}</span>
+            </div>
+            <span class="spot-category-tag">${{spot.category}}</span>
+          </div>
+          <div class="spot-card-body">
+            <h4 class="spot-name">${{spot.name}}</h4>
+            <div class="spot-name-de">${{spot.nameDe}}</div>
+            <p class="spot-desc">${{spot.desc}}</p>
+            <div class="spot-tip-box">
+              <span class="tip-icon">💡</span>
+              <div class="tip-content">${{spot.tip}}</div>
+            </div>
+            <div class="spot-card-footer">
+              <button class="card-action-btn primary" onclick="event.stopPropagation(); focusOnSpot('${{spot.id}}', ${{spot.lat}}, ${{spot.lng}})">
+                📍 지도에서 보기
+              </button>
+              <a class="card-action-btn secondary" href="https://www.google.com/maps/search/?api=1&query=${{encodeURIComponent(spot.nameDe + ' ' + spot.name)}}" target="_blank" onclick="event.stopPropagation()">
+                🗺️ Google ↗
+              </a>
+            </div>
+          </div>
+        </article>
+      `;
+    }});
+  }});
+
+  // 고정 호텔 배너 보존
+  const hotelBanner = document.getElementById('hotelBannerCard');
+  container.innerHTML = '';
+  if (hotelBanner) container.appendChild(hotelBanner);
+  
+  const div = document.createElement('div');
+  div.innerHTML = cardsHtml;
+  while (div.firstChild) {{
+    container.appendChild(div.firstChild);
   }}
 }}
 
-function renderBottomCarousel(targetDays) {{
+function renderCarouselCards(targetDays) {{
   const carouselTrack = document.getElementById('carouselTrack');
-  const dayTitleElem = document.getElementById('carouselDayTitle');
+  const carouselDayTitle = document.getElementById('carouselDayTitle');
   if (!carouselTrack) return;
 
-  if (dayTitleElem) {{
-    if (currentDayFilter === 'all') {{
-      dayTitleElem.textContent = '전체 4일 코스 스팟 둘러보기';
-    }} else {{
-      const cur = targetDays[0];
-      dayTitleElem.textContent = `${{cur.dayLabel}} 스팟 (${{cur.spots.length}}곳)`;
-    }}
+  if (carouselDayTitle) {{
+    carouselDayTitle.textContent = currentDayFilter === 'all' 
+      ? '전체 7일 코스 스팟 둘러보기' 
+      : targetDays[0].dayLabel + ' 스팟 둘러보기';
   }}
 
   let cardsHtml = '';
-
-  // 첫 번째 카드는 항상 우리 숙소
-  cardsHtml += `
-    <div class="carousel-card" id="carousel-hotel" onclick="focusOnHotel()">
-      <div class="carousel-card-top">
-        <span class="carousel-badge" style="background:#b45309;">🏨 베이스캠프</span>
-        <a class="carousel-google-link" href="${{HOTEL_DATA.googleMapsUrl}}" target="_blank" rel="noopener" onclick="event.stopPropagation();">길찾기 ↗</a>
-      </div>
-      <div class="carousel-card-title">${{HOTEL_DATA.name}}</div>
-      <div class="carousel-card-sub">중앙역 트램 5분 · 님펜부르크 직통</div>
-      <div class="carousel-card-desc">${{HOTEL_DATA.desc}}</div>
-    </div>
-  `;
-
-  targetDays.forEach(dayInfo => {{
-    dayInfo.spots.forEach(spot => {{
-      const gUrl = `https://www.google.com/maps/search/?api=1&query=${{encodeURIComponent(spot.name + ' ' + (spot.nameDe || 'Munich'))}}`;
+  targetDays.forEach(day => {{
+    day.spots.forEach(spot => {{
       cardsHtml += `
         <div class="carousel-card" id="carousel-${{spot.id}}" onclick="focusOnSpot('${{spot.id}}', ${{spot.lat}}, ${{spot.lng}})">
           <div class="carousel-card-top">
-            <span class="carousel-badge" style="background:${{dayInfo.color}};">${{dayInfo.dayLabel}} #${{spot.num}}</span>
-            <a class="carousel-google-link" href="${{gUrl}}" target="_blank" rel="noopener" onclick="event.stopPropagation();">Google ↗</a>
+            <span class="carousel-card-badge" style="background: ${{day.color}};">${{day.dayLabel}} #${{spot.num}}</span>
+            <span class="carousel-card-time">${{spot.time}}</span>
           </div>
           <div class="carousel-card-title">${{spot.name}}</div>
           <div class="carousel-card-sub">${{spot.period}} ${{spot.time}} · ${{spot.category}}</div>
@@ -976,7 +1311,7 @@ function focusOnSpot(spotId, lat, lng) {{
     setMobileView('map');
   }}
   if (map) {{
-    map.flyTo([lat, lng], 15, {{ duration: 0.8 }});
+    map.flyTo([lat, lng], 14, {{ duration: 0.8 }});
     const marker = spotMarkerMap.get(spotId);
     if (marker) {{
       marker.openPopup();
@@ -991,12 +1326,12 @@ function updateHeaderSummary(targetDays) {{
   const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
 
   if (currentDayFilter === 'all') {{
-    if (titleEl) titleEl.textContent = '전체 4일 일정 개요 (20일 ~ 23일)';
+    if (titleEl) titleEl.textContent = '전체 7일 일정 개요 (19일 ~ 25일)';
     const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
     if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
-    if (transitTipEl) transitTipEl.innerHTML = `💡 날짜 탭을 누르면 렌트카 코스 및 일자별 세부 동선을 확인할 수 있습니다.`;
+    if (transitTipEl) transitTipEl.innerHTML = `💡 각 날짜 탭을 누르면 렌트카 코스, 기차 이동 및 일자별 세부 동선을 확인할 수 있습니다.`;
     if (googleHeaderBtn) {{
-      googleHeaderBtn.href = ITINERARY_DATA[1].googleRouteUrl;
+      googleHeaderBtn.href = ITINERARY_DATA[2].googleRouteUrl;
       googleHeaderBtn.textContent = '🚗 2일차 렌트카 전체 경로 (Google Maps)';
     }}
   }} else {{
@@ -1022,7 +1357,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {{
     btn.classList.add('active');
     currentDayFilter = btn.getAttribute('data-day');
     renderView();
-    setTimeout(fixMapSize, 150);
+    requestAnimationFrame(() => {{
+      fixMapSize();
+      setTimeout(fixMapSize, 150);
+    }});
   }});
 }});
 
@@ -1042,10 +1380,11 @@ if (fitBtn) {{
       ? ITINERARY_DATA 
       : ITINERARY_DATA.filter(d => d.day === parseInt(currentDayFilter));
     
-    const coords = [[HOTEL_DATA.lat, HOTEL_DATA.lng]];
+    const coords = [];
     targetDays.forEach(d => d.spots.forEach(s => coords.push([s.lat, s.lng])));
+    HOTELS_DATA.forEach(h => coords.push([h.lat, h.lng]));
     if (map && coords.length > 0) {{
-      map.fitBounds(coords, {{ padding: [40, 40] }});
+      map.fitBounds(coords, {{ padding: [35, 35] }});
     }}
   }});
 }}
@@ -1078,16 +1417,7 @@ if (modal) {{
   }});
 }}
 
-// 6. 숙소 배너 카드 클릭
-const hotelBanner = document.getElementById('hotelBannerCard');
-if (hotelBanner) {{
-  hotelBanner.addEventListener('click', (e) => {{
-    if (e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
-    focusOnHotel();
-  }});
-}}
-
-// 7. 지도 범례 접기/펼치기
+// 6. 지도 범례 접기/펼치기
 const legendHeader = document.getElementById('legendHeader');
 if (legendHeader) {{
   legendHeader.addEventListener('click', () => {{
@@ -1096,7 +1426,7 @@ if (legendHeader) {{
   }});
 }}
 
-// 8. 하단 캐러셀 제어 버튼 (접기/열기, 이전, 다음)
+// 7. 하단 캐러셀 제어 버튼 (접기/열기, 이전, 다음)
 const carouselToggleBtn = document.getElementById('carouselToggleBtn');
 if (carouselToggleBtn) {{
   carouselToggleBtn.addEventListener('click', () => {{
@@ -1123,7 +1453,7 @@ if (carouselNextBtn) {{
   }});
 }}
 
-// 9. 페이지 로드 초기화
+// 8. 페이지 로드 초기화
 window.addEventListener('DOMContentLoaded', () => {{
   if (window.innerWidth <= 900) {{
     setMobileView('list');
@@ -1147,4 +1477,4 @@ for tf in target_files:
     with open(tf, 'w', encoding='utf-8') as f:
         f.write(final_html)
 
-print("All HTML files rebuilt with 100% robust event listeners!")
+print("All HTML files successfully rebuilt for full 7-day Munich & Austria journey!")
