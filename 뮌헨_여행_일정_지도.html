@@ -3271,58 +3271,87 @@ function renderSidebarCards(targetDays) {
   const container = document.getElementById('timelineList');
   if (!container) return;
 
-  let cardsHtml = '';
-  targetDays.forEach(day => {
-    cardsHtml += `
-      <div class="day-group-header" style="border-left-color: ${day.color};">
-        <h3>${day.title}</h3>
-        <p>${day.summary}</p>
-      </div>
-    `;
-
-    day.spots.forEach(spot => {
-      cardsHtml += `
-        <article class="spot-card ${spot.highlight ? 'highlight' : ''}" id="card-${spot.id}" onclick="focusOnSpot('${spot.id}', ${spot.lat}, ${spot.lng})">
-          <div class="spot-card-header">
-            <span class="spot-num-badge" style="background: ${day.color};">${spot.num}</span>
-            <div class="spot-time-group">
-              <span class="spot-time">${spot.time}</span>
-              <span class="spot-period">${spot.period}</span>
-            </div>
-            <span class="spot-category-tag">${spot.category}</span>
-          </div>
-          <div class="spot-card-body">
-            <h4 class="spot-name">${spot.name}</h4>
-            <div class="spot-name-de">${spot.nameDe}</div>
-            <p class="spot-desc">${spot.desc}</p>
-            <div class="spot-tip-box">
-              <span class="tip-icon">💡</span>
-              <div class="tip-content">${spot.tip}</div>
-            </div>
-            <div class="spot-card-footer">
-              <button class="card-action-btn primary" onclick="event.stopPropagation(); focusOnSpot('${spot.id}', ${spot.lat}, ${spot.lng})">
-                📍 지도에서 보기
-              </button>
-              <a class="card-action-btn secondary" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.nameDe + ' ' + spot.name)}" target="_blank" onclick="event.stopPropagation()">
-                🗺️ Google ↗
-              </a>
-            </div>
-          </div>
-        </article>
-      `;
-    });
-  });
-
   // 고정 호텔 배너 보존
   const hotelBanner = document.getElementById('hotelBannerCard');
   container.innerHTML = '';
   if (hotelBanner) container.appendChild(hotelBanner);
-  
-  const div = document.createElement('div');
-  div.innerHTML = cardsHtml;
-  while (div.firstChild) {
-    container.appendChild(div.firstChild);
-  }
+
+  targetDays.forEach(day => {
+    const daySection = document.createElement('div');
+    daySection.style.marginBottom = '24px';
+
+    if (currentDayFilter === 'all') {
+      const dayHeader = document.createElement('div');
+      dayHeader.style.display = 'flex';
+      dayHeader.style.alignItems = 'center';
+      dayHeader.style.justifyContent = 'space-between';
+      dayHeader.style.padding = '8px 0';
+      dayHeader.style.marginBottom = '12px';
+      dayHeader.style.borderBottom = `2px solid ` + day.color;
+      dayHeader.innerHTML = `
+        <span style="font-weight: 800; font-size: 15px; color: ` + day.color + `;">` + day.dayLabel + `</span>
+        <span style="font-size: 11.5px; color: var(--text-secondary);">` + day.spots.length + `개 장소</span>
+      `;
+      daySection.appendChild(dayHeader);
+    }
+
+    let currentPeriod = '';
+    let currentPeriodContainer = null;
+
+    day.spots.forEach(spot => {
+      if (spot.period !== currentPeriod) {
+        currentPeriod = spot.period;
+        currentPeriodContainer = document.createElement('div');
+        currentPeriodContainer.className = 'period-section';
+        currentPeriodContainer.innerHTML = `<div class="period-title">` + currentPeriod + ` 일정</div>`;
+        daySection.appendChild(currentPeriodContainer);
+      }
+
+      const gSearchUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.nameDe + ' ' + spot.name);
+      const card = document.createElement('div');
+      card.className = 'spot-card' + (spot.highlight ? ' selected' : '');
+      card.id = `card-` + spot.id;
+      card.innerHTML = `
+        <div class="card-top">
+          <div class="badge-wrap">
+            <span class="spot-num-badge" style="background: ` + day.color + `">` + spot.num + `</span>
+            <span class="time-badge">` + spot.time + `</span>
+          </div>
+          <span class="category-badge">` + spot.category + `</span>
+        </div>
+        <div class="spot-name">` + spot.name + `</div>
+        <div class="spot-name-de">` + (spot.nameDe || '') + `</div>
+        <div class="spot-desc">` + spot.desc + `</div>
+        ` + (spot.tip ? `
+          <div class="spot-tip ` + (spot.highlight ? 'highlight' : '') + `">
+            <span>` + (spot.highlight ? '🚗' : '💡') + `</span>
+            <span>` + spot.tip + `</span>
+          </div>
+        ` : '') + `
+        <div class="card-actions">
+          <button class="mini-action-link" style="background:#eff6ff; border:1px solid #bfdbfe; color:#2563eb; cursor:pointer;" onclick="focusOnSpot('` + spot.id + `', ` + spot.lat + `, ` + spot.lng + `)">
+            📍 지도에서 보기
+          </button>
+          <a class="mini-action-link" href="` + gSearchUrl + `" target="_blank" onclick="event.stopPropagation();">
+            🗺️ Google ↗
+          </a>
+        </div>
+      `;
+
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName && (e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button')) return;
+        focusOnSpot(spot.id, spot.lat, spot.lng);
+      });
+
+      if (currentPeriodContainer) {
+        currentPeriodContainer.appendChild(card);
+      } else {
+        daySection.appendChild(card);
+      }
+    });
+
+    container.appendChild(daySection);
+  });
 }
 
 function renderCarouselCards(targetDays) {
@@ -3339,15 +3368,16 @@ function renderCarouselCards(targetDays) {
   let cardsHtml = '';
   targetDays.forEach(day => {
     day.spots.forEach(spot => {
+      const gSearchUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.nameDe + ' ' + spot.name);
       cardsHtml += `
-        <div class="carousel-card" id="carousel-${spot.id}" onclick="focusOnSpot('${spot.id}', ${spot.lat}, ${spot.lng})">
+        <div class="carousel-card" id="carousel-` + spot.id + `" onclick="focusOnSpot('` + spot.id + `', ` + spot.lat + `, ` + spot.lng + `)">
           <div class="carousel-card-top">
-            <span class="carousel-card-badge" style="background: ${day.color};">${day.dayLabel} #${spot.num}</span>
-            <span class="carousel-card-time">${spot.time}</span>
+            <span class="carousel-badge" style="background: ` + day.color + `;">` + day.dayLabel + ` #` + spot.num + `</span>
+            <a class="carousel-google-link" href="` + gSearchUrl + `" target="_blank" onclick="event.stopPropagation();">Google ↗</a>
           </div>
-          <div class="carousel-card-title">${spot.name}</div>
-          <div class="carousel-card-sub">${spot.period} ${spot.time} · ${spot.category}</div>
-          <div class="carousel-card-desc">${spot.desc}</div>
+          <div class="carousel-card-title">` + spot.name + `</div>
+          <div class="carousel-card-sub">` + spot.period + ` ` + spot.time + ` · ` + spot.category + `</div>
+          <div class="carousel-card-desc">` + spot.desc + `</div>
         </div>
       `;
     });
