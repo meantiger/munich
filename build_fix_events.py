@@ -545,33 +545,61 @@ let markersLayerGroup = null;
 let polylinesLayerGroup = null;
 let hotelMarker = null;
 let tileLayer = null;
-let currentTileMode = 'voyager';
+let currentTileMode = 'osm';
 const spotMarkerMap = new Map();
 
 const TILE_PROVIDERS = {{
-  voyager: {{
-    url: 'https://basemaps.cartocdn.com/rastertiles/voyager/{{z}}/{{x}}/{{y}}{{r}}.png',
+  osm: {{
+    name: '일반지도',
+    btnLabel: '🗺️ 일반지도',
+    url: 'https://tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png',
     options: {{
-      attribution: '&copy; CARTO & OpenStreetMap',
-      subdomains: 'abcd',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
       maxZoom: 19
     }}
   }},
-  esri_street: {{
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{{z}}/{{y}}/{{x}}',
+  topo: {{
+    name: '지형도',
+    btnLabel: '⛰️ 지형도',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{{z}}/{{y}}/{{x}}',
     options: {{
-      attribution: '&copy; Esri World Street Map',
+      attribution: 'Tiles &copy; Esri World Topo Map',
       maxZoom: 19
     }}
   }},
-  esri_satellite: {{
+  satellite: {{
+    name: '위성사진',
+    btnLabel: '🛰️ 위성사진',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{{z}}/{{y}}/{{x}}',
     options: {{
-      attribution: '&copy; Esri World Imagery',
+      attribution: 'Tiles &copy; Esri World Imagery',
       maxZoom: 18
+    }}
+  }},
+  street: {{
+    name: '거리뷰',
+    btnLabel: '🛣️ 거리뷰',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{{z}}/{{y}}/{{x}}',
+    options: {{
+      attribution: 'Tiles &copy; Esri World Street Map',
+      maxZoom: 19
     }}
   }}
 }};
+
+function applyTileMode(mode) {{
+  if (!map) return;
+  if (tileLayer) {{
+    map.removeLayer(tileLayer);
+  }}
+  currentTileMode = mode;
+  const provider = TILE_PROVIDERS[mode] || TILE_PROVIDERS.osm;
+  tileLayer = L.tileLayer(provider.url, provider.options).addTo(map);
+  const toggleBtn = document.getElementById('btnToggleTile');
+  if (toggleBtn) {{
+    toggleBtn.innerHTML = provider.btnLabel;
+  }}
+}}
 
 function initMap() {{
   try {{
@@ -581,7 +609,7 @@ function initMap() {{
       zoomControl: true
     }});
 
-    tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
+    applyTileMode(currentTileMode);
 
     polylinesLayerGroup = L.layerGroup().addTo(map);
     markersLayerGroup = L.layerGroup().addTo(map);
@@ -600,7 +628,7 @@ function initMap() {{
 
 function fixMapSize() {{
   if (map) {{
-    map.invalidateSize();
+    map.invalidateSize({{ animate: false }});
   }}
 }}
 
@@ -674,8 +702,12 @@ function setMobileView(view) {{
   }});
 
   if (view === 'map') {{
-    setTimeout(fixMapSize, 100);
-    setTimeout(fixMapSize, 300);
+    requestAnimationFrame(() => {{
+      fixMapSize();
+      setTimeout(fixMapSize, 80);
+      setTimeout(fixMapSize, 250);
+      setTimeout(fixMapSize, 600);
+    }});
   }}
 }}
 
@@ -991,20 +1023,13 @@ if (fitBtn) {{
 
 // 4. 지도 스타일 전환 버튼
 const toggleTileBtn = document.getElementById('btnToggleTile');
+const tileModes = ['osm', 'topo', 'satellite', 'street'];
+
 if (toggleTileBtn) {{
   toggleTileBtn.addEventListener('click', () => {{
-    if (!map) return;
-    map.removeLayer(tileLayer);
-    if (currentTileMode === 'voyager') {{
-      currentTileMode = 'esri_street';
-      tileLayer = L.tileLayer(TILE_PROVIDERS.esri_street.url, TILE_PROVIDERS.esri_street.options).addTo(map);
-    }} else if (currentTileMode === 'esri_street') {{
-      currentTileMode = 'esri_satellite';
-      tileLayer = L.tileLayer(TILE_PROVIDERS.esri_satellite.url, TILE_PROVIDERS.esri_satellite.options).addTo(map);
-    }} else {{
-      currentTileMode = 'voyager';
-      tileLayer = L.tileLayer(TILE_PROVIDERS.voyager.url, TILE_PROVIDERS.voyager.options).addTo(map);
-    }}
+    const currentIdx = tileModes.indexOf(currentTileMode);
+    const nextIdx = (currentIdx + 1) % tileModes.length;
+    applyTileMode(tileModes[nextIdx]);
   }});
 }}
 
