@@ -1660,10 +1660,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <header>
     <div class="header-top-row">
       <div class="header-left">
-        <div class="brand-badge">Bayern & Austria</div>
+        <div class="brand-badge">Europe 11 Days</div>
         <div class="header-title-group">
-          <h1>🇩🇪 뮌헨 & 오스트리아 7일 여행</h1>
-          <p>뮌헨 시내 · 알프스 렌트카 · 잘츠부르크 & 할슈타트</p>
+          <h1>🇩🇪 뮌헨 · 🇦🇹 오스트리아 & 🇩🇰 코펜하겐 11일 여행</h1>
+          <p>뮌헨 & 알프스 · 잘츠부르크 & 할슈타트 · 코펜하겐</p>
         </div>
       </div>
 
@@ -1688,7 +1688,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <div class="day-tabs" id="dayTabs">
       <button class="tab-btn active" data-day="all">
         <span class="tab-dot" style="background: #64748b;"></span>
-        전체 7일
+        전체 11일
       </button>
       <button class="tab-btn" data-day="0">
         <span class="tab-dot" style="background: #0284c7;"></span>
@@ -1718,6 +1718,22 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <span class="tab-dot" style="background: #0d9488;"></span>
         🏞️ 25일 (할슈타트)
       </button>
+      <button class="tab-btn" data-day="7">
+        <span class="tab-dot" style="background: #dc2626;"></span>
+        ✈️ 26일 (코펜하겐)
+      </button>
+      <button class="tab-btn" data-day="8">
+        <span class="tab-dot" style="background: #e11d48;"></span>
+        🇩🇰 27일 (코펜하겐)
+      </button>
+      <button class="tab-btn" data-day="9">
+        <span class="tab-dot" style="background: #b91c1c;"></span>
+        🇩🇰 28일 (코펜하겐)
+      </button>
+      <button class="tab-btn" data-day="10">
+        <span class="tab-dot" style="background: #4338ca;"></span>
+        🛫 29일 (귀국)
+      </button>
     </div>
   </header>
 
@@ -1728,8 +1744,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <aside class="sidebar">
       <div class="sidebar-header" id="sidebarHeader">
         <div class="sidebar-title">
-          <span id="dayTitleText">전체 7일 일정 개요 (19일 ~ 25일)</span>
-          <span id="spotCountBadge" style="font-size:11px; color:var(--text-muted); font-weight:500;">총 37개 스팟</span>
+          <span id="dayTitleText">전체 11일 일정 개요 (19일 ~ 29일)</span>
+          <span id="spotCountBadge" style="font-size:11px; color:var(--text-muted); font-weight:500;">총 55개 스팟</span>
         </div>
         <div class="transit-badge" id="transitTipText">
           💡 각 날짜 탭을 클릭하거나 좌측 카드를 누르면 지도가 해당 장소로 자동 이동합니다.
@@ -1774,15 +1790,19 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <div class="legend-body">
           <div class="legend-item" style="margin-bottom: 2px; padding-bottom: 2px; border-bottom: 1px dashed #e2e8f0;">
             <span style="font-size: 11px;">🏨</span>
-            <span style="font-size: 11px;"><strong>노보텔</strong>: 뮌헨 메인 숙소 (20~24일 4박)</span>
+            <span style="font-size: 11px;"><strong>노보텔</strong>: 뮌헨 메인 (20~24일 4박)</span>
           </div>
           <div class="legend-item" style="margin-bottom: 2px; padding-bottom: 2px; border-bottom: 1px dashed #e2e8f0;">
-            <span style="font-size: 11px;">🏨</span>
-            <span style="font-size: 11px;"><strong>이비스</strong>: 공항 호텔 (19일 입국 & 25일 귀국)</span>
+            <span style="font-size: 11px;">✈️</span>
+            <span style="font-size: 11px;"><strong>이비스</strong>: 뮌헨 공항 (19일 & 25일 2박)</span>
+          </div>
+          <div class="legend-item" style="margin-bottom: 2px; padding-bottom: 2px; border-bottom: 1px dashed #e2e8f0;">
+            <span style="font-size: 11px;">🇦🇹</span>
+            <span style="font-size: 11px;"><strong>호텔 유로파</strong>: 잘츠부르크 중앙역 앞 (24일 1박)</span>
           </div>
           <div class="legend-item" style="margin-bottom: 4px; padding-bottom: 2px; border-bottom: 1px dashed #e2e8f0;">
-            <span style="font-size: 11px;">🏨</span>
-            <span style="font-size: 11px;"><strong>호텔 유로파</strong>: 잘츠부르크 중앙역 앞 (24일 1박)</span>
+            <span style="font-size: 11px;">🇩🇰</span>
+            <span style="font-size: 11px;"><strong>래디슨 로열</strong>: 코펜하겐 중앙역 앞 (26~29일 3박)</span>
           </div>
           <div class="legend-item">
             <div class="legend-color" style="background: #0284c7;"></div>
@@ -1810,7 +1830,23 @@ svg.leaflet-image-layer.leaflet-interactive path {
           </div>
           <div class="legend-item">
             <div class="legend-color" style="background: #0d9488;"></div>
-            <span><strong>25일</strong> : 🏞️ 할슈타트 당일치기 ➔ 뮌헨 (이비스 에어포트)</span>
+            <span><strong>25일</strong> : 🏞️ 할슈타트 당일 ➔ 뮌헨 (이비스 에어포트)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: #dc2626;"></div>
+            <span><strong>26일</strong> : ✈️ 뮌헨 ➔ 코펜하겐 (래디슨 로열 호텔)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: #e11d48;"></div>
+            <span><strong>27일</strong> : 🇩🇰 뉘하운 운하 & 아말리엔보르 궁전</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: #b91c1c;"></div>
+            <span><strong>28일</strong> : 🇩🇰 로센보르그 성 & 티볼리 가든 야경</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: #4338ca;"></div>
+            <span><strong>29일</strong> : 🛫 시내 산책 ➔ 대한항공 KE6410 출국</span>
           </div>
         </div>
       </div>
@@ -1975,6 +2011,77 @@ svg.leaflet-image-layer.leaflet-interactive path {
                 🏨 <strong>이비스 뮌헨 에어포트</strong> (재투숙)
               </td>
             </tr>
+            <tr style="background: #fef2f2;">
+              <td><strong>26일<br><span style="color:#dc2626; font-weight:800;">[✈️코펜하겐]</span></strong></td>
+              <td>
+                • 이비스 에어포트 체크아웃<br>
+                • <strong>SAS SK 662 (10:15 MUC 출발)</strong><br>
+                • <strong>11:55 코펜하겐(CPH) 도착</strong>
+              </td>
+              <td>
+                • 공항 ➔ 중앙역 기차 이동(15분)<br>
+                • <strong>래디슨 컬렉션 로열 호텔 체크인</strong><br>
+                  (중앙역 바로 앞 도보 2분)<br>
+                • 코펜하겐 오후 시내 자유 탐방
+              </td>
+              <td>
+                • 시청사 광장 & 티볼리 주변<br>
+                • 북유럽 로컬 다이닝<br>
+                🏨 <strong>래디슨 컬렉션 로열 호텔</strong> (1박)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>27일<br><span style="color:#e11d48; font-weight:700;">[🇩🇰코펜하겐1]</span></strong></td>
+              <td>
+                • <strong>뉘하운 운하 (Nyhavn)</strong> 산책<br>
+                • 운하 투어 보트 탑승
+              </td>
+              <td>
+                • <strong>아말리엔보르 궁전</strong> (12시 교대식)<br>
+                • <strong>인어공주 동상</strong> & 카스텔레 요새<br>
+                • 스트뢰에(Strøget) 명품 쇼핑 거리
+              </td>
+              <td>
+                • 구시가지 북유럽 레스토랑 디너<br>
+                • 운하 야경 산책<br>
+                🏨 <strong>래디슨 컬렉션 로열 호텔</strong> (2박)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>28일<br><span style="color:#b91c1c; font-weight:700;">[🇩🇰코펜하겐2]</span></strong></td>
+              <td>
+                • <strong>로센보르그 성 & 왕실 보물관</strong><br>
+                • 왕의 정원(Kongens Have) 산책
+              </td>
+              <td>
+                • <strong>룬데토른(원형탑)</strong> 360도 시내 전망<br>
+                • 토르베할레네 미식 마켓 런치<br>
+                • <strong>티볼리 가든 (Tivoli Gardens)</strong>
+              </td>
+              <td>
+                • 티볼리 공원 환상적인 야경<br>
+                • 덴마크 완결 기념 디너<br>
+                🏨 <strong>래디슨 컬렉션 로열 호텔</strong> (3박)
+              </td>
+            </tr>
+            <tr style="background: #eef2ff;">
+              <td><strong>29일<br><span style="color:#4338ca; font-weight:800;">[🛫귀국]</span></strong></td>
+              <td>
+                • 래디슨 로열 호텔 체크아웃 & 짐보관<br>
+                • 마지막 코펜하겐 거리 여유 산책<br>
+                • 북유럽 카페 타임 & 기념품 쇼핑
+              </td>
+              <td>
+                • 시내 런치 후 14:30 공항 이동<br>
+                • 코펜하겐 카스트룹 공항(CPH) 도착<br>
+                • 출국 심사 & 면세점 쇼핑
+              </td>
+              <td>
+                • <strong>대한항공 KE6410 (17:30 출발)</strong><br>
+                • 한국(인천공항) 귀국 비행 길<br>
+                ✈️ <strong>기내 숙박</strong>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -2007,11 +2114,11 @@ const HOTELS_DATA = [
     "nameDe": "ibis Styles Munich Airport",
     "lat": 48.354,
     "lng": 11.7591,
-    "tag": "✈️ 19일(입국) & 25일(귀국 전) 2박",
+    "tag": "✈️ 19일(입국) & 25일(환승 전) 2박",
     "address": "Freisinger Str. 80, 85356 Freising",
     "googleMapsUrl": "https://maps.app.goo.gl/q1EQZ3kPKLurGyM6A",
-    "desc": "뮌헨 국제공항 인근 신축 호텔. 19일 늦은 밤(22:25) 도착 후 편안한 첫날 휴식 및 25일 오스트리아 여행 후 다음 날 귀국을 위한 최적의 공항 호텔!",
-    "tip": "공항 터미널에서 버스 635번 또는 택시로 10~15분 거리. 20일 아침 S-Bahn으로 시내 직통 이동.",
+    "desc": "뮌헨 국제공항 인근 최신 호텔. 19일 늦은 밤(22:25) 도착 후 편안한 첫날 휴식 및 25일 오스트리아 여행 후 다음 날 10:15 코펜하겐 비행을 위한 최적의 공항 호텔!",
+    "tip": "공항 터미널에서 버스 635번 또는 택시로 10~15분 거리. 26일 아침 코펜하겐행 탑승 수월.",
     "iconEmoji": "✈️",
     "color": "#0284c7"
   },
@@ -2028,6 +2135,20 @@ const HOTELS_DATA = [
     "tip": "기차역과 시내 버스 정류장이 바로 코앞이라 미라벨 정원, 구시가지, 다음 날 할슈타트 이동 최적!",
     "iconEmoji": "🇦🇹",
     "color": "#e11d48"
+  },
+  {
+    "id": "hotel-copenhagen",
+    "name": "래디슨 컬렉션 로열 호텔, 코펜하겐",
+    "nameDe": "Radisson Collection Royal Hotel, Copenhagen",
+    "lat": 55.67491,
+    "lng": 12.56377,
+    "tag": "🇩🇰 26일~29일 코펜하겐 숙소 (3박 / 중앙역 2분)",
+    "address": "Hammerichsgade 1, 1611 København, Denmark",
+    "googleMapsUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
+    "desc": "전설적인 덴마크 디자인 거장 아르네 야콥센이 설계한 세계 최초의 5성급 디자인 호텔! 코펜하겐 중앙역(København H) 및 티볼리 가든 바로 정면 도보 2분 초역세권.",
+    "tip": "공항에서 직통 기차로 15분 만에 중앙역 도착 후 도보 2분 체크인/짐보관! 시내 주요 명소 도보 이동 최적.",
+    "iconEmoji": "🇩🇰",
+    "color": "#dc2626"
   }
 ];
 
@@ -2132,11 +2253,11 @@ const ITINERARY_DATA = [
         "time": "10:00 - 11:00",
         "name": "BMW 뮤지엄 (BMW Museum)",
         "nameDe": "BMW Museum",
-        "lat": 48.1764,
+        "lat": 48.1763,
         "lng": 11.5591,
         "category": "박물관",
-        "desc": "사발(Bowl) 모양 랜드마크 건물로, 100년이 넘는 BMW의 모터사이클, 클래식 레이싱 카, 엔진 혁신의 역사를 나선형 슬로프를 따라 감상합니다.",
-        "tip": "BMW Welt에서 구름다리 육교를 통해 바로 연결됩니다."
+        "desc": "사발(Bowl) 모양 랜드마크 건물에 100년 역사의 모터스포츠, 클래식 카, 엔진 혁신이 집약된 박물관입니다.",
+        "tip": "원형 램프를 따라 내려오며 시대순으로 전시된 전설적인 클래식 카들을 감상하세요."
       },
       {
         "id": "d1-3",
@@ -2145,26 +2266,26 @@ const ITINERARY_DATA = [
         "period": "오전~점심",
         "time": "11:00 - 12:00",
         "name": "올리도르프(Olydorf) 대학가 베이커리 & 카페",
-        "nameDe": "Studentenstadt Olympisches Dorf Café & Bäckerei",
+        "nameDe": "Olympisches Dorf & Bäckerei",
         "lat": 48.1795,
-        "lng": 11.5535,
-        "category": "대학가 카페 / 베이커리",
-        "desc": "선수촌을 개조한 올림픽 빌리지 학생촌입니다. 학생들이 개성 있게 꾸민 독창적인 외벽 벽화를 구경하며, 주변 로컬 베이커리와 카페에서 갓 구운 독일 빵과 따뜻한 커피를 테이크아웃합니다.",
-        "tip": "피크닉용 브레첼, 크루아상, 샌드위치와 커피를 챙겨 바로 옆 올림피아 언덕으로 이동하세요."
+        "lng": 11.554,
+        "category": "대학가 베이커리 / 카페 테이크아웃",
+        "desc": "1972 올림픽 선수촌이자 현재 뮌헨 대학생들의 거주지인 올리도르프의 독창적인 외벽 벽화를 구경하고, 로컬 베이커리와 카페에서 갓 구운 독일 빵(브레첼 등)과 따뜻한 커피를 테이크아웃합니다.",
+        "tip": "여기서 산 빵과 커피를 들고 올림피아 언덕으로 이동해 감성 피크닉을 즐기세요!"
       },
       {
         "id": "d1-4",
         "day": 1,
         "num": 5,
-        "period": "점심~오후",
+        "period": "점심",
         "time": "12:00 - 13:30",
         "name": "올림피아 파크 언덕 피크닉 & 호숫가 산책",
-        "nameDe": "Olympiapark München Picknick & Olympiaberg",
-        "lat": 48.1731,
-        "lng": 11.5466,
-        "category": "공원 피크닉 / 힐링 산책",
-        "desc": "테이크아웃한 맛있는 빵과 커피를 들고 올림픽 힐(Olympiaberg) 잔디밭에 앉아 여유로운 브런치 피크닉을 즐깁니다. 텐트형 스타디움과 뮌헨 시내 전경을 감상하며 힐링 산책!",
-        "tip": "언덕 위에서 탁 트인 전경을 바라보며 시차 적응과 여독을 가볍게 풀기 좋습니다."
+        "nameDe": "Olympiapark & Olympiaberg Picknick",
+        "lat": 48.1735,
+        "lng": 11.553,
+        "category": "공원 산책 / 브런치 피크닉",
+        "desc": "테이크아웃한 베이커리와 커피를 들고 올림픽 언덕(Olympiaberg)에 올라 뮌헨 시내 전경을 내려다보며 여유로운 브런치 피크닉을 즐깁니다. 푸른 잔디와 호숫가를 거닐며 첫날 비행 피로를 힐링합니다.",
+        "tip": "언덕 정상 벤치에서 올림픽 타워와 텐트 지붕 경기장을 한눈에 조망할 수 있습니다."
       },
       {
         "id": "d1-5",
@@ -2172,13 +2293,13 @@ const ITINERARY_DATA = [
         "num": 6,
         "period": "오후",
         "time": "14:00 - 14:50",
-        "name": "마리엔 광장 & 프라우엔키르헤",
+        "name": "마리엔 광장 & 프라우엔키르헤 (대성당)",
         "nameDe": "Marienplatz & Frauenkirche",
-        "lat": 48.1386,
-        "lng": 11.5732,
-        "category": "역사 광장 & 대성당",
-        "desc": "U-Bahn U3을 타고 시내 중심으로 이동! 뮌헨의 심장 마리엔 광장과 두 개의 돔 탑이 솟은 프라우엔키르헤 대성당 바닥의 전설적인 '악마의 발자국'을 관람합니다.",
-        "tip": "성당 입구 악마의 발자국 위치에 서면 기둥에 가려 창문이 보이지 않는 신비한 구조를 직접 확인해보세요."
+        "lat": 48.1374,
+        "lng": 11.5755,
+        "category": "역사 광장 & 랜드마크 대성당",
+        "desc": "지하철 U3를 타고 시내 중심으로 이동! 뮌헨의 심장 마리엔 광장과 양파 모양 돔 쌍탑이 인상적인 프라우엔키르헤 내부의 신비로운 '악마의 발자국'을 관람합니다.",
+        "tip": "성당 입구 바닥의 악마 발자국에 발을 맞추고 서면 기둥에 가려 창문이 전혀 보이지 않는 신비한 착시를 체험해보세요."
       },
       {
         "id": "d1-6",
@@ -2186,13 +2307,13 @@ const ITINERARY_DATA = [
         "num": 7,
         "period": "오후",
         "time": "14:50 - 15:40",
-        "name": "빅투알리엔 마켓 (Viktualienmarkt)",
+        "name": "빅투알리엔 야외 시장 (Viktualienmarkt)",
         "nameDe": "Viktualienmarkt",
         "lat": 48.1351,
-        "lng": 11.576,
-        "category": "전통 야외 시장",
-        "desc": "200년 전통의 활기찬 야외 식료품 시장입니다. 신선한 과일, 치즈, 바이에른 소시지, 향신료 부스를 구경하고 마이바움(오월제 기둥) 아래 비어가든의 활기찬 분위기를 느낍니다.",
-        "tip": "생과일 주스나 치즈 한 조각을 간식으로 맛보기 좋습니다."
+        "lng": 11.5762,
+        "category": "전통 야외 시장 / 먹거리",
+        "desc": "200년이 넘는 역사를 지닌 뮌헨 최대의 야외 식료품 시장입니다. 알록달록한 생과일, 독일 치즈, 소시지, 수제 잼 등을 구경하고 신선한 착즙 주스를 맛봅니다.",
+        "tip": "시장 중앙의 마이바움(Maypole) 기둥 아래 벤치에서 시원한 과일 주스 한잔하기 좋습니다."
       },
       {
         "id": "d1-7",
@@ -2200,13 +2321,13 @@ const ITINERARY_DATA = [
         "num": 8,
         "period": "오후",
         "time": "15:45 - 16:35",
-        "name": "달마이어 본점 (Dallmayr Delikatessenhaus)",
+        "name": "알로이스 달마이어 본점 (Dallmayr)",
         "nameDe": "Alois Dallmayr Delikatessenhaus",
         "lat": 48.1382,
-        "lng": 11.5768,
-        "category": "왕실 납품 프리미엄 식료품점",
-        "desc": "300년이 넘는 전통을 자랑하는 바이에른 왕실 공식 납품 프리미엄 델리카트슨 본점입니다. 명품 원두커피(Prodomo), 핸드메이드 초콜릿, 잼, 티 등 독일 최고급 미식 선물의 성지입니다.",
-        "tip": "노란 틴케이스에 담긴 달마이어 시그니처 원두와 초콜릿은 지인 선물용으로 실패가 없습니다."
+        "lng": 11.5772,
+        "category": "300년 전통 왕실 프리미엄 식료품점",
+        "desc": "바이에른 왕실 납품업체였던 유럽 최고의 고급 델리카테슨입니다. 대표 커피 프로도모(Prodomo), 초콜릿, 수제 잼, 틴케이스 차 등 품격 있는 선물거리를 둘러보고 구매합니다.",
+        "tip": "매장 중앙 님프 조각상 분수대 주변의 수제 초콜릿 섹션은 기념품으로 강력 추천합니다."
       },
       {
         "id": "d1-8",
@@ -2214,28 +2335,28 @@ const ITINERARY_DATA = [
         "num": 9,
         "period": "오후",
         "time": "16:50 - 17:20",
-        "name": "신시청 인형극 관람 (Glockenspiel - 17시 정각)",
-        "nameDe": "Neues Rathaus Glockenspiel",
+        "name": "신시청사 인형극 (★ 17:00 정각 시작)",
+        "nameDe": "Neues Rathaus Glockenspiel (17:00)",
         "lat": 48.1375,
         "lng": 11.5754,
-        "category": "시계탑 인형극 공연",
-        "desc": "네오고딕 양식 신시청사 시계탑에서 펼쳐지는 정교한 기계식 인형극입니다. 16세기 빌헬름 5세의 혼례 마상 시합과 축하 댄스가 43개 종소리와 함께 울려 퍼집니다.",
-        "tip": "★ 17:00 정각 시작! 16:55까지 광장 분수대 앞으로 돌아와 자리를 잡으세요.",
+        "category": "기계식 시계탑 인형극 (무료 관람)",
+        "desc": "★ 17:00 정각 시작! 신시청사 시계탑에서 펼쳐지는 43개 종소리와 32개 등신대 인형들의 바이에른 공작 결혼식 마상 토너먼트 및 셰플러 댄스를 관람합니다.",
+        "tip": "16:55까지 마리엔 광장 중앙 피슈 분수대 앞에 서서 시계탑 상단을 올려다보세요.",
         "highlight": true
       },
       {
         "id": "d1-9",
         "day": 1,
         "num": 10,
-        "period": "오후~저녁",
+        "period": "오후",
         "time": "17:30 - 18:20",
-        "name": "막스마라 (Max Mara 부티크)",
-        "nameDe": "Max Mara München (Maximilianstraße)",
-        "lat": 48.1396,
-        "lng": 11.5815,
-        "category": "명품 쇼핑",
-        "desc": "뮌헨 최고급 명품 거리인 막시밀리안 슈트라세(Maximilianstraße)에 위치한 막스마라 플래그십 부티크입니다. 고급스러운 코트와 최신 컬렉션을 여유롭게 쇼핑합니다.",
-        "tip": "주변에 샤넬, 루이비통, 에르메스 등 세계적 명품 플래그십이 함께 모여 있습니다."
+        "name": "막스마라 부티크 (Max Mara)",
+        "nameDe": "Max Mara Boutique Maximilianstraße",
+        "lat": 48.1392,
+        "lng": 11.5794,
+        "category": "명품 부티크 쇼핑",
+        "desc": "뮌헨 최고급 부티크 거리 막시밀리안 슈트라세에 위치한 막스마라 플래그십 매장입니다. 클래식 코트와 아이코닉 컬렉션을 여유롭게 둘러봅니다.",
+        "tip": "유럽 현지 매장은 면세(Tax-free) 환급 혜택이 있어 국내보다 훨씬 합리적인 쇼핑이 가능합니다."
       },
       {
         "id": "d1-10",
@@ -2243,13 +2364,13 @@ const ITINERARY_DATA = [
         "num": 11,
         "period": "저녁",
         "time": "18:20 - 19:15",
-        "name": "퓐프 회페 (Fünf Höfe)",
-        "nameDe": "Fünf Höfe Shopping Mall",
-        "lat": 48.1406,
+        "name": "퓐프 회페 (Fünf Höfe) 감성 아케이드",
+        "nameDe": "Fünf Höfe Shopping Arcade",
+        "lat": 48.1404,
         "lng": 11.5756,
-        "category": "세련된 쇼핑 아케이드",
-        "desc": "세계적인 건축가 헤르초크 & 드 뫼롱이 설계한 감각적인 5개 중정 쇼핑 아케이드입니다. 공중에 매달린 거대한 행잉 플랜트와 감각적인 디자이너 숍, 라이프스타일 부티크를 둘러봅니다.",
-        "tip": "건축물 자체가 현대 미술 작품 같아 사진 촬영하기에도 매우 멋진 명소입니다."
+        "category": "건축 & 라이프스타일 복합 아케이드",
+        "desc": "세계적 건축가 헤르초크 & 드 뫼롱이 설계한 5개 중정 아케이드입니다. 천장에 매달린 공중정원 '스피어(Sphere)'와 감각적인 부티크 숍을 둘러봅니다.",
+        "tip": "바달룽가 중정의 거대한 철골 구체 조형물 아래는 감각적인 인증샷 명소입니다."
       },
       {
         "id": "d1-11",
@@ -2257,25 +2378,25 @@ const ITINERARY_DATA = [
         "num": 12,
         "period": "저녁",
         "time": "19:15 - 20:45",
-        "name": "구시가지 저녁 식사 (브레너그릴/슈파텐하우스) & 내일 로드트립 간식 구비 (Rewe City)",
-        "nameDe": "Abendessen (Brenner Grill / Spatenhaus) & Snack-Einkauf",
-        "lat": 48.1398,
-        "lng": 11.5745,
-        "category": "미식 디너 & 마트 장보기",
-        "desc": "퓐프 회페 주변 최고 맛집에서 근사한 첫날 저녁 식사! [핫플 그릴: 브레너 그릴(Brenner Grill)], [정통 바이에른: 슈파텐하우스(Spatenhaus an der Oper)], [캐주얼: Vapiano/Aran]. 식사 후 바로 옆 'Rewe City' 마트에 들러 내일 새벽 렌트카에서 먹을 생수, 과일, 음료, 빵을 미리 챙깁니다!",
-        "tip": "식사 후 마리엔광장역에서 S-Bahn을 타면 숙소 앞 Donnersbergerbrücke역까지 6분 만에 편안하게 복귀할 수 있습니다.",
+        "name": "구시가지 저녁 식사 & 내일 로드트립 간식 구비 (Rewe City)",
+        "nameDe": "Abendessen (Brenner Grill / Spatenhaus) & Rewe",
+        "lat": 48.1394,
+        "lng": 11.5798,
+        "category": "미식 저녁 & 로드트립 준비",
+        "desc": "퓐프 회페 바로 옆 브레너 그릴(Brenner Grill, 참나무 숯불 그릴) 또는 슈파텐하우스(Spatenhaus, 정통 바이에른 슈니첼 & 생맥주)에서 저녁을 즐깁니다. 식사 후 바로 옆 Rewe City 마트에서 내일 06:00 로드트립 간식(생수, 과일)을 구비합니다.",
+        "tip": "마리엔 광장에서 S-Bahn 탑승 시 숙소(노보텔) 앞 Donnersbergerbrücke역까지 6분 만에 직통 복귀 가능합니다!",
         "highlight": true
       }
     ]
   },
   {
     "day": 2,
-    "dayLabel": "🚗 21일 (2일차) 렌트카",
-    "title": "21일: 🚗 렌트카 알프스 로드트립 (노이슈바인슈타인 성 & 추크슈피체 산)",
-    "summary": "새벽 06:00 SIXT 뮌헨 중앙역에서 렌터카 픽업 후 로맨틱 가도 질주! 마리엔 다리 오픈런, 노이슈바인슈타인 성 내부 관람, 에메랄드빛 호수 점심, 오스트리아 국경 드라이브, 독일 최고봉(2,962m) 정복",
+    "dayLabel": "🚗 21일 (렌트카)",
+    "title": "21일: 🚗 렌트카 바이에른 알프스 로드트립 (노이슈바인슈타인 성 & 추크슈피체)",
+    "summary": "새벽 06:00 SIXT 중앙역 픽업 후 로맨틱 가도 모닝 드라이브! 마리엔 다리 오픈런 인생 사진, 노이슈바인슈타인 성 내부 투어, 호엔슈방가우 마을 알프제 호수 런치, 오스트리아 파노라마 국도 절경 드라이브, 독일 최고봉 추크슈피체(2,962m) 케이블카와 아이브제 산책 후 뮌헨 복귀",
     "color": "#f97316",
-    "transitTip": "이동 수단: SIXT 렌터카 드라이브 (총 약 280km 힐링 루프 코스). A96 고속도로 및 오스트리아 비네트 불필요 국도 이용",
-    "googleRouteUrl": "https://www.google.com/maps/dir/SIXT+Car+Rental+Munich+Central+Station/Marienbr%C3%BCcke/Neuschwanstein+Castle/Alpsee/Eibsee+Cable+Car/Novotel+M%C3%BCnchen+City+Arnulfpark",
+    "transitTip": "교통편: SIXT 렌터카 왕복 드라이브 (총 약 280km 힐링 루프 코스)",
+    "googleRouteUrl": "https://www.google.com/maps/dir/Bahnhofplatz+1,+80335+M%C3%BCnchen/Marienbr%C3%BCcke/Schloss+Neuschwanstein/Alpsee/Zugspitze/Eibsee/Novotel+M%C3%BCnchen+City+Arnulfpark",
     "spots": [
       {
         "id": "d2-1",
@@ -2691,7 +2812,7 @@ const ITINERARY_DATA = [
     "day": 6,
     "dayLabel": "🏞️ 25일 (할슈타트)",
     "title": "25일: 🏞️ 동화 마을 할슈타트(Hallstatt) 탐방 후 뮌헨 복귀 & 에어포트 호텔 1박",
-    "summary": "잘츠부르크에서 기차+버스를 타고 알프스 호수 속 그림 같은 세계문화유산 할슈타트 당일 투어! 알프스 산과 청정 호수를 만끽한 뒤 뮌헨으로 복귀하여, 다음 날 귀국에 가장 완벽한 공항 옆 이비스 스타일스 뮌헨 에어포트에 투숙",
+    "summary": "잘츠부르크에서 기차+버스를 타고 알프스 호수 속 그림 같은 세계문화유산 할슈타트 당일 투어! 알프스 산과 청정 호수를 만끽한 뒤 뮌헨으로 복귀하여, 다음 날 코펜하겐 비행에 가장 편리한 공항 옆 이비스 스타일스 뮌헨 에어포트에 투숙",
     "color": "#0d9488",
     "transitTip": "교통편: 잘츠부르크 ➔ 바트이슐/아트낭 ➔ 할슈타트 (기차+버스/페리). 할슈타트 ➔ 잘츠부르크 ➔ 뮌헨 Hbf ➔ 공항 S-Bahn",
     "googleRouteUrl": "https://maps.app.goo.gl/q1EQZ3kPKLurGyM6A",
@@ -2759,13 +2880,315 @@ const ITINERARY_DATA = [
         "num": 5,
         "period": "저녁~밤",
         "time": "19:30 - 20:30",
-        "name": "이비스 스타일스 뮌헨 에어포트 체크인 (귀국 전 마지막 밤)",
+        "name": "이비스 스타일스 뮌헨 에어포트 체크인 (내일 코펜하겐 준비)",
         "nameDe": "ibis Styles Munich Airport (Wiederaufnahme)",
         "lat": 48.354,
         "lng": 11.7591,
-        "category": "공항 호텔 재투숙 (귀국 동선 최적)",
-        "desc": "19일 첫날 묵었던 공항 인근 이비스 스타일스 호텔에 다시 체크인! 다음 날 아침 비행기 탑승을 위해 짐을 최종 패킹하고, 이번 바이에른 & 오스트리아 대장정의 추억을 정리하며 편안하게 휴식합니다.",
+        "category": "공항 호텔 재투숙 (출국/환승 동선 최적)",
+        "desc": "19일 첫날 묵었던 공항 인근 이비스 스타일스 호텔에 다시 체크인! 내일 오전 10:15 코펜하겐 비행기 탑승을 위해 짐을 정리하고 편안하게 휴식합니다.",
         "tip": "호텔 바로 앞 공항 연결 버스로 공항 터미널까지 10~15분 만에 여유롭게 이동 가능합니다.",
+        "highlight": true
+      }
+    ]
+  },
+  {
+    "day": 7,
+    "dayLabel": "✈️ 26일 (코펜하겐)",
+    "title": "26일: ✈️ 뮌헨 출발 ➔ 코펜하겐 도착 & 래디슨 로열 호텔 체크인",
+    "summary": "이비스 체크아웃 후 10:15 SAS SK 662편 탑승 ➔ 11:55 덴마크 코펜하겐 착륙! 공항 직통 기차로 15분 만에 중앙역 도착, 거장 아르네 야콥센이 설계한 5성급 래디슨 컬렉션 로열 호텔에 체크인/짐보관 후 코펜하겐 북유럽 감성 투어 시작 (상세 일정 추후 확정 예정)",
+    "color": "#dc2626",
+    "transitTip": "항공편: SAS SK 662 (뮌헨 MUC 10:15 ➔ 코펜하겐 CPH 11:55). 공항 ➔ 중앙역 기차 15분 직통",
+    "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
+    "spots": [
+      {
+        "id": "d7-1",
+        "day": 7,
+        "num": 1,
+        "period": "오전",
+        "time": "08:00 - 09:00",
+        "name": "이비스 체크아웃 ➔ 뮌헨 국제공항(MUC) 터미널 이동",
+        "nameDe": "ibis Check-out ➔ Munich Airport Terminal 2",
+        "lat": 48.3537,
+        "lng": 11.786,
+        "category": "체크아웃 & 공항 이동",
+        "desc": "이비스 스타일스 뮌헨 에어포트에서 체크아웃 후 버스 635번/택시로 10분 만에 뮌헨 공항 터미널2 도착! SAS 항공 카운터에서 수하물 위탁 및 출국 보안 검색을 진행합니다.",
+        "tip": "항공기 출발 2시간 전(08:15)까지 공항 터미널에 도착하세요."
+      },
+      {
+        "id": "d7-2",
+        "day": 7,
+        "num": 2,
+        "period": "오전~낮",
+        "time": "10:15 - 11:55",
+        "name": "SAS SK 662 탑승: 뮌헨(MUC) ➔ 코펜하겐(CPH) 비행",
+        "nameDe": "Flug SAS SK 662: München ➔ Kopenhagen",
+        "lat": 55.618,
+        "lng": 12.6508,
+        "category": "스칸디나비아 항공 국제선",
+        "desc": "독일 바이에른을 뒤로하고 북유럽 덴마크로 향합니다! 약 1시간 40분의 쾌적한 비행 후 11:55 코펜하겐 카스트룹 국제공항(CPH)에 정시 착륙합니다.",
+        "tip": "기내에서 코펜하겐 중앙역행 기차 티켓 구매 앱(DOT Billetter)을 확인해두면 편리합니다.",
+        "highlight": true
+      },
+      {
+        "id": "d7-3",
+        "day": 7,
+        "num": 3,
+        "period": "낮",
+        "time": "12:15 - 12:50",
+        "name": "코펜하겐 공항 ➔ 코펜하겐 중앙역(København H) 기차 이동",
+        "nameDe": "København Lufthavn ➔ København H (DSB Train)",
+        "lat": 55.6728,
+        "lng": 12.5648,
+        "category": "공항 직통 기차 (15분 소요)",
+        "desc": "공항 터미널 3 지하 기차 플랫폼(Track 2)에서 DSB 열차를 탑승하면 환승 없이 단 15분(3정거장) 만에 코펜하겐 중앙역에 도착합니다.",
+        "tip": "열차 배차 간격이 약 10분마다 있어 대기 시간 없이 탑승 가능합니다."
+      },
+      {
+        "id": "d7-4",
+        "day": 7,
+        "num": 4,
+        "period": "낮",
+        "time": "13:00 - 13:45",
+        "name": "래디슨 컬렉션 로열 호텔 코펜하겐 (체크인 / 짐 보관)",
+        "nameDe": "Radisson Collection Royal Hotel, Copenhagen",
+        "lat": 55.67491,
+        "lng": 12.56377,
+        "category": "5성급 디자인 호텔 (중앙역 도보 2분)",
+        "desc": "코펜하겐 중앙역 정문 바로 맞은편 초역세권! 덴마크 디자인 거장 아르네 야콥센이 설계한 세계 최초의 5성급 디자인 호텔에 체크인하고 짐을 보관합니다.",
+        "tip": "구글맵: https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6 (티볼리 공원 및 시청사 광장 바로 앞)",
+        "highlight": true
+      },
+      {
+        "id": "d7-5",
+        "day": 7,
+        "num": 5,
+        "period": "오후~저녁",
+        "time": "14:00 - 21:00",
+        "name": "코펜하겐 시내 오후 자유 탐방 (세부 일정 추후 확정 예정)",
+        "nameDe": "København Stadt-Tour (Details folgen)",
+        "lat": 55.6761,
+        "lng": 12.5683,
+        "category": "북유럽 감성 도시 투어",
+        "desc": "호텔 바로 앞 시청사 광장, 티볼리 가든 외관, 스트뢰에 거리 초입을 여유롭게 산책하며 북유럽 특유의 감각적인 거리 풍경과 덴마크 미식을 즐깁니다! (사용자님이 추후 세부 일정을 알려주시면 정밀 업데이트됩니다)",
+        "tip": "코펜하겐 시내는 자전거와 보행자 중심 도시로 도보 여행이 매우 쾌적합니다."
+      }
+    ]
+  },
+  {
+    "day": 8,
+    "dayLabel": "🇩🇰 27일 (코펜하겐)",
+    "title": "27일: 🇩🇰 코펜하겐 핵심 명소 자유 투어 (운하 & 왕실 궁전)",
+    "summary": "알록달록 파스텔톤 동화 마을 뉘하운(Nyhavn) 운하, 운하 투어 보트, 덴마크 왕실의 아말리엔보르 궁전과 근위병 교대식, 인어공주 동상, 스트뢰에 쇼핑 거리 (상세 일정 추후 확정 예정)",
+    "color": "#e11d48",
+    "transitTip": "교통: 코펜하겐 시내 도보 & 메트로 이용 편리",
+    "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
+    "spots": [
+      {
+        "id": "d8-1",
+        "day": 8,
+        "num": 1,
+        "period": "오전",
+        "time": "09:30 - 11:30",
+        "name": "뉘하운 운하 (Nyhavn) & 운하 투어 보트",
+        "nameDe": "Nyhavn & Kanalrundfart",
+        "lat": 55.6795,
+        "lng": 12.591,
+        "category": "코펜하겐 1번지 랜드마크",
+        "desc": "코펜하겐을 상징하는 알록달록 파스텔톤 목조 건물과 돛단배들이 늘어선 그림 같은 운하 거리입니다. 운하 투어 보트를 타고 물 위에서 코펜하겐의 명소들을 감상합니다.",
+        "tip": "운하를 배경으로 벤치나 다리 위에서 인생 사진을 남기세요!",
+        "highlight": true
+      },
+      {
+        "id": "d8-2",
+        "day": 8,
+        "num": 2,
+        "period": "낮",
+        "time": "11:45 - 13:30",
+        "name": "아말리엔보르 궁전 (Amalienborg - 12:00 근위병 교대식)",
+        "nameDe": "Amalienborg Slot",
+        "lat": 55.684,
+        "lng": 12.593,
+        "category": "덴마크 왕실 궁전",
+        "desc": "현재 덴마크 왕실이 거주하는 로코코 양식의 4개 궁전 복합체입니다. 매일 낮 12:00 정각에 펼쳐지는 웅장하고 절도 있는 왕실 근위병 교대식을 관람합니다.",
+        "tip": "11:45까지 궁전 광장 중앙에 자리 잡으면 교대식 행렬을 가장 가까이에서 볼 수 있습니다."
+      },
+      {
+        "id": "d8-3",
+        "day": 8,
+        "num": 3,
+        "period": "오후",
+        "time": "14:00 - 15:30",
+        "name": "인어공주 동상 & 카스텔레(Kastellet) 별 요새",
+        "nameDe": "Den Lille Havfrue & Kastellet",
+        "lat": 55.6929,
+        "lng": 12.5993,
+        "category": "동화의 도시 상징 / 수변 공원",
+        "desc": "안데르센 동화 인어공주를 모티브로 한 세계적인 명물 청동 조각상과 바로 옆 북유럽 최고의 별 모양 요새 카스텔레를 평화롭게 산책합니다.",
+        "tip": "풍차와 붉은 요새 건물들이 어우러진 언덕길 산책로가 아주 아름답습니다."
+      },
+      {
+        "id": "d8-4",
+        "day": 8,
+        "num": 4,
+        "period": "오후~저녁",
+        "time": "16:00 - 21:00",
+        "name": "스트뢰에(Strøget) 명품 쇼핑 & 로컬 다이닝",
+        "nameDe": "Strøget Shopping & Nordic Dinner",
+        "lat": 55.6788,
+        "lng": 12.5768,
+        "category": "유럽 최장 보행자 쇼핑 거리",
+        "desc": "로열 코펜하겐, 일룸 볼리구스, 헤이(HAY) 하우스 등 북유럽 프리미엄 디자인 숍과 브랜드 부티크를 구경하고, 구시가지 감성 레스토랑에서 맛있는 디너를 즐깁니다.",
+        "tip": "호텔(래디슨 로열)까지 스트뢰에 거리를 따라 걸어서 바로 복귀할 수 있습니다."
+      }
+    ]
+  },
+  {
+    "day": 9,
+    "dayLabel": "🇩🇰 28일 (코펜하겐)",
+    "title": "28일: 🇩🇰 르네상스 고성과 낭만, 코펜하겐 감성 & 티볼리 야경",
+    "summary": "왕관 보석이 빛나는 르네상스 로센보르그 성, 룬데토른(원형탑) 360도 파노라마 전망, 토르베할레네 미식 마켓 스뫼레브뢰 런치, 밤이 되면 동화처럼 반짝이는 티볼리 가든 야경 (상세 일정 추후 확정 예정)",
+    "color": "#b91c1c",
+    "transitTip": "교통: 중앙역 및 호텔 기준 시내 도보 & 메트로",
+    "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
+    "spots": [
+      {
+        "id": "d9-1",
+        "day": 9,
+        "num": 1,
+        "period": "오전",
+        "time": "10:00 - 12:30",
+        "name": "로센보르그 성 (Rosenborg Slot) & 왕의 정원",
+        "nameDe": "Rosenborg Slot & Kongens Have",
+        "lat": 55.6858,
+        "lng": 12.5773,
+        "category": "르네상스 양식의 성 & 보물관",
+        "desc": "크리스티안 4세가 지은 네덜란드 르네상스 양식의 고성입니다. 지하 보물창고에 보관된 눈부신 덴마크 왕관과 대관식 의자, 화려한 연회 홀을 둘러보고 아름다운 왕의 정원을 거닙니다.",
+        "tip": "지하 보물관의 다이아몬드 왕관 컬렉션은 놓치지 말아야 할 하이라이트입니다!",
+        "highlight": true
+      },
+      {
+        "id": "d9-2",
+        "day": 9,
+        "num": 2,
+        "period": "점심~낮",
+        "time": "12:45 - 14:30",
+        "name": "토르베할레네(Torvehallerne) 미식 마켓 런치",
+        "nameDe": "TorvehallerneKBH Food Hall",
+        "lat": 55.6836,
+        "lng": 12.5694,
+        "category": "코펜하겐 대표 프리미엄 푸드마켓",
+        "desc": "코펜하겐 최고의 미식 홀! 덴마크 정통 오픈 샌드위치 '스뫼레브뢰(Smørrebrød)', 신선한 해산물, 로컬 치즈, 커피 컬렉티브(Coffee Collective)의 스페셜티 커피를 맛봅니다.",
+        "tip": "Hallernes Smørrebrød 부스에서 연어, 로스트비프 오픈 샌드위치를 즐겨보세요."
+      },
+      {
+        "id": "d9-3",
+        "day": 9,
+        "num": 3,
+        "period": "오후",
+        "time": "14:45 - 16:30",
+        "name": "룬데토른 (Rundetaarn - 원형탑 전망대)",
+        "nameDe": "Rundetaarn",
+        "lat": 55.6813,
+        "lng": 12.5757,
+        "category": "유럽에서 가장 오래된 천문대",
+        "desc": "계단 없이 나선형 슬로프를 따라 209m를 걸어 올라가면 코펜하겐 구시가지의 붉은 지붕들과 저 멀리 외레순 해협까지 360도 파노라마 뷰가 한눈에 펼쳐집니다.",
+        "tip": "슬로프 중간의 도서관 전시관과 독특한 건축미를 감상하며 여유롭게 올라가세요."
+      },
+      {
+        "id": "d9-4",
+        "day": 9,
+        "num": 4,
+        "period": "저녁~밤",
+        "time": "18:00 - 21:30",
+        "name": "티볼리 가든 (Tivoli Gardens) 야경 & 디너",
+        "nameDe": "Tivoli Gardens Kopenhagen",
+        "lat": 55.6736,
+        "lng": 12.5681,
+        "category": "세계 최초 테마파크 & 환상적인 야경",
+        "desc": "호텔 바로 정면! 1843년 개장한 동화 속 놀이공원 티볼리 가든입니다. 밤이 되면 수만 개의 조명이 켜지며 환상적인 불빛 정원으로 변신합니다. 레스토랑에서 덴마크 완결 기념 디너를 즐깁니다.",
+        "tip": "우리 숙소(래디슨 로열)에서 걸어서 2분 거리이므로 밤늦게까지 야경을 즐겨도 귀가 부담이 전혀 없습니다!",
+        "highlight": true
+      }
+    ]
+  },
+  {
+    "day": 10,
+    "dayLabel": "🛫 29일 (귀국)",
+    "title": "29일: 🛫 호텔 체크아웃 ➔ 코펜하겐 공항 ➔ 대한항공 KE6410 출국",
+    "summary": "래디슨 컬렉션 로열 호텔 체크아웃 후 마지막 북유럽 거리 산책과 브런치, 14:30 코펜하겐 카스트룹 공항(CPH) 이동 후 17:30 대한항공 KE6410 편으로 영광의 귀국 비행길 출발!",
+    "color": "#4338ca",
+    "transitTip": "항공편: 대한항공 KE6410 (코펜하겐 CPH 17:30 출발 ➔ 인천 비행). 중앙역 ➔ 공항 기차 15분",
+    "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
+    "spots": [
+      {
+        "id": "d10-1",
+        "day": 10,
+        "num": 1,
+        "period": "오전",
+        "time": "10:00 - 11:30",
+        "name": "래디슨 로열 체크아웃 & 짐 보관, 마지막 시내 산책",
+        "nameDe": "Hotel Radisson Check-out & Spaziergang",
+        "lat": 55.67491,
+        "lng": 12.56377,
+        "category": "체크아웃 & 짐 보관",
+        "desc": "호텔 체크아웃 후 리셉션에 캐리어를 맡기고, 가벼운 몸으로 시청사 광장 주변과 스트뢰에 거리를 거닐며 마지막 코펜하겐 공기를 만끽합니다.",
+        "tip": "기념품이나 북유럽 소품, 덴마크 버터쿠키 쇼핑을 마무리하세요."
+      },
+      {
+        "id": "d10-2",
+        "day": 10,
+        "num": 2,
+        "period": "점심",
+        "time": "11:45 - 13:45",
+        "name": "코펜하겐 완결 브런치 & 카페 타임",
+        "nameDe": "Abschluss-Brunch & Café",
+        "lat": 55.675,
+        "lng": 12.565,
+        "category": "북유럽 브런치 & 스페셜티 커피",
+        "desc": "유럽 여행 11일간의 대장정을 마무리하며 향긋한 북유럽 커피와 맛있는 브런치 식사로 여유로운 휴식을 즐깁니다.",
+        "tip": "식사 후 14:00까지 호텔로 복귀하여 맡겨둔 캐리어를 찾으세요."
+      },
+      {
+        "id": "d10-3",
+        "day": 10,
+        "num": 3,
+        "period": "오후",
+        "time": "14:15 - 14:50",
+        "name": "코펜하겐 중앙역 ➔ 카스트룹 국제공항(CPH) 기차 이동",
+        "nameDe": "København H ➔ CPH Airport Transfer",
+        "lat": 55.618,
+        "lng": 12.6508,
+        "category": "공항 기차 이동 (15분 소요)",
+        "desc": "호텔 바로 앞 코펜하겐 중앙역에서 DSB 공항 열차를 타고 단 15분 만에 코펜하겐 카스트룹 국제공항 터미널 3 도착!",
+        "tip": "비행 출발 2시간 30분 전인 15:00까지 공항에 여유롭게 도착합니다."
+      },
+      {
+        "id": "d10-4",
+        "day": 10,
+        "num": 4,
+        "period": "오후",
+        "time": "15:00 - 17:00",
+        "name": "카스트룹 공항 체크인, 택스리펀 & 출국 심사",
+        "nameDe": "CPH Airport Check-in & Tax Refund",
+        "lat": 55.618,
+        "lng": 12.6508,
+        "category": "공항 출국 수속 & 면세점",
+        "desc": "대한항공 카운터에서 탑승권 발권 및 수하물 위탁, 글로벌블루 택스리펀 환급 처리 후 면세구역으로 이동하여 출국 심사를 진행합니다.",
+        "tip": "덴마크 및 독일에서 구매한 영수증 택스리펀 도장을 잊지 마세요."
+      },
+      {
+        "id": "d10-5",
+        "day": 10,
+        "num": 5,
+        "period": "저녁~밤",
+        "time": "17:30 - 12:00(+1)",
+        "name": "대한항공 KE6410 탑승 ➔ 대한민국 귀국 비행",
+        "nameDe": "Abflug: Korean Air KE6410 nach Incheon (17:30)",
+        "lat": 55.618,
+        "lng": 12.6508,
+        "category": "대한항공 직항 귀국편",
+        "desc": "★ 17:30 정각 이륙! 독일 뮌헨과 알프스, 오스트리아 잘츠부르크·할슈타트를 거쳐 덴마크 코펜하겐까지 이어진 11일간의 잊지 못할 유럽 대장정을 마치고 한국으로 귀국합니다.",
+        "tip": "기내에서 휴식을 취하며 환상적이었던 유럽 여행 사진과 추억을 정리하세요.",
         "highlight": true
       }
     ]
@@ -2916,6 +3339,46 @@ const TRAIN_ROUTE_HALLSTATT = [
   [
     48.354,
     11.7591
+  ]
+];
+const FLIGHT_ROUTE_CPH = [
+  [
+    48.354,
+    11.7591
+  ],
+  [
+    50.5,
+    11.9
+  ],
+  [
+    52.5,
+    12.1
+  ],
+  [
+    54.2,
+    12.3
+  ],
+  [
+    55.618,
+    12.6508
+  ]
+];
+const CPH_METRO_ROUTE = [
+  [
+    55.618,
+    12.6508
+  ],
+  [
+    55.635,
+    12.61
+  ],
+  [
+    55.6728,
+    12.5648
+  ],
+  [
+    55.67491,
+    12.56377
   ]
 ];
 
@@ -3106,6 +3569,8 @@ function updateHotelBanner(dayFilter) {
     targetHotel = HOTELS_DATA[1]; // 이비스 에어포트
   } else if (dayFilter === '5') {
     targetHotel = HOTELS_DATA[2]; // 잘츠부르크 유로파
+  } else if (dayFilter === '7' || dayFilter === '8' || dayFilter === '9' || dayFilter === '10') {
+    targetHotel = HOTELS_DATA[3]; // 래디슨 로열 코펜하겐
   }
 
   const badgeEl = banner.querySelector('.hotel-badge');
@@ -3190,9 +3655,17 @@ function renderView() {
       dashArray: '6, 6'
     }).addTo(polylinesLayerGroup);
 
+    // 26일 뮌헨 ➔ 코펜하겐 비행선 (보라색 대시선)
+    L.polyline(FLIGHT_ROUTE_CPH, {
+      color: '#8b5cf6',
+      weight: 2.8,
+      opacity: 0.85,
+      dashArray: '8, 8'
+    }).addTo(polylinesLayerGroup);
+
     // 기타 날짜 가벼운 연결선
     targetDays.forEach(day => {
-      if (day.day !== 2 && day.day !== 5 && day.day !== 6 && day.day !== 0) {
+      if (day.day !== 2 && day.day !== 5 && day.day !== 6 && day.day !== 7 && day.day !== 0) {
         const coords = day.spots.map(s => [s.lat, s.lng]);
         if (coords.length > 1) {
           L.polyline(coords, {
@@ -3224,6 +3697,18 @@ function renderView() {
       opacity: 0.95,
       dashArray: '6, 6'
     }).addTo(polylinesLayerGroup);
+  } else if (currentDayFilter === '7') {
+    L.polyline(FLIGHT_ROUTE_CPH, {
+      color: '#dc2626',
+      weight: 4.5,
+      opacity: 0.95,
+      dashArray: '8, 8'
+    }).addTo(polylinesLayerGroup);
+    L.polyline(CPH_METRO_ROUTE, {
+      color: '#dc2626',
+      weight: 4,
+      opacity: 0.85
+    }).addTo(polylinesLayerGroup);
   } else {
     targetDays.forEach(day => {
       const coords = day.spots.map(s => [s.lat, s.lng]);
@@ -3240,11 +3725,19 @@ function renderView() {
   // 3. 지도 바운드 맞춤
   const allCoords = [];
   if (currentDayFilter === 'all') {
-    // 전체일 때 뮌헨과 알프스, 잘츠부르크 포커스
+    // 전체일 때 기본 뮌헨 & 바이에른 & 잘츠부르크 권역 포커스
     allCoords.push([HOTELS_DATA[0].lat, HOTELS_DATA[0].lng]);
     allCoords.push([47.4211, 10.9853]); // 추크슈피체
     allCoords.push([48.3540, 11.7591]); // 공항
     allCoords.push([47.8122, 13.0437]); // 잘츠부르크
+  } else if (currentDayFilter === '7') {
+    // 26일 비행선 전체 포커스 (뮌헨 ➔ 코펜하겐)
+    allCoords.push([48.3540, 11.7591]);
+    allCoords.push([55.67491, 12.56377]);
+  } else if (['8', '9', '10'].includes(currentDayFilter)) {
+    // 코펜하겐 시내 일정 포커스
+    targetDays.forEach(d => d.spots.forEach(s => allCoords.push([s.lat, s.lng])));
+    allCoords.push([HOTELS_DATA[3].lat, HOTELS_DATA[3].lng]);
   } else {
     targetDays.forEach(d => d.spots.forEach(s => allCoords.push([s.lat, s.lng])));
     if (currentDayFilter === '0' || currentDayFilter === '6') {
@@ -3361,7 +3854,7 @@ function renderCarouselCards(targetDays) {
 
   if (carouselDayTitle) {
     carouselDayTitle.textContent = currentDayFilter === 'all' 
-      ? '전체 7일 코스 스팟 둘러보기' 
+      ? '전체 11일 코스 스팟 둘러보기' 
       : targetDays[0].dayLabel + ' 스팟 둘러보기';
   }
 
@@ -3375,9 +3868,9 @@ function renderCarouselCards(targetDays) {
             <span class="carousel-badge" style="background: ` + day.color + `;">` + day.dayLabel + ` #` + spot.num + `</span>
             <a class="carousel-google-link" href="` + gSearchUrl + `" target="_blank" onclick="event.stopPropagation();">Google ↗</a>
           </div>
-          <div class="carousel-card-title">` + spot.name + `</div>
-          <div class="carousel-card-sub">` + spot.period + ` ` + spot.time + ` · ` + spot.category + `</div>
-          <div class="carousel-card-desc">` + spot.desc + `</div>
+          <div class="carousel-card-title">${spot.name}</div>
+          <div class="carousel-card-sub">${spot.period} ${spot.time} · ${spot.category}</div>
+          <div class="carousel-card-desc">${spot.desc}</div>
         </div>
       `;
     });
@@ -3427,10 +3920,10 @@ function updateHeaderSummary(targetDays) {
   const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
 
   if (currentDayFilter === 'all') {
-    if (titleEl) titleEl.textContent = '전체 7일 일정 개요 (19일 ~ 25일)';
+    if (titleEl) titleEl.textContent = '전체 11일 일정 개요 (19일 ~ 29일)';
     const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
     if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
-    if (transitTipEl) transitTipEl.innerHTML = `💡 각 날짜 탭을 누르면 렌트카 코스, 기차 이동 및 일자별 세부 동선을 확인할 수 있습니다.`;
+    if (transitTipEl) transitTipEl.innerHTML = `💡 각 날짜 탭을 누르면 렌트카 코스, 기차 이동, 코펜하겐 비행 및 일자별 세부 동선을 확인할 수 있습니다.`;
     if (googleHeaderBtn) {
       googleHeaderBtn.href = ITINERARY_DATA[2].googleRouteUrl;
       googleHeaderBtn.textContent = '🚗 2일차 렌트카 전체 경로 (Google Maps)';
