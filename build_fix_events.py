@@ -1643,19 +1643,137 @@ function updateHeaderSummary(targetDays) {{
 // ★★★ 모든 이벤트 리스너 완벽 연결 ★★★
 // ==========================================
 
-// 1. 일자별 탭 버튼 클릭
-document.querySelectorAll('.tab-btn').forEach(btn => {{
+// 날짜를 활성화하고 뷰를 갱신하는 공통 함수
+function selectDay(dayVal, autoScroll = true) {{
+  currentDayFilter = dayVal;
+  
+  // 1. 탭 버튼 상태 동기화
+  document.querySelectorAll('.tab-btn').forEach(btn => {{
+    const isMatch = btn.getAttribute('data-day') === dayVal;
+    btn.classList.toggle('active', isMatch);
+    if (isMatch && autoScroll) {{
+      btn.scrollIntoView({{ behavior: 'smooth', inline: 'center', block: 'nearest' }});
+    }}
+  }});
+
+  // 2. 드롭다운 상태 동기화
+  const dropdown = document.getElementById('daySelectDropdown');
+  if (dropdown) dropdown.value = dayVal;
+
+  // 3. 뷰 렌더링 및 지도 크기 보정
+  renderView();
+  requestAnimationFrame(() => {{
+    fixMapSize();
+    setTimeout(fixMapSize, 150);
+  }});
+}}
+
+// 1. 권역별 칩 필터 버튼 이벤트
+let currentRegion = 'all';
+document.querySelectorAll('.region-btn').forEach(btn => {{
   btn.addEventListener('click', () => {{
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentDayFilter = btn.getAttribute('data-day');
-    renderView();
-    requestAnimationFrame(() => {{
-      fixMapSize();
-      setTimeout(fixMapSize, 150);
+    currentRegion = btn.getAttribute('data-region');
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    let firstVisibleDay = null;
+    let currentDayStillVisible = false;
+
+    tabBtns.forEach(tBtn => {{
+      const dayReg = tBtn.getAttribute('data-region');
+      const dayVal = tBtn.getAttribute('data-day');
+
+      if (currentRegion === 'all') {{
+        tBtn.classList.remove('hidden');
+        if (dayVal === currentDayFilter) currentDayStillVisible = true;
+      }} else {{
+        if (dayReg === currentRegion) {{
+          tBtn.classList.remove('hidden');
+          if (!firstVisibleDay) firstVisibleDay = dayVal;
+          if (dayVal === currentDayFilter) currentDayStillVisible = true;
+        }} else {{
+          tBtn.classList.add('hidden');
+        }}
+      }}
     }});
+
+    // 만약 현재 선택된 날짜가 필터링되어 숨겨졌다면, 해당 권역의 첫 번째 날짜로 자동 전환
+    if (!currentDayStillVisible) {{
+      if (currentRegion === 'all') {{
+        selectDay('all');
+      }} else if (firstVisibleDay) {{
+        selectDay(firstVisibleDay);
+      }}
+    }} else {{
+      const activeBtn = document.querySelector('.tab-btn.active');
+      if (activeBtn) activeBtn.scrollIntoView({{ behavior: 'smooth', inline: 'center', block: 'nearest' }});
+    }}
   }});
 }});
+
+// 2. 일자 퀵 점프 드롭다운 이벤트
+const dayDropdown = document.getElementById('daySelectDropdown');
+if (dayDropdown) {{
+  dayDropdown.addEventListener('change', (e) => {{
+    const selectedDay = e.target.value;
+    const targetBtn = document.querySelector(`.tab-btn[data-day="${{selectedDay}}"]`);
+    if (targetBtn) {{
+      const reg = targetBtn.getAttribute('data-region');
+      if (reg && reg !== currentRegion && currentRegion !== 'all') {{
+        document.querySelectorAll('.region-btn').forEach(b => {{
+          b.classList.toggle('active', b.getAttribute('data-region') === reg);
+        }});
+        currentRegion = reg;
+        document.querySelectorAll('.tab-btn').forEach(tb => {{
+          tb.classList.toggle('hidden', tb.getAttribute('data-region') !== reg && tb.getAttribute('data-region') !== 'all');
+        }});
+      }}
+    }}
+    selectDay(selectedDay);
+  }});
+}}
+
+// 3. 일자별 탭 버튼 클릭
+document.querySelectorAll('.tab-btn').forEach(btn => {{
+  btn.addEventListener('click', () => {{
+    const dayVal = btn.getAttribute('data-day');
+    selectDay(dayVal);
+  }});
+}});
+
+// 4. 이전 날 / 다음 날 화살표 네비게이션
+const prevBtn = document.getElementById('dayNavPrevBtn');
+const nextBtn = document.getElementById('dayNavNextBtn');
+
+function getVisibleDayList() {{
+  const visibleBtns = Array.from(document.querySelectorAll('.tab-btn:not(.hidden)'));
+  return visibleBtns.map(b => b.getAttribute('data-day'));
+}}
+
+if (prevBtn) {{
+  prevBtn.addEventListener('click', () => {{
+    const days = getVisibleDayList();
+    const currIdx = days.indexOf(currentDayFilter);
+    if (currIdx > 0) {{
+      selectDay(days[currIdx - 1]);
+    }} else {{
+      selectDay(days[days.length - 1]);
+    }}
+  }});
+}}
+
+if (nextBtn) {{
+  nextBtn.addEventListener('click', () => {{
+    const days = getVisibleDayList();
+    const currIdx = days.indexOf(currentDayFilter);
+    if (currIdx !== -1 && currIdx < days.length - 1) {{
+      selectDay(days[currIdx + 1]);
+    }} else {{
+      selectDay(days[0]);
+    }}
+  }});
+}}
 
 // 2. 모바일 세그먼트 스위치 버튼 (일정 목록 / 지도 전체 보기)
 document.querySelectorAll('.mobile-switch-btn').forEach(btn => {{

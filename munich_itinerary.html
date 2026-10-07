@@ -840,17 +840,125 @@ svg.leaflet-image-layer.leaflet-interactive path {
       box-shadow: var(--shadow-sm);
     }
 
+    /* 권역별 칩 및 일자 퀵 점프 래퍼 */
+    .region-tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+
+    .region-tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 1px 0;
+    }
+    .region-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .region-btn {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .region-btn:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+    .region-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+    }
+
+    /* 일자 바로가기 셀렉트 박스 */
+    .quick-jump-wrap {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+    .day-select-dropdown {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.15s ease;
+      max-width: 175px;
+    }
+    .day-select-dropdown:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    /* 일자별 탭 바 래퍼 (좌우 화살표 + 스크롤 바) */
+    .day-tabs-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      position: relative;
+      width: 100%;
+    }
+
+    .day-nav-arrow-btn {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      width: 22px;
+      height: 26px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      user-select: none;
+      padding: 0;
+    }
+    .day-nav-arrow-btn:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+
     /* 일자별 필터 탭 (가로 스와이프 지원) */
     .day-tabs {
       display: flex;
       background: #f1f5f9;
       padding: 3px;
-      border-radius: 9px;
+      border-radius: 8px;
       gap: 3px;
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      scroll-behavior: smooth;
+      flex: 1;
     }
     .day-tabs::-webkit-scrollbar {
       display: none;
@@ -859,16 +967,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .tab-btn {
       border: none;
       background: transparent;
-      padding: 6px 10px;
-      border-radius: 7px;
-      font-size: 11.5px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       white-space: nowrap;
       flex-shrink: 0;
     }
@@ -885,11 +993,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
       font-weight: 800;
     }
 
+    .tab-btn.hidden {
+      display: none !important;
+    }
+
     .tab-btn .tab-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       display: inline-block;
+      flex-shrink: 0;
     }
 
     /* 메인 레이아웃 */
@@ -899,7 +1012,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       overflow: hidden;
       position: relative;
       width: 100%;
-      height: calc(100vh - 110px);
+      min-height: 0;
     }
 
     /* 좌측 사이드바 */
@@ -1622,7 +1735,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
       }
       
       .main-layout {
-        height: calc(100vh - 128px);
+        flex: 1;
+        min-height: 0;
+        height: auto;
       }
 
       body.mobile-mode-list .sidebar {
@@ -1660,9 +1775,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <header>
     <div class="header-top-row">
       <div class="header-left">
-        <div class="brand-badge">Europe 11 Days</div>
+        <div class="brand-badge">Europe 12 Days</div>
         <div class="header-title-group">
-          <h1>🇩🇪 뮌헨 · 🇦🇹 오스트리아 & 🇩🇰 코펜하겐 11일 여행</h1>
+          <h1>🇩🇪 뮌헨 · 🇦🇹 오스트리아 & 🇩🇰 코펜하겐 12일 여행</h1>
           <p>뮌헨 & 알프스 · 잘츠부르크 & 할슈타트 · 코펜하겐</p>
         </div>
       </div>
@@ -1684,60 +1799,98 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <button class="mobile-switch-btn" data-view="map">🗺️ 지도 전체 보기</button>
     </div>
 
-    <!-- 일자별 필터 탭 (가로 스크롤) -->
-    <div class="day-tabs" id="dayTabs">
-      <button class="tab-btn active" data-day="all">
-        <span class="tab-dot" style="background: #64748b;"></span>
-        전체 11일
-      </button>
-      <button class="tab-btn" data-day="0">
-        <span class="tab-dot" style="background: #0284c7;"></span>
-        ✈️ 19일 (입국)
-      </button>
-      <button class="tab-btn" data-day="1">
-        <span class="tab-dot" style="background: var(--color-day1);"></span>
-        20일 (시내)
-      </button>
-      <button class="tab-btn" data-day="2">
-        <span class="tab-dot" style="background: var(--color-day2);"></span>
-        🚗 21일 (렌트카)
-      </button>
-      <button class="tab-btn" data-day="3">
-        <span class="tab-dot" style="background: var(--color-day3);"></span>
-        22일 (과학·궁전)
-      </button>
-      <button class="tab-btn" data-day="4">
-        <span class="tab-dot" style="background: var(--color-day4);"></span>
-        23일 (아레나)
-      </button>
-      <button class="tab-btn" data-day="5">
-        <span class="tab-dot" style="background: #e11d48;"></span>
-        🚆 24일 (잘츠부르크)
-      </button>
-      <button class="tab-btn" data-day="6">
-        <span class="tab-dot" style="background: #0d9488;"></span>
-        🏞️ 25일 (할슈타트)
-      </button>
-      <button class="tab-btn" data-day="7">
-        <span class="tab-dot" style="background: #dc2626;"></span>
-        ✈️ 26일 (코펜하겐)
-      </button>
-      <button class="tab-btn" data-day="8">
-        <span class="tab-dot" style="background: #e11d48;"></span>
-        🇩🇰 27일 (코펜하겐)
-      </button>
-      <button class="tab-btn" data-day="9">
-        <span class="tab-dot" style="background: #b91c1c;"></span>
-        🇩🇰 28일 (코펜하겐)
-      </button>
-      <button class="tab-btn" data-day="10">
-        <span class="tab-dot" style="background: #be123c;"></span>
-        🇩🇰 29일 (코펜하겐)
-      </button>
-      <button class="tab-btn" data-day="11">
-        <span class="tab-dot" style="background: #4338ca;"></span>
-        🛫 30일 (귀국)
-      </button>
+    <!-- 1단: 권역별 퀵 필터 칩 & 일자 바로가기 드롭다운 -->
+    <div class="region-tabs-row">
+      <div class="region-tabs" id="regionTabs">
+        <button class="region-btn active" data-region="all">🌍 전체 12일</button>
+        <button class="region-btn" data-region="munich">🇩🇪 뮌헨 (19~23일)</button>
+        <button class="region-btn" data-region="austria">🇦🇹 오스트리아 (24~25일)</button>
+        <button class="region-btn" data-region="copenhagen">🇩🇰 코펜하겐 (26~30일)</button>
+      </div>
+      <div class="quick-jump-wrap">
+        <select class="day-select-dropdown" id="daySelectDropdown" aria-label="날짜 바로가기">
+          <option value="all">📅 날짜 바로가기...</option>
+          <option value="all">🌍 전체 12일 일정 보기</option>
+          <optgroup label="🇩🇪 독일 (뮌헨 & 바이에른 알프스)">
+            <option value="0">19일 (일) ✈️ 뮌헨 도착 & 에어포트 호텔</option>
+            <option value="1">20일 (월) 🇩🇪 뮌헨 시내 & BMW, 구시가지 쇼핑</option>
+            <option value="2">21일 (화) 🚗 렌트카 (마리엔다리·성·추크슈피체)</option>
+            <option value="3">22일 (수) 🇩🇪 독일박물관, 레지덴츠, 호프브로이</option>
+            <option value="4">23일 (목) 🇩🇪 아레나 투어, 영국정원, 님펜부르크</option>
+          </optgroup>
+          <optgroup label="🇦🇹 오스트리아 (잘츠부르크 & 할슈타트)">
+            <option value="5">24일 (금) 🚆 뮌헨 ➔ 잘츠부르크 기차 & 구시가지</option>
+            <option value="6">25일 (토) 🏞️ 할슈타트 투어 ➔ 뮌헨 공항 호텔 복귀</option>
+          </optgroup>
+          <optgroup label="🇩🇰 덴마크 (코펜하겐)">
+            <option value="7">26일 (일) ✈️ 뮌헨 ➔ 코펜하겐 비행 & 래디슨 로열</option>
+            <option value="8">27일 (월) 🇩🇰 코펜하겐 자유 일정</option>
+            <option value="9">28일 (화) 🇩🇰 코펜하겐 자유 일정</option>
+            <option value="10">29일 (수) 🇩🇰 코펜하겐 자유 일정</option>
+            <option value="11">30일 (목) 🛫 체크아웃 ➔ 대한항공 KE6410 출국</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+
+    <!-- 2단: 일자별 필터 탭 (좌우 네비 화살표 + 컴팩트 버튼) -->
+    <div class="day-tabs-bar-wrap">
+      <button class="day-nav-arrow-btn" id="dayNavPrevBtn" title="이전 날짜">‹</button>
+      <div class="day-tabs" id="dayTabs">
+        <button class="tab-btn active" data-day="all" data-region="all">
+          <span class="tab-dot" style="background: #64748b;"></span>
+          전체
+        </button>
+        <button class="tab-btn" data-day="0" data-region="munich">
+          <span class="tab-dot" style="background: #0284c7;"></span>
+          19일 (입국)
+        </button>
+        <button class="tab-btn" data-day="1" data-region="munich">
+          <span class="tab-dot" style="background: var(--color-day1);"></span>
+          20일 (시내)
+        </button>
+        <button class="tab-btn" data-day="2" data-region="munich">
+          <span class="tab-dot" style="background: var(--color-day2);"></span>
+          21일 (렌트)
+        </button>
+        <button class="tab-btn" data-day="3" data-region="munich">
+          <span class="tab-dot" style="background: var(--color-day3);"></span>
+          22일 (궁전)
+        </button>
+        <button class="tab-btn" data-day="4" data-region="munich">
+          <span class="tab-dot" style="background: var(--color-day4);"></span>
+          23일 (아레나)
+        </button>
+        <button class="tab-btn" data-day="5" data-region="austria">
+          <span class="tab-dot" style="background: #e11d48;"></span>
+          24일 (잘츠)
+        </button>
+        <button class="tab-btn" data-day="6" data-region="austria">
+          <span class="tab-dot" style="background: #0d9488;"></span>
+          25일 (할슈)
+        </button>
+        <button class="tab-btn" data-day="7" data-region="copenhagen">
+          <span class="tab-dot" style="background: #dc2626;"></span>
+          26일 (코펜)
+        </button>
+        <button class="tab-btn" data-day="8" data-region="copenhagen">
+          <span class="tab-dot" style="background: #e11d48;"></span>
+          27일 (자유)
+        </button>
+        <button class="tab-btn" data-day="9" data-region="copenhagen">
+          <span class="tab-dot" style="background: #b91c1c;"></span>
+          28일 (자유)
+        </button>
+        <button class="tab-btn" data-day="10" data-region="copenhagen">
+          <span class="tab-dot" style="background: #be123c;"></span>
+          29일 (자유)
+        </button>
+        <button class="tab-btn" data-day="11" data-region="copenhagen">
+          <span class="tab-dot" style="background: #4338ca;"></span>
+          30일 (귀국)
+        </button>
+      </div>
+      <button class="day-nav-arrow-btn" id="dayNavNextBtn" title="다음 날짜">›</button>
     </div>
   </header>
 
@@ -3844,19 +3997,137 @@ function updateHeaderSummary(targetDays) {
 // ★★★ 모든 이벤트 리스너 완벽 연결 ★★★
 // ==========================================
 
-// 1. 일자별 탭 버튼 클릭
-document.querySelectorAll('.tab-btn').forEach(btn => {
+// 날짜를 활성화하고 뷰를 갱신하는 공통 함수
+function selectDay(dayVal, autoScroll = true) {
+  currentDayFilter = dayVal;
+  
+  // 1. 탭 버튼 상태 동기화
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    const isMatch = btn.getAttribute('data-day') === dayVal;
+    btn.classList.toggle('active', isMatch);
+    if (isMatch && autoScroll) {
+      btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  });
+
+  // 2. 드롭다운 상태 동기화
+  const dropdown = document.getElementById('daySelectDropdown');
+  if (dropdown) dropdown.value = dayVal;
+
+  // 3. 뷰 렌더링 및 지도 크기 보정
+  renderView();
+  requestAnimationFrame(() => {
+    fixMapSize();
+    setTimeout(fixMapSize, 150);
+  });
+}
+
+// 1. 권역별 칩 필터 버튼 이벤트
+let currentRegion = 'all';
+document.querySelectorAll('.region-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentDayFilter = btn.getAttribute('data-day');
-    renderView();
-    requestAnimationFrame(() => {
-      fixMapSize();
-      setTimeout(fixMapSize, 150);
+    currentRegion = btn.getAttribute('data-region');
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    let firstVisibleDay = null;
+    let currentDayStillVisible = false;
+
+    tabBtns.forEach(tBtn => {
+      const dayReg = tBtn.getAttribute('data-region');
+      const dayVal = tBtn.getAttribute('data-day');
+
+      if (currentRegion === 'all') {
+        tBtn.classList.remove('hidden');
+        if (dayVal === currentDayFilter) currentDayStillVisible = true;
+      } else {
+        if (dayReg === currentRegion) {
+          tBtn.classList.remove('hidden');
+          if (!firstVisibleDay) firstVisibleDay = dayVal;
+          if (dayVal === currentDayFilter) currentDayStillVisible = true;
+        } else {
+          tBtn.classList.add('hidden');
+        }
+      }
     });
+
+    // 만약 현재 선택된 날짜가 필터링되어 숨겨졌다면, 해당 권역의 첫 번째 날짜로 자동 전환
+    if (!currentDayStillVisible) {
+      if (currentRegion === 'all') {
+        selectDay('all');
+      } else if (firstVisibleDay) {
+        selectDay(firstVisibleDay);
+      }
+    } else {
+      const activeBtn = document.querySelector('.tab-btn.active');
+      if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
   });
 });
+
+// 2. 일자 퀵 점프 드롭다운 이벤트
+const dayDropdown = document.getElementById('daySelectDropdown');
+if (dayDropdown) {
+  dayDropdown.addEventListener('change', (e) => {
+    const selectedDay = e.target.value;
+    const targetBtn = document.querySelector(`.tab-btn[data-day="${selectedDay}"]`);
+    if (targetBtn) {
+      const reg = targetBtn.getAttribute('data-region');
+      if (reg && reg !== currentRegion && currentRegion !== 'all') {
+        document.querySelectorAll('.region-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-region') === reg);
+        });
+        currentRegion = reg;
+        document.querySelectorAll('.tab-btn').forEach(tb => {
+          tb.classList.toggle('hidden', tb.getAttribute('data-region') !== reg && tb.getAttribute('data-region') !== 'all');
+        });
+      }
+    }
+    selectDay(selectedDay);
+  });
+}
+
+// 3. 일자별 탭 버튼 클릭
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const dayVal = btn.getAttribute('data-day');
+    selectDay(dayVal);
+  });
+});
+
+// 4. 이전 날 / 다음 날 화살표 네비게이션
+const prevBtn = document.getElementById('dayNavPrevBtn');
+const nextBtn = document.getElementById('dayNavNextBtn');
+
+function getVisibleDayList() {
+  const visibleBtns = Array.from(document.querySelectorAll('.tab-btn:not(.hidden)'));
+  return visibleBtns.map(b => b.getAttribute('data-day'));
+}
+
+if (prevBtn) {
+  prevBtn.addEventListener('click', () => {
+    const days = getVisibleDayList();
+    const currIdx = days.indexOf(currentDayFilter);
+    if (currIdx > 0) {
+      selectDay(days[currIdx - 1]);
+    } else {
+      selectDay(days[days.length - 1]);
+    }
+  });
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
+    const days = getVisibleDayList();
+    const currIdx = days.indexOf(currentDayFilter);
+    if (currIdx !== -1 && currIdx < days.length - 1) {
+      selectDay(days[currIdx + 1]);
+    } else {
+      selectDay(days[0]);
+    }
+  });
+}
 
 // 2. 모바일 세그먼트 스위치 버튼 (일정 목록 / 지도 전체 보기)
 document.querySelectorAll('.mobile-switch-btn').forEach(btn => {
