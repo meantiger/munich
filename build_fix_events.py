@@ -51,7 +51,7 @@ hotels_data = [
     "nameDe": "Radisson Collection Royal Hotel, Copenhagen",
     "lat": 55.67491,
     "lng": 12.56377,
-    "tag": "🇩🇰 26일~29일 코펜하겐 숙소 (3박 / 중앙역 2분)",
+    "tag": "🇩🇰 26일~30일 코펜하겐 숙소 (4박 / 중앙역 2분)",
     "address": "Hammerichsgade 1, 1611 København, Denmark",
     "googleMapsUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
     "desc": "전설적인 덴마크 디자인 거장 아르네 야콥센이 설계한 세계 최초의 5성급 디자인 호텔! 코펜하겐 중앙역(København H) 및 티볼리 가든 바로 정면 도보 2분 초역세권.",
@@ -61,7 +61,7 @@ hotels_data = [
   }
 ]
 
-# 2. 전체 11일 일정 데이터 (19일 ~ 29일)
+# 2. 전체 12일 일정 데이터 (19일 ~ 30일)
 itinerary_data = [
   {
     "day": 0,
@@ -924,16 +924,42 @@ itinerary_data = [
   },
   {
     "day": 10,
-    "dayLabel": "🛫 29일 (귀국)",
-    "title": "29일: 🛫 호텔 체크아웃 ➔ 코펜하겐 공항 ➔ 대한항공 KE6410 출국 (17:30)",
+    "dayLabel": "🇩🇰 29일 (코펜하겐)",
+    "title": "29일: 🇩🇰 코펜하겐 자유 일정 & 래디슨 로열 호텔 숙박",
+    "summary": "코펜하겐 자유 일정 (세부 일정 추후 업데이트 예정) / 래디슨 컬렉션 로열 호텔 숙박",
+    "color": "#be123c",
+    "transitTip": "숙소: 래디슨 컬렉션 로열 호텔 코펜하겐",
+    "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
+    "spots": [
+      {
+        "id": "d10-1",
+        "day": 10,
+        "num": 1,
+        "period": "전일",
+        "time": "자유 일정",
+        "name": "코펜하겐 자유 일정 (세부 일정 추후 업데이트 예정)",
+        "nameDe": "Kopenhagen Freizeit (Details folgen)",
+        "lat": 55.67491,
+        "lng": 12.56377,
+        "category": "자유 일정",
+        "desc": "상세 일정을 알려주시면 방문지와 동선을 등록해 드립니다.",
+        "tip": "숙소: 래디슨 컬렉션 로열 호텔 코펜하겐 (중앙역 앞)",
+        "highlight": True
+      }
+    ]
+  },
+  {
+    "day": 11,
+    "dayLabel": "🛫 30일 (귀국)",
+    "title": "30일: 🛫 호텔 체크아웃 ➔ 코펜하겐 공항 ➔ 대한항공 KE6410 출국 (17:30)",
     "summary": "래디슨 컬렉션 로열 호텔 체크아웃 후 코펜하겐 공항으로 이동, 17:30 출발 대한항공 KE6410 편으로 출국",
     "color": "#4338ca",
     "transitTip": "항공편: 대한항공 KE6410 (코펜하겐 CPH 17:30 출발)",
     "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
     "spots": [
       {
-        "id": "d10-1",
-        "day": 10,
+        "id": "d11-1",
+        "day": 11,
         "num": 1,
         "period": "오전~낮",
         "time": "자유 일정",
@@ -946,8 +972,8 @@ itinerary_data = [
         "tip": "출국 2~3시간 전 공항 이동 권장"
       },
       {
-        "id": "d10-2",
-        "day": 10,
+        "id": "d11-2",
+        "day": 11,
         "num": 2,
         "period": "오후",
         "time": "14:30 - 15:30",
@@ -960,8 +986,8 @@ itinerary_data = [
         "tip": "17:30 출발이므로 여유 있게 15:00 전후 공항 도착을 권장합니다."
       },
       {
-        "id": "d10-3",
-        "day": 10,
+        "id": "d11-3",
+        "day": 11,
         "num": 3,
         "period": "저녁~밤",
         "time": "17:30 - ",
@@ -1242,7 +1268,7 @@ function updateHotelBanner(dayFilter) {{
     targetHotel = HOTELS_DATA[1]; // 이비스 에어포트
   }} else if (dayFilter === '5') {{
     targetHotel = HOTELS_DATA[2]; // 잘츠부르크 유로파
-  }} else if (dayFilter === '7' || dayFilter === '8' || dayFilter === '9' || dayFilter === '10') {{
+  }} else if (dayFilter === '7' || dayFilter === '8' || dayFilter === '9' || dayFilter === '10' || dayFilter === '11') {{
     targetHotel = HOTELS_DATA[3]; // 래디슨 로열 코펜하겐
   }}
 
@@ -1407,7 +1433,7 @@ function renderView() {{
     // 26일 비행선 전체 포커스 (뮌헨 ➔ 코펜하겐)
     allCoords.push([48.3540, 11.7591]);
     allCoords.push([55.67491, 12.56377]);
-  }} else if (['8', '9', '10'].includes(currentDayFilter)) {{
+  }} else if (['8', '9', '10', '11'].includes(currentDayFilter)) {{
     // 코펜하겐 시내 일정 포커스
     targetDays.forEach(d => d.spots.forEach(s => allCoords.push([s.lat, s.lng])));
     allCoords.push([HOTELS_DATA[3].lat, HOTELS_DATA[3].lng]);
@@ -1593,7 +1619,7 @@ function updateHeaderSummary(targetDays) {{
   const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
 
   if (currentDayFilter === 'all') {{
-    if (titleEl) titleEl.textContent = '전체 11일 일정 개요 (19일 ~ 29일)';
+    if (titleEl) titleEl.textContent = '전체 12일 일정 개요 (19일 ~ 30일)';
     const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
     if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
     if (transitTipEl) transitTipEl.innerHTML = `💡 각 날짜 탭을 누르면 렌트카 코스, 기차 이동, 코펜하겐 비행 및 일자별 세부 동선을 확인할 수 있습니다.`;
