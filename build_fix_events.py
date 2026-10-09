@@ -78,10 +78,10 @@ itinerary_data = [
         "num": 1,
         "period": "오전~오후",
         "time": "11:55 - 18:55",
-        "name": "인천국제공항(ICN) 출국 ➔ 암스테르담(AMS) 비행",
-        "nameDe": "Incheon (ICN) nach Amsterdam (AMS) - DQYMPE",
-        "lat": 48.3537,
-        "lng": 11.7860,
+        "name": "인천국제공항(ICN) 출국 ➔ 암스테르담(AMS) 환승",
+        "nameDe": "Amsterdam Schiphol Airport (AMS Transfer)",
+        "lat": 52.3105,
+        "lng": 4.7683,
         "category": "국제선 항공편 (대한항공 DQYMPE)",
         "desc": "인천공항 제2여객터미널에서 11:55 출발하여 유럽으로 향합니다! 장거리 비행 후 18:55 네덜란드 암스테르담 스키폴 공항에 도착해 뮌헨행 환승을 진행합니다.",
         "tip": "기내에서 수분 섭취를 충분히 하고 시차 적응을 위해 현지 밤 시간에 맞춰 수면을 취하세요."
@@ -331,7 +331,7 @@ itinerary_data = [
         "time": "08:45 - 10:15",
         "name": "마리엔 다리 (Marienbrücke - 1순위 방문)",
         "nameDe": "Marienbrücke Neuschwanstein",
-        "lat": 48.5552,
+        "lat": 47.5552,
         "lng": 10.7496,
         "category": "전망 명소",
         "desc": "노이슈바인슈타인 성을 가장 웅장한 각도에서 바라볼 수 있는 아찔한 협곡 위 인도교입니다. 셔틀버스를 타고 올라가 성 내부 투어 전 인생 사진을 남깁니다.",
@@ -346,7 +346,7 @@ itinerary_data = [
         "time": "10:30 - 12:15",
         "name": "노이슈바인슈타인 성 내부 투어",
         "nameDe": "Schloss Neuschwanstein",
-        "lat": 48.5576,
+        "lat": 47.5576,
         "lng": 10.7498,
         "category": "성 / 궁전",
         "desc": "디즈니 성의 모티브가 된 루드비히 2세 국왕의 백조의 성입니다. 왕의 침실, 인공 동굴, 바그너 오페라를 테마로 꾸며진 웅장한 '가수의 홀' 등을 가이드 오디오 투어로 관람합니다.",
@@ -361,7 +361,7 @@ itinerary_data = [
         "time": "12:30 - 13:45",
         "name": "호엔슈방가우 마을 & 알프제(Alpsee) 점심",
         "nameDe": "Hohenschwangau & Alpsee",
-        "lat": 48.5539,
+        "lat": 47.5539,
         "lng": 10.7380,
         "category": "호수 산책 / 점심 식사",
         "desc": "성에서 내려와 에메랄드빛 알프제 호숫가를 가볍게 거닐고, 호엔슈방가우 마을 레스토랑에서 따뜻한 슈니첼이나 바이에른 요리로 든든한 점심 식사를 즐깁니다.",
@@ -817,11 +817,11 @@ itinerary_data = [
         "period": "오전",
         "time": "08:00 - 09:00",
         "name": "이비스 스타일스 에어포트 체크아웃 ➔ 뮌헨 공항 이동",
-        "nameDe": "ibis Check-out ➔ München Airport",
-        "lat": 48.3537,
-        "lng": 11.7860,
+        "nameDe": "ibis Styles Check-out ➔ München Airport",
+        "lat": 48.3540,
+        "lng": 11.7591,
         "category": "체크아웃 & 공항 이동",
-        "desc": "이비스 스타일스 뮌헨 에어포트 체크아웃 후 뮌헨 공항으로 이동하여 탑승 수속을 진행합니다.",
+        "desc": "이비스 스타일스 뮌헨 에어포트 호텔 체크아웃 후 셔틀/택시로 뮌헨 공항 제2터미널 이동(10분)하여 탑승 수속을 진행합니다.",
         "tip": "항공기 출발 2시간 전 공항 도착 권장"
       },
       {
@@ -1065,8 +1065,8 @@ itinerary_data = [
         "time": "17:30 - ",
         "name": "대한항공 KE6410 탑승 ➔ 대한민국 귀국 비행",
         "nameDe": "Korean Air KE6410 (17:30 Abflug)",
-        "lat": 55.6180,
-        "lng": 12.6508,
+        "lat": 55.5800,
+        "lng": 12.7800,
         "category": "대한항공 국제선 (출국)",
         "desc": "★ 17:30 코펜하겐 공항 이륙! 대한민국 인천공항으로 귀국 비행.",
         "tip": "대한항공 KE6410 (17:30 정시 출발)",
@@ -1099,14 +1099,25 @@ roadtrip_coords = [
   [48.1455, 11.5390]  # 노보텔 복귀
 ]
 
+flight_route_day0 = [
+  [52.3105, 4.7683], # 암스테르담 스키폴 공항 (AMS 환승)
+  [51.2000, 6.7000], # 라인강 상공
+  [50.0500, 8.5700], # 프랑크푸르트 상공
+  [49.1000, 10.4000], # 바이에른 북부 상공
+  [48.3537, 11.7860], # 뮌헨 국제공항 (MUC)
+  [48.3540, 11.7591]  # 이비스 스타일스 에어포트 호텔
+]
+
 train_route_salzburg = [
+  [48.1455, 11.5390], # 노보텔 뮌헨 시티 아르눌프파크 (출발)
   [48.1402, 11.5583], # 뮌헨 중앙역 (München Hbf)
   [48.1350, 11.6000], # 뮌헨 동역 (München Ost)
   [47.8561, 12.1289], # 로젠하임 (Rosenheim)
   [47.8600, 12.3500], # 킴제 (Chiemsee)
   [47.8680, 12.6450], # 트라운슈타인 (Traunstein)
   [47.8380, 12.9700], # 프라이라싱 (Freilassing 국경)
-  [47.8130, 13.0457]  # 잘츠부르크 중앙역 (Salzburg Hbf)
+  [47.8130, 13.0457], # 잘츠부르크 중앙역 (Salzburg Hbf) / 호텔 유로파
+  [47.7981, 13.0470]  # 잘츠부르크 구시가지 투어 (게트라이데/미라벨)
 ]
 
 train_route_hallstatt = [
@@ -1123,7 +1134,8 @@ train_route_hallstatt = [
 
 # 26일 뮌헨 ➔ 코펜하겐 비행선 및 메트로선
 flight_route_cph = [
-  [48.3540, 11.7591], # 뮌헨 공항 (MUC)
+  [48.3540, 11.7591], # 이비스 스타일스 호텔 (출발)
+  [48.3537, 11.7860], # 뮌헨 공항 (MUC 이륙)
   [50.5000, 11.9000],
   [52.5000, 12.1000], # 베를린 서부 상공
   [54.2000, 12.3000], # 발트해 해상
@@ -1135,6 +1147,13 @@ cph_metro_route = [
   [55.6350, 12.6100], # 타른뷔
   [55.6728, 12.5648], # 코펜하겐 중앙역
   [55.67491, 12.56377] # 래디슨 컬렉션 로열 호텔
+]
+
+cph_city_day7 = [
+  [55.67491, 12.56377], # 래디슨 컬렉션 로열 호텔 (체크인)
+  [55.6738, 12.5670],   # 티볼리 푸드홀 런치
+  [55.6761, 12.5683],   # 시청사 광장 & 스트뢰에 산책
+  [55.6736, 12.5683]    # 티볼리 가든 (할로윈 축제)
 ]
 
 # 27일 코펜하겐 ➔ 오드룹고르(핀 율의 집) ➔ 루이지애나 현대미술관 ➔ 코펜하겐 복귀 경로
@@ -1158,6 +1177,15 @@ route_cph_art_tour = [
   [55.67491, 12.56377] # 래디슨 컬렉션 로열 호텔
 ]
 
+# 30일 코펜하겐 귀국 비행 경로
+flight_route_return = [
+  [55.67491, 12.56377], # 래디슨 컬렉션 로열 호텔
+  [55.6400, 12.6100],   # 메트로
+  [55.6180, 12.6508],   # 코펜하겐 공항
+  [55.5800, 12.7800],   # 외레순 해협 이륙 궤적
+  [55.5000, 13.1500]    # 귀국 비행 (발트해 상공)
+]
+
 # 4. HTML 파일의 head 부분 가져오기
 base_html = open('/Users/min/orca/workspaces/trip/여행/index.html', encoding='utf-8').read()
 html_head = base_html.split('<script>')[0]
@@ -1169,11 +1197,14 @@ const HOTELS_DATA = {json.dumps(hotels_data, ensure_ascii=False, indent=2)};
 const ITINERARY_DATA = {json.dumps(itinerary_data, ensure_ascii=False, indent=2)};
 
 const ROADTRIP_ROUTE_COORDS = {json.dumps(roadtrip_coords, ensure_ascii=False, indent=2)};
+const FLIGHT_ROUTE_DAY0 = {json.dumps(flight_route_day0, ensure_ascii=False, indent=2)};
 const TRAIN_ROUTE_SALZBURG = {json.dumps(train_route_salzburg, ensure_ascii=False, indent=2)};
 const TRAIN_ROUTE_HALLSTATT = {json.dumps(train_route_hallstatt, ensure_ascii=False, indent=2)};
 const FLIGHT_ROUTE_CPH = {json.dumps(flight_route_cph, ensure_ascii=False, indent=2)};
 const CPH_METRO_ROUTE = {json.dumps(cph_metro_route, ensure_ascii=False, indent=2)};
+const CPH_CITY_DAY7 = {json.dumps(cph_city_day7, ensure_ascii=False, indent=2)};
 const ROUTE_CPH_ART_TOUR = {json.dumps(route_cph_art_tour, ensure_ascii=False, indent=2)};
+const FLIGHT_ROUTE_RETURN = {json.dumps(flight_route_return, ensure_ascii=False, indent=2)};
 
 let currentDayFilter = 'all';
 let currentMobileView = 'list';
@@ -1425,7 +1456,15 @@ function renderView() {{
 
   // 2. 경로 폴리라인 그리기
   if (currentDayFilter === 'all') {{
-    // 렌트카 루프선
+    // 19일 암스테르담 ➔ 뮌헨 비행선
+    L.polyline(FLIGHT_ROUTE_DAY0, {{
+      color: '#8b5cf6',
+      weight: 2.8,
+      opacity: 0.85,
+      dashArray: '8, 8'
+    }}).addTo(polylinesLayerGroup);
+
+    // 21일 렌트카 루프선
     L.polyline(ROADTRIP_ROUTE_COORDS, {{
       color: '#f97316',
       weight: 3.5,
@@ -1456,6 +1495,19 @@ function renderView() {{
       dashArray: '8, 8'
     }}).addTo(polylinesLayerGroup);
 
+    // 26일 코펜하겐 시내 이동선
+    L.polyline(CPH_METRO_ROUTE, {{
+      color: '#dc2626',
+      weight: 2.5,
+      opacity: 0.85
+    }}).addTo(polylinesLayerGroup);
+    L.polyline(CPH_CITY_DAY7, {{
+      color: '#dc2626',
+      weight: 2.5,
+      opacity: 0.85,
+      dashArray: '4, 4'
+    }}).addTo(polylinesLayerGroup);
+
     // 27일 코펜하겐 ➔ 루이지애나 해안 예술 투어선
     L.polyline(ROUTE_CPH_ART_TOUR, {{
       color: '#e11d48',
@@ -1464,9 +1516,17 @@ function renderView() {{
       dashArray: '6, 6'
     }}).addTo(polylinesLayerGroup);
 
-    // 기타 날짜 가벼운 연결선
+    // 30일 출국 귀국선
+    L.polyline(FLIGHT_ROUTE_RETURN, {{
+      color: '#0284c7',
+      weight: 2.8,
+      opacity: 0.85,
+      dashArray: '6, 6'
+    }}).addTo(polylinesLayerGroup);
+
+    // 기타 날짜 가벼운 연결선 (Day 1, 3, 4, 9, 10 등)
     targetDays.forEach(day => {{
-      if (day.day !== 2 && day.day !== 5 && day.day !== 6 && day.day !== 7 && day.day !== 8 && day.day !== 0) {{
+      if (![0, 2, 5, 6, 7, 8, 11].includes(day.day)) {{
         const coords = day.spots.map(s => [s.lat, s.lng]);
         if (coords.length > 1) {{
           L.polyline(coords, {{
@@ -1478,6 +1538,13 @@ function renderView() {{
         }}
       }}
     }});
+  }} else if (currentDayFilter === '0') {{
+    L.polyline(FLIGHT_ROUTE_DAY0, {{
+      color: '#8b5cf6',
+      weight: 4.5,
+      opacity: 0.95,
+      dashArray: '8, 8'
+    }}).addTo(polylinesLayerGroup);
   }} else if (currentDayFilter === '2') {{
     L.polyline(ROADTRIP_ROUTE_COORDS, {{
       color: '#f97316',
@@ -1510,9 +1577,22 @@ function renderView() {{
       weight: 4,
       opacity: 0.85
     }}).addTo(polylinesLayerGroup);
+    L.polyline(CPH_CITY_DAY7, {{
+      color: '#dc2626',
+      weight: 3.5,
+      opacity: 0.9,
+      dashArray: '4, 4'
+    }}).addTo(polylinesLayerGroup);
   }} else if (currentDayFilter === '8') {{
     L.polyline(ROUTE_CPH_ART_TOUR, {{
       color: '#e11d48',
+      weight: 4.5,
+      opacity: 0.95,
+      dashArray: '6, 6'
+    }}).addTo(polylinesLayerGroup);
+  }} else if (currentDayFilter === '11') {{
+    L.polyline(FLIGHT_ROUTE_RETURN, {{
+      color: '#0284c7',
       weight: 4.5,
       opacity: 0.95,
       dashArray: '6, 6'
@@ -1538,6 +1618,10 @@ function renderView() {{
     allCoords.push([47.4211, 10.9853]); // 추크슈피체
     allCoords.push([48.3540, 11.7591]); // 공항
     allCoords.push([47.8122, 13.0437]); // 잘츠부르크
+  }} else if (currentDayFilter === '0') {{
+    // 19일 암스테르담 ➔ 뮌헨 비행 포커스
+    allCoords.push([52.3105, 4.7683]);
+    allCoords.push([48.3540, 11.7591]);
   }} else if (currentDayFilter === '7') {{
     // 26일 비행선 전체 포커스 (뮌헨 ➔ 코펜하겐)
     allCoords.push([48.3540, 11.7591]);
@@ -1548,7 +1632,7 @@ function renderView() {{
     allCoords.push([HOTELS_DATA[3].lat, HOTELS_DATA[3].lng]);
   }} else {{
     targetDays.forEach(d => d.spots.forEach(s => allCoords.push([s.lat, s.lng])));
-    if (currentDayFilter === '0' || currentDayFilter === '6') {{
+    if (currentDayFilter === '6') {{
       allCoords.push([HOTELS_DATA[1].lat, HOTELS_DATA[1].lng]);
     }} else if (currentDayFilter === '5') {{
       allCoords.push([HOTELS_DATA[2].lat, HOTELS_DATA[2].lng]);
