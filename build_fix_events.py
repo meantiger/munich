@@ -95,7 +95,7 @@ itinerary_data = [
         "name": "암스테르담 환승 ➔ 뮌헨 국제공항(MUC) 도착",
         "nameDe": "Amsterdam Transfer ➔ Munich Airport Ankunft (22:25)",
         "lat": 48.3537,
-        "lng": 11.7860,
+        "lng": 11.786,
         "category": "환승 및 뮌헨 공항 착륙",
         "desc": "스키폴 공항에서 환승 후 22:25 뮌헨 국제공항 터미널 착륙! 입국 심사 및 위탁 수하물을 찾고 첫날 숙소로 이동합니다.",
         "tip": "터미널 출구로 나와 버스 정류장(635번 버스) 또는 택시/우버 승차장으로 이동하세요."
@@ -108,7 +108,7 @@ itinerary_data = [
         "time": "23:00 - 23:30",
         "name": "이비스 스타일스 뮌헨 에어포트 (첫날 숙박)",
         "nameDe": "ibis Styles Munich Airport (Check-in)",
-        "lat": 48.3540,
+        "lat": 48.354,
         "lng": 11.7591,
         "category": "첫날 공항 호텔 (새로 오픈)",
         "desc": "늦은 밤 도착 후 편안하게 쉴 수 있는 공항 인근 최신 호텔입니다! 체크인 후 따뜻한 샤워와 함께 내일부터 본격적으로 시작될 뮌헨 일정을 위해 꿀잠 충전.",
@@ -131,26 +131,41 @@ itinerary_data = [
         "day": 1,
         "num": 1,
         "period": "아침",
-        "time": "08:00 - 08:50",
-        "name": "이비스 체크아웃 ➔ 노보텔 뮌헨 시티 아르눌프파크 이동 & 짐 보관",
-        "nameDe": "ibis Check-out ➔ Novotel Arnulfpark Luggage Drop",
+        "time": "08:00 - 08:45",
+        "name": "이비스 스타일스 에어포트 체크아웃 ➔ 시내 이동",
+        "nameDe": "ibis Styles Check-out ➔ München City",
+        "lat": 48.354,
+        "lng": 11.7591,
+        "category": "숙소 체크아웃 & S-Bahn 이동",
+        "desc": "첫날 숙소인 이비스 공항 호텔에서 아침 체크아웃 후 S-Bahn(S1 또는 S8)을 타고 뮌헨 시내 Donnersbergerbrücke역으로 이동합니다 (약 40분 소요).",
+        "tip": "공항-시내 전 구간 커버 M-5구역 일일권(Day Ticket) 또는 뮌헨 시티 투어 카드 이용!",
+        "highlight": True
+      },
+      {
+        "id": "d1-0b",
+        "day": 1,
+        "num": 2,
+        "period": "오전",
+        "time": "08:45 - 09:00",
+        "name": "노보텔 뮌헨 시티 아르눌프파크 도착 & 캐리어 짐 보관",
+        "nameDe": "Novotel Arnulfpark Luggage Drop",
         "lat": 48.1455,
-        "lng": 11.5390,
-        "category": "숙소 이동 & 캐리어 짐 보관",
-        "desc": "이비스 호텔에서 이른 아침 체크아웃 후 S-Bahn(S1 또는 S8)을 타고 뮌헨 시내 Donnersbergerbrücke역으로 이동! 우리 메인 숙소인 노보텔 아르눌프파크 리셉션에 캐리어 짐을 맡깁니다(Luggage Drop). 가벼운 몸으로 09:00 BMW 벨트 시작!",
-        "tip": "호텔 리셉션에 'Luggage storage please'라고 말하고 짐 보관 태그를 챙긴 뒤 가볍게 출발하세요.",
+        "lng": 11.539,
+        "category": "메인 숙소 짐 보관",
+        "desc": "Donnersbergerbrücke역 하차 후 도보 3분! 우리 메인 숙소인 노보텔 아르눌프파크 리셉션에 캐리어를 맡기고(Luggage Drop) 가벼운 몸으로 첫날 시내 일정을 시작합니다!",
+        "tip": "리셉션에 'Luggage storage please'라고 말하고 짐 보관 태그를 챙기세요.",
         "highlight": True
       },
       {
         "id": "d1-1",
         "day": 1,
-        "num": 2,
+        "num": 3,
         "period": "오전",
         "time": "09:00 - 10:00",
         "name": "BMW 벨트 (BMW Welt)",
         "nameDe": "BMW Welt München",
-        "lat": 48.1770,
-        "lng": 11.5560,
+        "lat": 48.177,
+        "lng": 11.556,
         "category": "전시 / 복합문화공간",
         "desc": "소용돌이 형태의 미래지향적 건물에 BMW, MINI, 롤스로이스의 최신 라인업이 전시된 첨단 쇼룸입니다. 무료입장이며 시승 및 포토존이 다채롭습니다.",
         "tip": "아침 9시 개장 직후 입장하면 여유롭게 신차 탑승 사진을 남길 수 있습니다."
@@ -158,7 +173,7 @@ itinerary_data = [
       {
         "id": "d1-2",
         "day": 1,
-        "num": 3,
+        "num": 4,
         "period": "오전",
         "time": "10:00 - 11:00",
         "name": "BMW 뮤지엄 (BMW Museum)",
@@ -172,13 +187,13 @@ itinerary_data = [
       {
         "id": "d1-3",
         "day": 1,
-        "num": 4,
+        "num": 5,
         "period": "오전~점심",
         "time": "11:00 - 12:00",
         "name": "올리도르프(Olydorf) 대학가 베이커리 & 카페",
         "nameDe": "Olympisches Dorf & Bäckerei",
         "lat": 48.1795,
-        "lng": 11.5540,
+        "lng": 11.554,
         "category": "대학가 베이커리 / 카페 테이크아웃",
         "desc": "1972 올림픽 선수촌이자 현재 뮌헨 대학생들의 거주지인 올리도르프의 독창적인 외벽 벽화를 구경하고, 로컬 베이커리와 카페에서 갓 구운 독일 빵(브레첼 등)과 따뜻한 커피를 테이크아웃합니다.",
         "tip": "여기서 산 빵과 커피를 들고 올림피아 언덕으로 이동해 감성 피크닉을 즐기세요!"
@@ -186,13 +201,13 @@ itinerary_data = [
       {
         "id": "d1-4",
         "day": 1,
-        "num": 5,
+        "num": 6,
         "period": "점심",
         "time": "12:00 - 13:30",
         "name": "올림피아 파크 언덕 피크닉 & 호숫가 산책",
         "nameDe": "Olympiapark & Olympiaberg Picknick",
         "lat": 48.1735,
-        "lng": 11.5530,
+        "lng": 11.553,
         "category": "공원 산책 / 브런치 피크닉",
         "desc": "테이크아웃한 베이커리와 커피를 들고 올림픽 언덕(Olympiaberg)에 올라 뮌헨 시내 전경을 내려다보며 여유로운 브런치 피크닉을 즐깁니다. 푸른 잔디와 호숫가를 거닐며 첫날 비행 피로를 힐링합니다.",
         "tip": "언덕 정상 벤치에서 올림픽 타워와 텐트 지붕 경기장을 한눈에 조망할 수 있습니다."
@@ -200,7 +215,7 @@ itinerary_data = [
       {
         "id": "d1-5",
         "day": 1,
-        "num": 6,
+        "num": 7,
         "period": "오후",
         "time": "14:00 - 14:50",
         "name": "마리엔 광장 & 프라우엔키르헤 (대성당)",
@@ -214,7 +229,7 @@ itinerary_data = [
       {
         "id": "d1-6",
         "day": 1,
-        "num": 7,
+        "num": 8,
         "period": "오후",
         "time": "14:50 - 15:40",
         "name": "빅투알리엔 야외 시장 (Viktualienmarkt)",
@@ -228,7 +243,7 @@ itinerary_data = [
       {
         "id": "d1-7",
         "day": 1,
-        "num": 8,
+        "num": 9,
         "period": "오후",
         "time": "15:45 - 16:35",
         "name": "알로이스 달마이어 본점 (Dallmayr)",
@@ -242,7 +257,7 @@ itinerary_data = [
       {
         "id": "d1-8",
         "day": 1,
-        "num": 9,
+        "num": 10,
         "period": "오후",
         "time": "16:50 - 17:20",
         "name": "신시청사 인형극 (★ 17:00 정각 시작)",
@@ -257,7 +272,7 @@ itinerary_data = [
       {
         "id": "d1-9",
         "day": 1,
-        "num": 10,
+        "num": 11,
         "period": "오후",
         "time": "17:30 - 18:20",
         "name": "막스마라 부티크 (Max Mara)",
@@ -271,7 +286,7 @@ itinerary_data = [
       {
         "id": "d1-10",
         "day": 1,
-        "num": 11,
+        "num": 12,
         "period": "저녁",
         "time": "18:20 - 19:15",
         "name": "퓐프 회페 (Fünf Höfe) 감성 아케이드",
@@ -285,7 +300,7 @@ itinerary_data = [
       {
         "id": "d1-11",
         "day": 1,
-        "num": 12,
+        "num": 13,
         "period": "저녁",
         "time": "19:15 - 20:45",
         "name": "구시가지 저녁 식사 & 내일 로드트립 간식 구비 (Rewe City)",
@@ -309,9 +324,24 @@ itinerary_data = [
     "googleRouteUrl": "https://www.google.com/maps/dir/Bahnhofplatz+1,+80335+M%C3%BCnchen/Marienbr%C3%BCcke/Schloss+Neuschwanstein/Alpsee/Zugspitze/Eibsee/Novotel+M%C3%BCnchen+City+Arnulfpark",
     "spots": [
       {
-        "id": "d2-1",
+        "id": "d2-0",
         "day": 2,
         "num": 1,
+        "period": "새벽",
+        "time": "05:30 - 06:00",
+        "name": "노보텔 숙소 출발 ➔ 뮌헨 중앙역 이동",
+        "nameDe": "Novotel Arnulfpark Start ➔ München Hbf",
+        "lat": 48.1455,
+        "lng": 11.539,
+        "category": "숙소 출발 & 트램 이동",
+        "desc": "노보텔 숙소 바로 앞 정류장에서 트램 17번을 타고 새벽 05:45 출발! 5분 만에 뮌헨 중앙역 북쪽 정류장(Hauptbahnhof Nord)에 도착하여 렌터카 픽업을 준비합니다.",
+        "tip": "새벽 시간 트램 시간표를 미리 확인하고 여유 있게 탑승하세요.",
+        "highlight": True
+      },
+      {
+        "id": "d2-1",
+        "day": 2,
+        "num": 2,
         "period": "새벽~아침",
         "time": "06:00 - 06:45",
         "name": "SIXT 렌터카 뮌헨 중앙역점 (06:00 차량 픽업)",
@@ -326,7 +356,7 @@ itinerary_data = [
       {
         "id": "d2-2",
         "day": 2,
-        "num": 2,
+        "num": 3,
         "period": "아침~오전",
         "time": "08:45 - 10:15",
         "name": "마리엔 다리 (Marienbrücke - 1순위 방문)",
@@ -341,7 +371,7 @@ itinerary_data = [
       {
         "id": "d2-3",
         "day": 2,
-        "num": 3,
+        "num": 4,
         "period": "오전~낮",
         "time": "10:30 - 12:15",
         "name": "노이슈바인슈타인 성 내부 투어",
@@ -356,13 +386,13 @@ itinerary_data = [
       {
         "id": "d2-4",
         "day": 2,
-        "num": 4,
+        "num": 5,
         "period": "낮",
         "time": "12:30 - 13:45",
         "name": "호엔슈방가우 마을 & 알프제(Alpsee) 점심",
         "nameDe": "Hohenschwangau & Alpsee",
         "lat": 47.5539,
-        "lng": 10.7380,
+        "lng": 10.738,
         "category": "호수 산책 / 점심 식사",
         "desc": "성에서 내려와 에메랄드빛 알프제 호숫가를 가볍게 거닐고, 호엔슈방가우 마을 레스토랑에서 따뜻한 슈니첼이나 바이에른 요리로 든든한 점심 식사를 즐깁니다.",
         "tip": "호숫가 벤치에서 성과 호수를 바라보며 마시는 시원한 음료가 일품입니다."
@@ -370,7 +400,7 @@ itinerary_data = [
       {
         "id": "d2-5",
         "day": 2,
-        "num": 5,
+        "num": 6,
         "period": "오후",
         "time": "13:45 - 15:00",
         "name": "알프스 파노라마 국도 드라이브 (오스트리아 국경)",
@@ -384,7 +414,7 @@ itinerary_data = [
       {
         "id": "d2-6",
         "day": 2,
-        "num": 6,
+        "num": 7,
         "period": "오후",
         "time": "15:00 - 17:45",
         "name": "추크슈피체 산 (2,962m) & 아이브제",
@@ -399,13 +429,13 @@ itinerary_data = [
       {
         "id": "d2-7",
         "day": 2,
-        "num": 7,
+        "num": 8,
         "period": "저녁",
         "time": "18:00 - 19:30",
         "name": "뮌헨 복귀 드라이브 & 차량 반납 / 호텔 휴식",
         "nameDe": "Rückfahrt nach München & SIXT Rückgabe",
         "lat": 48.1455,
-        "lng": 11.5390,
+        "lng": 11.539,
         "category": "귀환 & 휴식",
         "desc": "가르미슈-파르텐키르헨을 지나 A95 아우토반을 시원하게 달려 뮌헨으로 복귀합니다. SIXT 렌터카를 반납하고 호텔에서 뿌듯한 마음으로 편안한 휴식을 취합니다.",
         "tip": "차량 반납 전 중앙역 근처 주유소에서 기름을 가득(Full) 채워 반납하세요."
@@ -422,9 +452,24 @@ itinerary_data = [
     "googleRouteUrl": "https://www.google.com/maps/dir/Deutsches+Museum/TU+Mensa/Odeonsplatz/Residenz+M%C3%BCnchen/Hofbr%C3%A4uhaus+M%C3%BCnchen",
     "spots": [
       {
-        "id": "d3-1",
+        "id": "d3-0",
         "day": 3,
         "num": 1,
+        "period": "오전",
+        "time": "10:15 - 10:45",
+        "name": "노보텔 숙소 출발 ➔ 국립 독일 박물관 이동",
+        "nameDe": "Novotel Arnulfpark Start ➔ Deutsches Museum",
+        "lat": 48.1455,
+        "lng": 11.539,
+        "category": "숙소 출발 & S-Bahn 이동",
+        "desc": "어제 장거리 로드트립 후 꿀잠! 숙소에서 여유롭게 출발하여 Donnersbergerbrücke역에서 S-Bahn 탑승 ➔ Isartor역 하차 후 도보 5분 박물관 도착.",
+        "tip": "이자르토어역에서 루드비히 다리(Ludwigsbrücke)를 건너는 아침 풍경이 상쾌합니다.",
+        "highlight": True
+      },
+      {
+        "id": "d3-1",
+        "day": 3,
+        "num": 2,
         "period": "오전",
         "time": "10:45 - 12:00",
         "name": "국립 독일 박물관 (Deutsches Museum - 1시간 알짜 코스)",
@@ -438,12 +483,12 @@ itinerary_data = [
       {
         "id": "d3-2",
         "day": 3,
-        "num": 2,
+        "num": 3,
         "period": "점심",
         "time": "12:15 - 13:30",
         "name": "TU MENSA (뮌헨공대 학생식당 점심)",
         "nameDe": "Mensa Arcisstraße (TUM)",
-        "lat": 48.1480,
+        "lat": 48.148,
         "lng": 11.5678,
         "category": "대학교 학생식당 (가성비 런치)",
         "desc": "유럽 최고의 공대 중 하나인 뮌헨공대(TUM) 메인 캠퍼스 학생식당입니다. 뮌헨 시내 최고의 가성비로 든든한 점심 식사를 즐기며 활기찬 독일 대학생들의 분위기를 경험합니다.",
@@ -452,7 +497,7 @@ itinerary_data = [
       {
         "id": "d3-3",
         "day": 3,
-        "num": 3,
+        "num": 4,
         "period": "오후",
         "time": "13:45 - 14:45",
         "name": "오데온 광장 테라스 카페 타임",
@@ -466,7 +511,7 @@ itinerary_data = [
       {
         "id": "d3-4",
         "day": 3,
-        "num": 4,
+        "num": 5,
         "period": "오후",
         "time": "14:45 - 16:45",
         "name": "뮌헨 레지덴츠 궁전 (Residenz München & 안티콰리움)",
@@ -481,7 +526,7 @@ itinerary_data = [
       {
         "id": "d3-5",
         "day": 3,
-        "num": 5,
+        "num": 6,
         "period": "오후",
         "time": "16:45 - 17:55",
         "name": "오데온 광장 ~ 막시밀리안 거리 산책 & 상점 구경",
@@ -495,13 +540,13 @@ itinerary_data = [
       {
         "id": "d3-6",
         "day": 3,
-        "num": 6,
+        "num": 7,
         "period": "저녁",
         "time": "18:00 - 20:30",
         "name": "호프브로이하우스 (★ 저녁 18:00 정각 도착!)",
         "nameDe": "Hofbräuhaus am Platzl (18:00 Ankunft)",
         "lat": 48.1376,
-        "lng": 11.5800,
+        "lng": 11.58,
         "category": "바이에른 전설의 맥주홀",
         "desc": "★ 레지덴츠에서 걸어서 3분 거리! 저녁 피크(19시) 전인 18:00 정각 도착으로 1층 대형 맥주홀(Schwemme) 명당자리를 대기 없이 즉시 선점합니다! 라이브 브라스 밴드 연주와 함께 1L 맥주 & 슈바인학센 건배!",
         "tip": "18시 입장은 자리 잡기에 최고의 골든타임입니다! 식사 후 입구 전용 샵에서 1L 맥주잔, 도자기 머그, 마그넷 기념품도 여유롭게 챙기세요.",
@@ -519,9 +564,24 @@ itinerary_data = [
     "googleRouteUrl": "https://www.google.com/maps/dir/Allianz+Arena/M%C3%BCnchner+Freiheit/Eisbachwelle/Schloss+Nymphenburg/Novotel+M%C3%BCnchen+City+Arnulfpark/Dallmayr",
     "spots": [
       {
-        "id": "d4-1",
+        "id": "d4-0",
         "day": 4,
         "num": 1,
+        "period": "오전",
+        "time": "09:45 - 10:30",
+        "name": "노보텔 숙소 출발 ➔ 알리안츠 아레나 이동",
+        "nameDe": "Novotel Arnulfpark Start ➔ Allianz Arena",
+        "lat": 48.1455,
+        "lng": 11.539,
+        "category": "숙소 출발 & 대중교통 이동",
+        "desc": "노보텔 숙소에서 출발! Donnersbergerbrücke역에서 S-Bahn 탑승 ➔ 마리엔 광장 환승 ➔ 지하철 U6을 타고 북쪽 Fröttmaning(프뢰트마닝)역으로 이동(약 35분 소요).",
+        "tip": "11:45 투어 시작 전 경기장 브런치를 즐기기 위해 09:45 숙소에서 여유 있게 출발하세요.",
+        "highlight": True
+      },
+      {
+        "id": "d4-1",
+        "day": 4,
+        "num": 2,
         "period": "오전",
         "time": "10:30 - 11:35",
         "name": "알리안츠 아레나 도착 & 비스트로 런치 (Arena Bistro)",
@@ -535,7 +595,7 @@ itinerary_data = [
       {
         "id": "d4-2",
         "day": 4,
-        "num": 2,
+        "num": 3,
         "period": "오전~낮",
         "time": "11:45 - 12:45",
         "name": "알리안츠 아레나 스타디움 투어 (★ 11:45 정각 시작)",
@@ -550,7 +610,7 @@ itinerary_data = [
       {
         "id": "d4-3",
         "day": 4,
-        "num": 3,
+        "num": 4,
         "period": "낮",
         "time": "12:45 - 13:50",
         "name": "FC 바이에른 뮤지엄 & 공식 메가스토어",
@@ -564,7 +624,7 @@ itinerary_data = [
       {
         "id": "d4-4",
         "day": 4,
-        "num": 4,
+        "num": 5,
         "period": "오후",
         "time": "14:15 - 15:20",
         "name": "슈바빙(Schwabing) 지구 산책 & 테라스 카페 타임",
@@ -578,7 +638,7 @@ itinerary_data = [
       {
         "id": "d4-5",
         "day": 4,
-        "num": 5,
+        "num": 6,
         "period": "오후",
         "time": "15:30 - 16:40",
         "name": "낮의 영국정원 & 아이스바흐 파도타기 (Eisbachwelle)",
@@ -592,7 +652,7 @@ itinerary_data = [
       {
         "id": "d4-6",
         "day": 4,
-        "num": 6,
+        "num": 7,
         "period": "오후",
         "time": "17:15 - 18:30",
         "name": "님펜부르크 궁전 (Schloss Nymphenburg - 석양 산책)",
@@ -607,13 +667,13 @@ itinerary_data = [
       {
         "id": "d4-7",
         "day": 4,
-        "num": 7,
+        "num": 8,
         "period": "저녁",
         "time": "18:45 - 19:20",
         "name": "★ 숙소(노보텔) 중간 복귀: 쇼핑 짐 정리 & 멋진 디너 의상 환복!",
         "nameDe": "Novotel Hotel - Frischepause & Umziehen",
         "lat": 48.1455,
-        "lng": 11.5390,
+        "lng": 11.539,
         "category": "호텔 휴식 & 환복 타임",
         "desc": "님펜부르크에서 트램 17번을 타고 우리 숙소(노보텔 아르눌프파크)로 12분 만에 복귀! 종일 들고 다닌 짐을 객실에 내려놓고, 20:00 예약된 파인다이닝 디너를 위해 세련되고 편안한 옷으로 갈아입고 가볍게 재충전합니다.",
         "tip": "트램 17번이 궁전-호텔-시내를 일직선으로 완벽하게 이어주어 동선 낭비가 전혀 없습니다."
@@ -621,13 +681,13 @@ itinerary_data = [
       {
         "id": "d4-8",
         "day": 4,
-        "num": 8,
+        "num": 9,
         "period": "저녁",
         "time": "19:25 - 20:00",
         "name": "구시가지 슈퍼마켓/마트 (Rewe, Edeka, dm) 귀국 선물 쇼핑",
         "nameDe": "Souvenirs & Supermarkt Shopping (dm / Edeka / Dallmayr)",
-        "lat": 48.1380,
-        "lng": 11.5770,
+        "lat": 48.138,
+        "lng": 11.577,
         "category": "기념품 & 슈퍼마켓 쇼핑",
         "desc": "가벼운 옷차림으로 시내로 이동하여, 식당 주변의 슈퍼마켓(Edeka, Rewe)과 dm에서 독일 프리미엄 초콜릿, 과자, 발포비타민, 핸드크림 등 귀국 선물을 알차게 쇼핑합니다.",
         "tip": "쇼핑 후 가벼운 쇼핑백을 들고 바로 앞 20:00 예약 레스토랑으로 여유롭게 입장하세요."
@@ -635,7 +695,7 @@ itinerary_data = [
       {
         "id": "d4-9",
         "day": 4,
-        "num": 9,
+        "num": 10,
         "period": "저녁",
         "time": "20:00 - 22:00",
         "name": "완결 축배 디너 (★ 20:00 예약 정각 입장!)",
@@ -664,12 +724,12 @@ itinerary_data = [
         "num": 1,
         "period": "오전",
         "time": "09:30 - 10:15",
-        "name": "노보텔 체크아웃 & 뮌헨 중앙역(München Hbf) 이동",
-        "nameDe": "Novotel Check-out ➔ München Hbf",
-        "lat": 48.1402,
-        "lng": 11.5583,
+        "name": "노보텔 체크아웃 ➔ 뮌헨 중앙역 이동",
+        "nameDe": "Novotel Arnulfpark Check-out ➔ München Hbf",
+        "lat": 48.1455,
+        "lng": 11.539,
         "category": "체크아웃 & 기차역 이동",
-        "desc": "노보텔에서 짐을 챙겨 체크아웃 후 트램 17번을 타고 5분 만에 뮌헨 중앙역 도착! 오스트리아행 기차 플랫폼으로 이동합니다.",
+        "desc": "노보텔 숙소에서 체크아웃 후 바로 앞 트램 17번을 타고 5분 만에 뮌헨 중앙역 도착! 잘츠부르크행 기차 플랫폼으로 이동합니다.",
         "tip": "중앙역 전광판에서 잘츠부르크(Salzburg Hbf)행 기차 플랫폼 번호를 확인하세요."
       },
       {
@@ -711,7 +771,7 @@ itinerary_data = [
         "name": "오스트리아 잘츠부르크 도시 투어 (세부 일정 추후 반영 예정)",
         "nameDe": "Salzburg Stadt-Tour (Details folgen)",
         "lat": 47.7981,
-        "lng": 13.0470,
+        "lng": 13.047,
         "category": "유네스코 세계문화유산 고도 탐방",
         "desc": "미라벨 정원, 게트라이데 거리(모차르트 생가), 호엔잘츠부르크 성채, 잘츠부르크 대성당 등 아름다운 모차르트와 사운드 오브 뮤직의 도시를 즐깁니다! (사용자님이 자세한 일정을 주시면 분 단위로 정밀하게 업데이트됩니다)",
         "tip": "잘츠부르크 카드를 구매하면 대중교통 및 주요 관광지 무료 입장이 가능합니다."
@@ -749,8 +809,8 @@ itinerary_data = [
         "time": "08:30 - 10:45",
         "name": "잘츠부르크 ➔ 할슈타트 (기차 + 버스/페리 이동)",
         "nameDe": "Salzburg ➔ Hallstatt Panorama-Transfer",
-        "lat": 47.7120,
-        "lng": 13.6230,
+        "lat": 47.712,
+        "lng": 13.623,
         "category": "잘츠카머구트 호수 파노라마 이동",
         "desc": "잘츠카머구트 호수 지대를 지나며 버스 150번 및 기차, 페리를 타고 할슈타트로 이동합니다. 페리선 위에서 호수 너머로 바라보는 할슈타트 마을 전경이 절경입니다.",
         "tip": "페리를 타고 호수를 건너 마을 선착장에 도착하는 순간이 최고의 포토존입니다."
@@ -792,7 +852,7 @@ itinerary_data = [
         "time": "19:30 - 20:30",
         "name": "이비스 스타일스 뮌헨 에어포트 체크인 (내일 코펜하겐 준비)",
         "nameDe": "ibis Styles Munich Airport (Wiederaufnahme)",
-        "lat": 48.3540,
+        "lat": 48.354,
         "lng": 11.7591,
         "category": "공항 호텔 재투숙 (출국/환승 동선 최적)",
         "desc": "19일 첫날 묵었던 공항 인근 이비스 스타일스 호텔에 다시 체크인! 내일 오전 10:15 코펜하겐 비행기 탑승을 위해 짐을 정리하고 편안하게 휴식합니다.",
@@ -818,7 +878,7 @@ itinerary_data = [
         "time": "08:00 - 09:00",
         "name": "이비스 스타일스 에어포트 체크아웃 ➔ 뮌헨 공항 이동",
         "nameDe": "ibis Styles Check-out ➔ München Airport",
-        "lat": 48.3540,
+        "lat": 48.354,
         "lng": 11.7591,
         "category": "체크아웃 & 공항 이동",
         "desc": "이비스 스타일스 뮌헨 에어포트 호텔 체크아웃 후 셔틀/택시로 뮌헨 공항 제2터미널 이동(10분)하여 탑승 수속을 진행합니다.",
@@ -832,7 +892,7 @@ itinerary_data = [
         "time": "10:15 - 11:55",
         "name": "SAS SK 662 탑승: 뮌헨(MUC) ➔ 코펜하겐(CPH) 비행",
         "nameDe": "Flug SAS SK 662 (10:15 ➔ 11:55)",
-        "lat": 55.6180,
+        "lat": 55.618,
         "lng": 12.6508,
         "category": "스칸디나비아 항공 국제선",
         "desc": "10:15 뮌헨 국제공항 출발 ➔ 11:55 코펜하겐 카스트룹 국제공항 도착 (비행시간 약 1시간 40분).",
@@ -863,7 +923,7 @@ itinerary_data = [
         "name": "티볼리 푸드홀 런치 (가솔린 그릴 or 스뫼레브뢰)",
         "nameDe": "Gasoline Grill @ Tivoli Food Hall",
         "lat": 55.6738,
-        "lng": 12.5670,
+        "lng": 12.567,
         "category": "세계 27대 수제버거 / 덴마크 미식",
         "desc": "호텔 바로 맞은편 티볼리 푸드홀에서 블룸버그 선정 세계 최고 버거 가솔린 그릴(치즈버거/버터버거) 또는 전통 오픈 샌드위치 런치.",
         "tip": "호텔 바로 앞 도보 1분! 브레이크타임 없이 늦은 점심 가능."
@@ -914,12 +974,12 @@ itinerary_data = [
         "num": 1,
         "period": "오전",
         "time": "10:30 - 11:15",
-        "name": "코펜하겐 중앙역 (København H) 출발 ➔ 오드룹고르 이동",
-        "nameDe": "København H ➔ Ordrupgaard",
-        "lat": 55.6728,
-        "lng": 12.5648,
+        "name": "래디슨 로열 숙소 출발 ➔ 중앙역 S-Bahn 탑승 (오드룹고르 이동)",
+        "nameDe": "Radisson Collection Royal Start ➔ Ordrupgaard",
+        "lat": 55.67491,
+        "lng": 12.56377,
         "category": "대중교통 이동 (S-Bahn + 버스 388번)",
-        "desc": "호텔 앞 코펜하겐 중앙역에서 S-Bahn C선 탑승(20분) ➔ Klampenborg 역 하차 ➔ 역 앞 버스 388번 환승(8분)하여 오드룹고르(Vilvordevej) 도착.",
+        "desc": "호텔 바로 맞은편 코펜하겐 중앙역으로 이동하여 S-Bahn C선 탑승(20분) ➔ Klampenborg 역 하차 ➔ 역 앞 버스 388번 환승(8분)하여 오드룹고르(Vilvordevej) 도착.",
         "tip": "코펜하겐 카드 Discover로 전 구간 무료!"
       },
       {
@@ -931,7 +991,7 @@ itinerary_data = [
         "name": "🏠 핀 율의 집 (Finn Juhl's House) & 오드룹고르 미술관",
         "nameDe": "Finn Juhl's House & Museum Ordrupgaard",
         "lat": 55.7672,
-        "lng": 12.5630,
+        "lng": 12.563,
         "category": "덴마크 디자인 거장의 자택 & 미술관",
         "desc": "덴마크 가구 거장 핀 율이 직접 설계·거주한 주택 내부 가이드 투어(치프테인 체어, 펠리컨 체어 등) & 자하 하디드 설계 미술관 신관 관람.",
         "tip": "★ 평일은 45분 가이드 투어 필수 (오드룹고르 공식 웹사이트 사전 예약 필수 / 화요일 11:00~17:00 오픈).",
@@ -1051,7 +1111,7 @@ itinerary_data = [
         "time": "14:30 - 15:30",
         "name": "코펜하겐 카스트룹 공항(CPH) 이동 & 출국 수속",
         "nameDe": "CPH Airport Check-in",
-        "lat": 55.6180,
+        "lat": 55.618,
         "lng": 12.6508,
         "category": "공항 이동 & 체크인",
         "desc": "코펜하겐 카스트룹 공항 도착 후 대한항공 카운터에서 탑승권 발권 및 수하물 위탁, 출국 심사를 진행합니다.",
@@ -1065,8 +1125,8 @@ itinerary_data = [
         "time": "17:30 - ",
         "name": "대한항공 KE6410 탑승 ➔ 대한민국 귀국 비행",
         "nameDe": "Korean Air KE6410 (17:30 Abflug)",
-        "lat": 55.5800,
-        "lng": 12.7800,
+        "lat": 55.58,
+        "lng": 12.78,
         "category": "대한항공 국제선 (출국)",
         "desc": "★ 17:30 코펜하겐 공항 이륙! 대한민국 인천공항으로 귀국 비행.",
         "tip": "대한항공 KE6410 (17:30 정시 출발)",
@@ -1077,8 +1137,30 @@ itinerary_data = [
 ]
 
 # 3. 경로 좌표들
+# 20일 이비스 공항 ➔ 노보텔 이동 및 뮌헨 시내 경로
+route_day1_transit = [
+  [48.3540, 11.7591], # 이비스 스타일스 에어포트 호텔
+  [48.3537, 11.7860], # 뮌헨 공항역
+  [48.2500, 11.6500], # 공항철도 S-Bahn
+  [48.1402, 11.5583], # 뮌헨 중앙역
+  [48.1455, 11.5390], # 노보텔 뮌헨 시티 아르눌프파크 (캐리어 짐 보관)
+  [48.1770, 11.5560], # BMW 벨트
+  [48.1763, 11.5591], # BMW 뮤지엄
+  [48.1795, 11.5540], # 올리도르프
+  [48.1735, 11.5530], # 올림피아 파크 언덕
+  [48.1374, 11.5755], # 마리엔 광장
+  [48.1351, 11.5762], # 빅투알리엔 시장
+  [48.1382, 11.5772], # 달마이어
+  [48.1375, 11.5754], # 신시청사 인형극
+  [48.1392, 11.5794], # 막스마라
+  [48.1404, 11.5756], # 퓐프 회페
+  [48.1394, 11.5798], # Rewe City
+  [48.1455, 11.5390]  # 노보텔 복귀
+]
+
 roadtrip_coords = [
-  [48.1402, 11.5583], # SIXT 뮌헨 중앙역
+  [48.1455, 11.5390], # 노보텔 숙소 출발 (트램/차량 이동)
+  [48.1402, 11.5583], # SIXT 뮌헨 중앙역 (06:00 차량 픽업)
   [48.1300, 11.4500],
   [48.0600, 11.0000],
   [48.0500, 10.8700],
@@ -1121,7 +1203,7 @@ train_route_salzburg = [
 ]
 
 train_route_hallstatt = [
-  [47.8130, 13.0457], # 잘츠부르크 중앙역
+  [47.8130, 13.0457], # 잘츠부르크 중앙역 (호텔 유로파 출발)
   [47.7950, 13.3000], # 푸슐제 (Fuschl am See)
   [47.7380, 13.4400], # 장크트 길겐 (St. Gilgen)
   [47.7120, 13.6230], # 바트 이슐 (Bad Ischl)
@@ -1129,7 +1211,8 @@ train_route_hallstatt = [
   [47.7120, 13.6230],
   [47.8130, 13.0457],
   [48.1402, 11.5583], # 뮌헨 중앙역
-  [48.3540, 11.7591]  # 이비스 에어포트
+  [48.2500, 11.6500], # 공항철도 S-Bahn
+  [48.3540, 11.7591]  # 이비스 에어포트 호텔
 ]
 
 # 26일 뮌헨 ➔ 코펜하겐 비행선 및 메트로선
@@ -1158,23 +1241,24 @@ cph_city_day7 = [
 
 # 27일 코펜하겐 ➔ 오드룹고르(핀 율의 집) ➔ 루이지애나 현대미술관 ➔ 코펜하겐 복귀 경로
 route_cph_art_tour = [
-  [55.6728, 12.5648], # 코펜하겐 중앙역
-  [55.6925, 12.5878], # 에스터포트 역
-  [55.7314, 12.5786], # 헬레룹 역
-  [55.7709, 12.5889], # 클람펜보르 역
-  [55.7672, 12.5630], # 오드룹고르 (핀 율의 집)
-  [55.7709, 12.5889], # 다시 클람펜보르 역
-  [55.8200, 12.5800], # 스코드스보르그 해안
-  [55.8500, 12.5600], # 베드백
-  [55.8850, 12.5450], # 룽스테드 퀴스트
-  [55.9300, 12.5400], # 콕케달
-  [55.9645, 12.5350], # 훔레백 역
-  [55.9683, 12.5392], # 루이지애나 현대미술관
-  [55.9645, 12.5350], # 훔레백 역 (복귀)
-  [55.7709, 12.5889], # 클람펜보르
-  [55.6925, 12.5878], # 에스터포트
-  [55.6728, 12.5648], # 코펜하겐 중앙역
-  [55.67491, 12.56377] # 래디슨 컬렉션 로열 호텔
+  [55.67491, 12.56377], # 래디슨 컬렉션 로열 호텔 (숙소 출발)
+  [55.6728, 12.5648],   # 코펜하겐 중앙역
+  [55.6925, 12.5878],   # 에스터포트 역
+  [55.7314, 12.5786],   # 헬레룹 역
+  [55.7709, 12.5889],   # 클람펜보르 역
+  [55.7672, 12.5630],   # 오드룹고르 (핀 율의 집)
+  [55.7709, 12.5889],   # 다시 클람펜보르 역
+  [55.8200, 12.5800],   # 스코드스보르그 해안
+  [55.8500, 12.5600],   # 베드백
+  [55.8850, 12.5450],   # 룽스테드 퀴스트
+  [55.9300, 12.5400],   # 콕케달
+  [55.9645, 12.5350],   # 훔레백 역
+  [55.9683, 12.5392],   # 루이지애나 현대미술관
+  [55.9645, 12.5350],   # 훔레백 역 (복귀)
+  [55.7709, 12.5889],   # 클람펜보르
+  [55.6925, 12.5878],   # 에스터포트
+  [55.6728, 12.5648],   # 코펜하겐 중앙역
+  [55.67491, 12.56377]  # 래디슨 컬렉션 로열 호텔 복귀
 ]
 
 # 30일 코펜하겐 귀국 비행 경로
@@ -1196,6 +1280,7 @@ const HOTELS_DATA = {json.dumps(hotels_data, ensure_ascii=False, indent=2)};
 
 const ITINERARY_DATA = {json.dumps(itinerary_data, ensure_ascii=False, indent=2)};
 
+const ROUTE_DAY1_TRANSIT = {json.dumps(route_day1_transit, ensure_ascii=False, indent=2)};
 const ROADTRIP_ROUTE_COORDS = {json.dumps(roadtrip_coords, ensure_ascii=False, indent=2)};
 const FLIGHT_ROUTE_DAY0 = {json.dumps(flight_route_day0, ensure_ascii=False, indent=2)};
 const TRAIN_ROUTE_SALZBURG = {json.dumps(train_route_salzburg, ensure_ascii=False, indent=2)};
@@ -1464,6 +1549,13 @@ function renderView() {{
       dashArray: '8, 8'
     }}).addTo(polylinesLayerGroup);
 
+    // 20일 이비스 공항 ➔ 노보텔 이동 및 시내선
+    L.polyline(ROUTE_DAY1_TRANSIT, {{
+      color: '#2563eb',
+      weight: 2.5,
+      opacity: 0.85
+    }}).addTo(polylinesLayerGroup);
+
     // 21일 렌트카 루프선
     L.polyline(ROADTRIP_ROUTE_COORDS, {{
       color: '#f97316',
@@ -1526,7 +1618,7 @@ function renderView() {{
 
     // 기타 날짜 가벼운 연결선 (Day 1, 3, 4, 9, 10 등)
     targetDays.forEach(day => {{
-      if (![0, 2, 5, 6, 7, 8, 11].includes(day.day)) {{
+      if (![0, 1, 2, 5, 6, 7, 8, 11].includes(day.day)) {{
         const coords = day.spots.map(s => [s.lat, s.lng]);
         if (coords.length > 1) {{
           L.polyline(coords, {{
@@ -1544,6 +1636,12 @@ function renderView() {{
       weight: 4.5,
       opacity: 0.95,
       dashArray: '8, 8'
+    }}).addTo(polylinesLayerGroup);
+  }} else if (currentDayFilter === '1') {{
+    L.polyline(ROUTE_DAY1_TRANSIT, {{
+      color: '#2563eb',
+      weight: 4,
+      opacity: 0.9
     }}).addTo(polylinesLayerGroup);
   }} else if (currentDayFilter === '2') {{
     L.polyline(ROADTRIP_ROUTE_COORDS, {{
