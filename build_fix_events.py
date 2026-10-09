@@ -914,12 +914,12 @@ itinerary_data = [
         "num": 1,
         "period": "오전",
         "time": "10:30 - 11:15",
-        "name": "코펜하겐 중앙역 ➔ 오드룹고르(핀 율의 집) 이동",
+        "name": "코펜하겐 중앙역 (København H) 출발 ➔ 오드룹고르 이동",
         "nameDe": "København H ➔ Ordrupgaard",
-        "lat": 55.7672,
-        "lng": 12.5630,
+        "lat": 55.6728,
+        "lng": 12.5648,
         "category": "대중교통 이동 (S-Bahn + 버스 388번)",
-        "desc": "중앙역에서 S-Bahn C선 탑승(20분) ➔ Klampenborg 역 하차 ➔ 역 앞 버스 388번 환승(8분)하여 Vilvordevej(오드룹고르) 도착.",
+        "desc": "호텔 앞 코펜하겐 중앙역에서 S-Bahn C선 탑승(20분) ➔ Klampenborg 역 하차 ➔ 역 앞 버스 388번 환승(8분)하여 오드룹고르(Vilvordevej) 도착.",
         "tip": "코펜하겐 카드 Discover로 전 구간 무료!"
       },
       {
@@ -941,35 +941,21 @@ itinerary_data = [
         "id": "d8-3",
         "day": 8,
         "num": 3,
-        "period": "낮",
-        "time": "13:30 - 14:20",
-        "name": "오드룹고르 ➔ 루이지애나 현대미술관 이동",
-        "nameDe": "Ordrupgaard ➔ Louisiana Museum",
+        "period": "오후~밤",
+        "time": "13:30 - 20:00",
+        "name": "🌊 루이지애나 현대미술관 (해안 기차 이동 & 야간 관람)",
+        "nameDe": "Louisiana Museum of Modern Art",
         "lat": 55.9683,
         "lng": 12.5392,
-        "category": "해안선 기차(Kystbanen) 이동",
-        "desc": "버스 388번 타고 Klampenborg 역 복귀 ➔ 해안선 기차 Kystbanen 탑승(22분) ➔ Humlebæk(훔레백) 역 하차 후 도보 10분 미술관 도착.",
-        "tip": "기차 차창 밖으로 북유럽 바다 풍경 조망 가능."
+        "category": "세계에서 가장 아름다운 바닷가 현대미술관",
+        "desc": "버스 388번 + 해안선 기차(Kystbanen)로 이동(45분) ➔ 외레순 해협 바다가 펼쳐지는 카페테리아 늦은 런치/커피 ➔ 알베르토 자코메티 홀, 알렉산더 칼더 조각 정원, 쿠사마 야요이 무한 거울의 방 감상 ➔ 바다 노을과 밤 22시 야간 개장 조명 만끽.",
+        "tip": "화요일은 밤 22:00까지 야간 개장! 카페테리아는 21:30까지 운영.",
+        "highlight": True
       },
       {
         "id": "d8-4",
         "day": 8,
         "num": 4,
-        "period": "오후~밤",
-        "time": "14:20 - 20:00",
-        "name": "🌊 루이지애나 현대미술관 (오션뷰 카페 & 야간 관람)",
-        "nameDe": "Louisiana Museum of Modern Art",
-        "lat": 55.9683,
-        "lng": 12.5392,
-        "category": "세계에서 가장 아름다운 바닷가 현대미술관",
-        "desc": "외레순 해협 바다가 펼쳐지는 카페테리아 늦은 런치/커피 ➔ 자코메티 홀, 알렉산더 칼더 조각 정원, 쿠사마 야요이 무한 거울의 방 감상 ➔ 바다 노을과 밤 22시 야간 개장 조명 만끽.",
-        "tip": "화요일은 밤 22:00까지 야간 개장! 카페테리아는 21:30까지 운영.",
-        "highlight": True
-      },
-      {
-        "id": "d8-5",
-        "day": 8,
-        "num": 5,
         "period": "밤",
         "time": "20:00 - 20:45",
         "name": "루이지애나 ➔ 코펜하겐 중앙역 호텔 복귀",
@@ -1151,6 +1137,27 @@ cph_metro_route = [
   [55.67491, 12.56377] # 래디슨 컬렉션 로열 호텔
 ]
 
+# 27일 코펜하겐 ➔ 오드룹고르(핀 율의 집) ➔ 루이지애나 현대미술관 ➔ 코펜하겐 복귀 경로
+route_cph_art_tour = [
+  [55.6728, 12.5648], # 코펜하겐 중앙역
+  [55.6925, 12.5878], # 에스터포트 역
+  [55.7314, 12.5786], # 헬레룹 역
+  [55.7709, 12.5889], # 클람펜보르 역
+  [55.7672, 12.5630], # 오드룹고르 (핀 율의 집)
+  [55.7709, 12.5889], # 다시 클람펜보르 역
+  [55.8200, 12.5800], # 스코드스보르그 해안
+  [55.8500, 12.5600], # 베드백
+  [55.8850, 12.5450], # 룽스테드 퀴스트
+  [55.9300, 12.5400], # 콕케달
+  [55.9645, 12.5350], # 훔레백 역
+  [55.9683, 12.5392], # 루이지애나 현대미술관
+  [55.9645, 12.5350], # 훔레백 역 (복귀)
+  [55.7709, 12.5889], # 클람펜보르
+  [55.6925, 12.5878], # 에스터포트
+  [55.6728, 12.5648], # 코펜하겐 중앙역
+  [55.67491, 12.56377] # 래디슨 컬렉션 로열 호텔
+]
+
 # 4. HTML 파일의 head 부분 가져오기
 base_html = open('/Users/min/orca/workspaces/trip/여행/index.html', encoding='utf-8').read()
 html_head = base_html.split('<script>')[0]
@@ -1166,6 +1173,7 @@ const TRAIN_ROUTE_SALZBURG = {json.dumps(train_route_salzburg, ensure_ascii=Fals
 const TRAIN_ROUTE_HALLSTATT = {json.dumps(train_route_hallstatt, ensure_ascii=False, indent=2)};
 const FLIGHT_ROUTE_CPH = {json.dumps(flight_route_cph, ensure_ascii=False, indent=2)};
 const CPH_METRO_ROUTE = {json.dumps(cph_metro_route, ensure_ascii=False, indent=2)};
+const ROUTE_CPH_ART_TOUR = {json.dumps(route_cph_art_tour, ensure_ascii=False, indent=2)};
 
 let currentDayFilter = 'all';
 let currentMobileView = 'list';
@@ -1448,9 +1456,17 @@ function renderView() {{
       dashArray: '8, 8'
     }}).addTo(polylinesLayerGroup);
 
+    // 27일 코펜하겐 ➔ 루이지애나 해안 예술 투어선
+    L.polyline(ROUTE_CPH_ART_TOUR, {{
+      color: '#e11d48',
+      weight: 2.8,
+      opacity: 0.85,
+      dashArray: '6, 6'
+    }}).addTo(polylinesLayerGroup);
+
     // 기타 날짜 가벼운 연결선
     targetDays.forEach(day => {{
-      if (day.day !== 2 && day.day !== 5 && day.day !== 6 && day.day !== 7 && day.day !== 0) {{
+      if (day.day !== 2 && day.day !== 5 && day.day !== 6 && day.day !== 7 && day.day !== 8 && day.day !== 0) {{
         const coords = day.spots.map(s => [s.lat, s.lng]);
         if (coords.length > 1) {{
           L.polyline(coords, {{
@@ -1493,6 +1509,13 @@ function renderView() {{
       color: '#dc2626',
       weight: 4,
       opacity: 0.85
+    }}).addTo(polylinesLayerGroup);
+  }} else if (currentDayFilter === '8') {{
+    L.polyline(ROUTE_CPH_ART_TOUR, {{
+      color: '#e11d48',
+      weight: 4.5,
+      opacity: 0.95,
+      dashArray: '6, 6'
     }}).addTo(polylinesLayerGroup);
   }} else {{
     targetDays.forEach(day => {{
