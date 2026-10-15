@@ -51,7 +51,7 @@ hotels_data = [
     "nameDe": "Radisson Collection Royal Hotel, Copenhagen",
     "lat": 55.67491,
     "lng": 12.56377,
-    "tag": "🇩🇰 26일~30일 코펜하겐 숙소 (4박 / 중앙역 2분)",
+    "tag": "🇩🇰 26일~29일 코펜하겐 숙소 (3박 / 중앙역 2분)",
     "address": "Hammerichsgade 1, 1611 København, Denmark",
     "googleMapsUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
     "desc": "전설적인 덴마크 디자인 거장 아르네 야콥센이 설계한 세계 최초의 5성급 디자인 호텔! 코펜하겐 중앙역(København H) 및 티볼리 가든 바로 정면 도보 2분 초역세권.",
@@ -61,7 +61,7 @@ hotels_data = [
   }
 ]
 
-# 2. 전체 12일 일정 데이터 (19일 ~ 30일)
+# 2. 전체 11일 일정 데이터 (19일 ~ 29일)
 itinerary_data = [
   {
     "day": 0,
@@ -1056,42 +1056,16 @@ itinerary_data = [
   },
   {
     "day": 10,
-    "dayLabel": "🇩🇰 29일 (코펜하겐)",
-    "title": "29일: 🇩🇰 코펜하겐 자유 일정 & 래디슨 로열 호텔 숙박",
-    "summary": "코펜하겐 자유 일정 (세부 일정 추후 업데이트 예정) / 래디슨 컬렉션 로열 호텔 숙박",
-    "color": "#be123c",
-    "transitTip": "숙소: 래디슨 컬렉션 로열 호텔 코펜하겐",
+    "dayLabel": "🛫 29일 (귀국)",
+    "title": "29일: 🛍️ 시내 자유 쇼핑 & 못 다 본 명소 탐방 ➔ 17:30 귀국 비행 (대한항공 KE6410)",
+    "summary": "호텔 체크아웃 후 짐 보관! 스트뢰에 거리 북유럽 디자인 소품·기념품 쇼핑 및 미처 못 가본 골목·카페 여유로운 탐방 후 공항 이동, 17:30 대한항공 KE6410 편으로 출국 (한국 시각 30일 도착)",
+    "color": "#4338ca",
+    "transitTip": "항공편: 대한항공 KE6410 (코펜하겐 CPH 17:30 출발 ➔ 인천 ICN 30일 낮 도착)",
     "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
     "spots": [
       {
         "id": "d10-1",
         "day": 10,
-        "num": 1,
-        "period": "전일",
-        "time": "자유 일정",
-        "name": "코펜하겐 자유 일정 (세부 일정 추후 업데이트 예정)",
-        "nameDe": "Kopenhagen Freizeit (Details folgen)",
-        "lat": 55.67491,
-        "lng": 12.56377,
-        "category": "자유 일정",
-        "desc": "상세 일정을 알려주시면 방문지와 동선을 등록해 드립니다.",
-        "tip": "숙소: 래디슨 컬렉션 로열 호텔 코펜하겐 (중앙역 앞)",
-        "highlight": True
-      }
-    ]
-  },
-  {
-    "day": 11,
-    "dayLabel": "🛫 30일 (귀국)",
-    "title": "30일: 🛍️ 시내 자유 쇼핑 & 못 다 본 명소 탐방 ➔ 17:30 귀국 비행 (대한항공 KE6410)",
-    "summary": "호텔 체크아웃 후 짐 보관! 스트뢰에 거리 북유럽 디자인 소품·기념품 쇼핑 및 미처 못 가본 골목·카페 여유로운 탐방 후 공항 이동, 17:30 대한항공 KE6410 편으로 출국",
-    "color": "#4338ca",
-    "transitTip": "항공편: 대한항공 KE6410 (코펜하겐 CPH 17:30 출발)",
-    "googleRouteUrl": "https://maps.app.goo.gl/FvKq3DDsXJTfPuDN6",
-    "spots": [
-      {
-        "id": "d11-1",
-        "day": 11,
         "num": 1,
         "period": "오전",
         "time": "10:00 - 10:30",
@@ -1105,8 +1079,8 @@ itinerary_data = [
         "highlight": True
       },
       {
-        "id": "d11-2",
-        "day": 11,
+        "id": "d10-2",
+        "day": 10,
         "num": 2,
         "period": "오전~낮",
         "time": "10:30 - 14:00",
@@ -1120,8 +1094,8 @@ itinerary_data = [
         "highlight": True
       },
       {
-        "id": "d11-3",
-        "day": 11,
+        "id": "d10-3",
+        "day": 10,
         "num": 3,
         "period": "낮",
         "time": "14:00 - 14:30",
@@ -1134,8 +1108,8 @@ itinerary_data = [
         "tip": "중앙역에서 카스트룹 공항(CPH)까지 직통 기차/메트로로 단 13~15분 소요됩니다."
       },
       {
-        "id": "d11-4",
-        "day": 11,
+        "id": "d10-4",
+        "day": 10,
         "num": 4,
         "period": "오후",
         "time": "14:30 - 17:30",
@@ -1148,8 +1122,8 @@ itinerary_data = [
         "tip": "17:30 출발이므로 최소 2시간 반 전인 15:00 전후에는 공항에 도착하세요."
       },
       {
-        "id": "d11-5",
-        "day": 11,
+        "id": "d10-5",
+        "day": 10,
         "num": 5,
         "period": "저녁~밤",
         "time": "17:30 - ",
@@ -1158,7 +1132,7 @@ itinerary_data = [
         "lat": 55.58,
         "lng": 12.78,
         "category": "대한항공 국제선 (귀국)",
-        "desc": "★ 17:30 코펜하겐 공항 이륙! 12일간의 아름다운 독일, 오스트리아, 덴마크 여정을 마무리하고 인천공항으로 귀국 비행.",
+        "desc": "★ 17:30 코펜하겐 공항 이륙! 11일간의 아름다운 독일, 오스트리아, 덴마크 여정을 마무리하고 대한민국 인천공항으로 귀국 비행 (한국 시각 30일 낮 도착).",
         "tip": "대한항공 KE6410 (17:30 정시 출발)",
         "highlight": True
       }
@@ -1290,7 +1264,7 @@ route_cph_art_tour = [
   [55.67491, 12.56377]  # 래디슨 컬렉션 로열 호텔 복귀
 ]
 
-# 30일 코펜하겐 시내 쇼핑 및 귀국 비행 경로
+# 29일 코펜하겐 시내 쇼핑 및 귀국 비행 경로
 flight_route_return = [
   [55.67491, 12.56377], # 래디슨 컬렉션 로열 호텔 (체크아웃)
   [55.6787, 12.5794],   # 스트뢰에 거리 시내 자유 쇼핑
@@ -1509,7 +1483,7 @@ function updateHotelBanner(dayFilter) {{
     targetHotel = HOTELS_DATA[1]; // 이비스 에어포트
   }} else if (dayFilter === '5') {{
     targetHotel = HOTELS_DATA[2]; // 잘츠부르크 유로파
-  }} else if (dayFilter === '7' || dayFilter === '8' || dayFilter === '9' || dayFilter === '10' || dayFilter === '11') {{
+  }} else if (dayFilter === '7' || dayFilter === '8' || dayFilter === '9' || dayFilter === '10') {{
     targetHotel = HOTELS_DATA[3]; // 래디슨 로열 코펜하겐
   }}
 
@@ -1639,7 +1613,7 @@ function renderView() {{
       dashArray: '6, 6'
     }}).addTo(polylinesLayerGroup);
 
-    // 30일 출국 귀국선
+    // 29일 출국 귀국선
     L.polyline(FLIGHT_ROUTE_RETURN, {{
       color: '#0284c7',
       weight: 2.8,
@@ -1649,7 +1623,7 @@ function renderView() {{
 
     // 기타 날짜 가벼운 연결선 (Day 1, 3, 4, 9, 10 등)
     targetDays.forEach(day => {{
-      if (![0, 1, 2, 5, 6, 7, 8, 11].includes(day.day)) {{
+      if (![0, 1, 2, 5, 6, 7, 8, 10].includes(day.day)) {{
         const coords = day.spots.map(s => [s.lat, s.lng]);
         if (coords.length > 1) {{
           L.polyline(coords, {{
@@ -1719,7 +1693,7 @@ function renderView() {{
       opacity: 0.95,
       dashArray: '6, 6'
     }}).addTo(polylinesLayerGroup);
-  }} else if (currentDayFilter === '11') {{
+  }} else if (currentDayFilter === '10') {{
     L.polyline(FLIGHT_ROUTE_RETURN, {{
       color: '#0284c7',
       weight: 4.5,
@@ -1755,7 +1729,7 @@ function renderView() {{
     // 26일 비행선 전체 포커스 (뮌헨 ➔ 코펜하겐)
     allCoords.push([48.3540, 11.7591]);
     allCoords.push([55.67491, 12.56377]);
-  }} else if (['8', '9', '10', '11'].includes(currentDayFilter)) {{
+  }} else if (['8', '9', '10'].includes(currentDayFilter)) {{
     // 코펜하겐 시내 일정 포커스
     targetDays.forEach(d => d.spots.forEach(s => allCoords.push([s.lat, s.lng])));
     allCoords.push([HOTELS_DATA[3].lat, HOTELS_DATA[3].lng]);
@@ -1941,7 +1915,7 @@ function updateHeaderSummary(targetDays) {{
   const googleHeaderBtn = document.getElementById('googleRouteHeaderBtn');
 
   if (currentDayFilter === 'all') {{
-    if (titleEl) titleEl.textContent = '전체 12일 일정 개요 (19일 ~ 30일)';
+    if (titleEl) titleEl.textContent = '전체 11일 일정 개요 (19일 ~ 29일, 한국 30일 도착)';
     const totalSpots = ITINERARY_DATA.reduce((acc, cur) => acc + cur.spots.length, 0);
     if (countBadge) countBadge.textContent = `총 ` + totalSpots + `개 방문지`;
     if (transitTipEl) transitTipEl.innerHTML = `💡 각 날짜 탭을 누르면 렌트카 코스, 기차 이동, 코펜하겐 비행 및 일자별 세부 동선을 확인할 수 있습니다.`;
